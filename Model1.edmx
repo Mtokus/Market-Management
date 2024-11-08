@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StokveSatisYonetimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="productDetailTbl">
+          <Key>
+            <PropertyRef Name="productDetailID" />
+          </Key>
+          <Property Name="productDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productID" Type="int" />
+          <Property Name="productDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="productPurchaseDate" Type="datetime" />
+          <Property Name="productGroupID" Type="int" />
+          <Property Name="supplierID" Type="int" />
+        </EntityType>
+        <EntityType Name="productGroupTbl">
+          <Key>
+            <PropertyRef Name="productGroupID" />
+          </Key>
+          <Property Name="productGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productGroupName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="productTbl">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="nvarchar" MaxLength="50" />
+          <Property Name="productPrice" Type="float" />
+          <Property Name="productBarcode" Type="varchar" MaxLength="13" />
+          <Property Name="productKDVRate" Type="float" />
+          <Property Name="productStockQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="receiptDetailTbl">
+          <Key>
+            <PropertyRef Name="receiptDetailID" />
+          </Key>
+          <Property Name="receiptDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiptID" Type="int" />
+          <Property Name="productID" Type="int" />
+          <Property Name="productQuantity" Type="int" />
+          <Property Name="productQuantityPrice" Type="int" />
+          <Property Name="productTotalPrice" Type="int" />
+        </EntityType>
+        <EntityType Name="receiptTbl">
+          <Key>
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="receiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiptFormationDate" Type="datetime" />
+          <Property Name="receiptTotalKDV" Type="float" />
+          <Property Name="receiptTotalPrice" Type="int" />
+          <Property Name="receiptPaymentType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StaffEntryExitTbl">
+          <Key>
+            <PropertyRef Name="staffEntryExitID" />
+          </Key>
+          <Property Name="staffEntryExitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffID" Type="int" />
+          <Property Name="entryDateTime" Type="datetime" />
+          <Property Name="exitDateTime" Type="datetime" />
+          <Property Name="leaveStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="staffPositionTbl">
+          <Key>
+            <PropertyRef Name="staffPositionID" />
+          </Key>
+          <Property Name="staffPositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffPositionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffPermissonLevel" Type="int" />
+        </EntityType>
+        <EntityType Name="staffTbl">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffTCNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staffNameSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffPhoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffAdress" Type="nvarchar" MaxLength="150" />
+          <Property Name="staffPositionID" Type="int" />
+          <Property Name="staffSalary" Type="int" />
+          <Property Name="staffPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffStartDate" Type="datetime" />
+          <Property Name="staffFinishDate" Type="datetime" />
+          <Property Name="staffIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="supplierTbl">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplierPhoneNumber" Type="nvarchar" MaxLength="11" />
+          <Property Name="supplierIBAN" Type="nvarchar" MaxLength="16" />
+          <Property Name="supplierEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplierAddress" Type="nvarchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_productDetailTbl_productGroupTbl">
+          <End Role="productGroupTbl" Type="Self.productGroupTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productGroupTbl">
+              <PropertyRef Name="productGroupID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="productGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productDetailTbl_productTbl1">
+          <End Role="productTbl" Type="Self.productTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productTbl">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productDetailTbl_supplierTbl">
+          <End Role="supplierTbl" Type="Self.supplierTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplierTbl">
+              <PropertyRef Name="supplierID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="supplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receiptDetailTbl_productTbl">
+          <End Role="productTbl" Type="Self.productTbl" Multiplicity="0..1" />
+          <End Role="receiptDetailTbl" Type="Self.receiptDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productTbl">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="receiptDetailTbl">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receiptDetailTbl_receiptTbl">
+          <End Role="receiptTbl" Type="Self.receiptTbl" Multiplicity="0..1" />
+          <End Role="receiptDetailTbl" Type="Self.receiptDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receiptTbl">
+              <PropertyRef Name="receiptID" />
+            </Principal>
+            <Dependent Role="receiptDetailTbl">
+              <PropertyRef Name="receiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffEntryExitTbl_staffTbl">
+          <End Role="staffTbl" Type="Self.staffTbl" Multiplicity="0..1" />
+          <End Role="StaffEntryExitTbl" Type="Self.StaffEntryExitTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staffTbl">
+              <PropertyRef Name="staffID" />
+            </Principal>
+            <Dependent Role="StaffEntryExitTbl">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffTbl_staffPositionTbl">
+          <End Role="staffPositionTbl" Type="Self.staffPositionTbl" Multiplicity="0..1" />
+          <End Role="staffTbl" Type="Self.staffTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staffPositionTbl">
+              <PropertyRef Name="staffPositionID" />
+            </Principal>
+            <Dependent Role="staffTbl">
+              <PropertyRef Name="staffPositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ProcedureStaffEntryExit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="productProcedure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="StokveSatisYonetimModelStoreContainer">
+          <EntitySet Name="productDetailTbl" EntityType="Self.productDetailTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productGroupTbl" EntityType="Self.productGroupTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productTbl" EntityType="Self.productTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="receiptDetailTbl" EntityType="Self.receiptDetailTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="receiptTbl" EntityType="Self.receiptTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffEntryExitTbl" EntityType="Self.StaffEntryExitTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staffPositionTbl" EntityType="Self.staffPositionTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staffTbl" EntityType="Self.staffTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplierTbl" EntityType="Self.supplierTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_productDetailTbl_productGroupTbl" Association="Self.FK_productDetailTbl_productGroupTbl">
+            <End Role="productGroupTbl" EntitySet="productGroupTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productDetailTbl_productTbl1" Association="Self.FK_productDetailTbl_productTbl1">
+            <End Role="productTbl" EntitySet="productTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productDetailTbl_supplierTbl" Association="Self.FK_productDetailTbl_supplierTbl">
+            <End Role="supplierTbl" EntitySet="supplierTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receiptDetailTbl_productTbl" Association="Self.FK_receiptDetailTbl_productTbl">
+            <End Role="productTbl" EntitySet="productTbl" />
+            <End Role="receiptDetailTbl" EntitySet="receiptDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receiptDetailTbl_receiptTbl" Association="Self.FK_receiptDetailTbl_receiptTbl">
+            <End Role="receiptTbl" EntitySet="receiptTbl" />
+            <End Role="receiptDetailTbl" EntitySet="receiptDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffEntryExitTbl_staffTbl" Association="Self.FK_StaffEntryExitTbl_staffTbl">
+            <End Role="staffTbl" EntitySet="staffTbl" />
+            <End Role="StaffEntryExitTbl" EntitySet="StaffEntryExitTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffTbl_staffPositionTbl" Association="Self.FK_staffTbl_staffPositionTbl">
+            <End Role="staffPositionTbl" EntitySet="staffPositionTbl" />
+            <End Role="staffTbl" EntitySet="staffTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StokveSatisYonetimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="productDetailTbl">
+          <Key>
+            <PropertyRef Name="productDetailID" />
+          </Key>
+          <Property Name="productDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="productDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productPurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="productGroupID" Type="Int32" />
+          <Property Name="supplierID" Type="Int32" />
+          <NavigationProperty Name="productGroupTbl" Relationship="Self.FK_productDetailTbl_productGroupTbl" FromRole="productDetailTbl" ToRole="productGroupTbl" />
+          <NavigationProperty Name="productTbl" Relationship="Self.FK_productDetailTbl_productTbl1" FromRole="productDetailTbl" ToRole="productTbl" />
+          <NavigationProperty Name="supplierTbl" Relationship="Self.FK_productDetailTbl_supplierTbl" FromRole="productDetailTbl" ToRole="supplierTbl" />
+        </EntityType>
+        <EntityType Name="productGroupTbl">
+          <Key>
+            <PropertyRef Name="productGroupID" />
+          </Key>
+          <Property Name="productGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="productDetailTbl" Relationship="Self.FK_productDetailTbl_productGroupTbl" FromRole="productGroupTbl" ToRole="productDetailTbl" />
+        </EntityType>
+        <EntityType Name="productTbl">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productPrice" Type="Double" />
+          <Property Name="productBarcode" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="productKDVRate" Type="Double" />
+          <Property Name="productStockQuantity" Type="Int32" />
+          <NavigationProperty Name="productDetailTbl" Relationship="Self.FK_productDetailTbl_productTbl1" FromRole="productTbl" ToRole="productDetailTbl" />
+          <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_productTbl" FromRole="productTbl" ToRole="receiptDetailTbl" />
+        </EntityType>
+        <EntityType Name="receiptDetailTbl">
+          <Key>
+            <PropertyRef Name="receiptDetailID" />
+          </Key>
+          <Property Name="receiptDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="receiptID" Type="Int32" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="productQuantity" Type="Int32" />
+          <Property Name="productQuantityPrice" Type="Int32" />
+          <Property Name="productTotalPrice" Type="Int32" />
+          <NavigationProperty Name="productTbl" Relationship="Self.FK_receiptDetailTbl_productTbl" FromRole="receiptDetailTbl" ToRole="productTbl" />
+          <NavigationProperty Name="receiptTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptDetailTbl" ToRole="receiptTbl" />
+        </EntityType>
+        <EntityType Name="receiptTbl">
+          <Key>
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="receiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="receiptFormationDate" Type="DateTime" Precision="3" />
+          <Property Name="receiptTotalKDV" Type="Double" />
+          <Property Name="receiptTotalPrice" Type="Int32" />
+          <Property Name="receiptPaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptTbl" ToRole="receiptDetailTbl" />
+        </EntityType>
+        <EntityType Name="StaffEntryExitTbl">
+          <Key>
+            <PropertyRef Name="staffEntryExitID" />
+          </Key>
+          <Property Name="staffEntryExitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffID" Type="Int32" />
+          <Property Name="entryDateTime" Type="DateTime" Precision="3" />
+          <Property Name="exitDateTime" Type="DateTime" Precision="3" />
+          <Property Name="leaveStatus" Type="Boolean" />
+          <NavigationProperty Name="staffTbl" Relationship="Self.FK_StaffEntryExitTbl_staffTbl" FromRole="StaffEntryExitTbl" ToRole="staffTbl" />
+        </EntityType>
+        <EntityType Name="staffPositionTbl">
+          <Key>
+            <PropertyRef Name="staffPositionID" />
+          </Key>
+          <Property Name="staffPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffPositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="staffPermissonLevel" Type="Int32" />
+          <NavigationProperty Name="staffTbl" Relationship="Self.FK_staffTbl_staffPositionTbl" FromRole="staffPositionTbl" ToRole="staffTbl" />
+        </EntityType>
+        <EntityType Name="staffTbl">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffTCNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="staffNameSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="staffPhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="staffEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="staffAdress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="staffPositionID" Type="Int32" />
+          <Property Name="staffSalary" Type="Int32" />
+          <Property Name="staffPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StaffEntryExitTbl" Relationship="Self.FK_StaffEntryExitTbl_staffTbl" FromRole="staffTbl" ToRole="StaffEntryExitTbl" />
+          <NavigationProperty Name="staffPositionTbl" Relationship="Self.FK_staffTbl_staffPositionTbl" FromRole="staffTbl" ToRole="staffPositionTbl" />
+          <Property Name="staffStartDate" Type="DateTime" Precision="3" />
+          <Property Name="staffFinishDate" Type="DateTime" Precision="3" />
+          <Property Name="staffIsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="supplierTbl">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplierPhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="supplierIBAN" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="supplierEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplierAddress" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="productDetailTbl" Relationship="Self.FK_productDetailTbl_supplierTbl" FromRole="supplierTbl" ToRole="productDetailTbl" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_productDetailTbl_productGroupTbl">
+          <End Role="productGroupTbl" Type="Self.productGroupTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productGroupTbl">
+              <PropertyRef Name="productGroupID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="productGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productDetailTbl_productTbl1">
+          <End Role="productTbl" Type="Self.productTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productTbl">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productDetailTbl_supplierTbl">
+          <End Role="supplierTbl" Type="Self.supplierTbl" Multiplicity="0..1" />
+          <End Role="productDetailTbl" Type="Self.productDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplierTbl">
+              <PropertyRef Name="supplierID" />
+            </Principal>
+            <Dependent Role="productDetailTbl">
+              <PropertyRef Name="supplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receiptDetailTbl_productTbl">
+          <End Role="productTbl" Type="Self.productTbl" Multiplicity="0..1" />
+          <End Role="receiptDetailTbl" Type="Self.receiptDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productTbl">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="receiptDetailTbl">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_receiptDetailTbl_receiptTbl">
+          <End Role="receiptTbl" Type="Self.receiptTbl" Multiplicity="0..1" />
+          <End Role="receiptDetailTbl" Type="Self.receiptDetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="receiptTbl">
+              <PropertyRef Name="receiptID" />
+            </Principal>
+            <Dependent Role="receiptDetailTbl">
+              <PropertyRef Name="receiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffEntryExitTbl_staffTbl">
+          <End Role="staffTbl" Type="Self.staffTbl" Multiplicity="0..1" />
+          <End Role="StaffEntryExitTbl" Type="Self.StaffEntryExitTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staffTbl">
+              <PropertyRef Name="staffID" />
+            </Principal>
+            <Dependent Role="StaffEntryExitTbl">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffTbl_staffPositionTbl">
+          <End Role="staffPositionTbl" Type="Self.staffPositionTbl" Multiplicity="0..1" />
+          <End Role="staffTbl" Type="Self.staffTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staffPositionTbl">
+              <PropertyRef Name="staffPositionID" />
+            </Principal>
+            <Dependent Role="staffTbl">
+              <PropertyRef Name="staffPositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="productDetailTbl" EntityType="Self.productDetailTbl" />
+          <EntitySet Name="productGroupTbl" EntityType="Self.productGroupTbl" />
+          <EntitySet Name="productTbl" EntityType="Self.productTbl" />
+          <EntitySet Name="receiptDetailTbl" EntityType="Self.receiptDetailTbl" />
+          <EntitySet Name="receiptTbl" EntityType="Self.receiptTbl" />
+          <EntitySet Name="StaffEntryExitTbl" EntityType="Self.StaffEntryExitTbl" />
+          <EntitySet Name="staffPositionTbl" EntityType="Self.staffPositionTbl" />
+          <EntitySet Name="staffTbl" EntityType="Self.staffTbl" />
+          <EntitySet Name="supplierTbl" EntityType="Self.supplierTbl" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_productDetailTbl_productGroupTbl" Association="Self.FK_productDetailTbl_productGroupTbl">
+            <End Role="productGroupTbl" EntitySet="productGroupTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productDetailTbl_productTbl1" Association="Self.FK_productDetailTbl_productTbl1">
+            <End Role="productTbl" EntitySet="productTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productDetailTbl_supplierTbl" Association="Self.FK_productDetailTbl_supplierTbl">
+            <End Role="supplierTbl" EntitySet="supplierTbl" />
+            <End Role="productDetailTbl" EntitySet="productDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receiptDetailTbl_productTbl" Association="Self.FK_receiptDetailTbl_productTbl">
+            <End Role="productTbl" EntitySet="productTbl" />
+            <End Role="receiptDetailTbl" EntitySet="receiptDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_receiptDetailTbl_receiptTbl" Association="Self.FK_receiptDetailTbl_receiptTbl">
+            <End Role="receiptTbl" EntitySet="receiptTbl" />
+            <End Role="receiptDetailTbl" EntitySet="receiptDetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffEntryExitTbl_staffTbl" Association="Self.FK_StaffEntryExitTbl_staffTbl">
+            <End Role="staffTbl" EntitySet="staffTbl" />
+            <End Role="StaffEntryExitTbl" EntitySet="StaffEntryExitTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffTbl_staffPositionTbl" Association="Self.FK_staffTbl_staffPositionTbl">
+            <End Role="staffPositionTbl" EntitySet="staffPositionTbl" />
+            <End Role="staffTbl" EntitySet="staffTbl" />
+          </AssociationSet>
+          <FunctionImport Name="ProcedureStaffEntryExit" ReturnType="Collection(StokveSatisYonetimModel.ProcedureStaffEntryExit_Result)" />
+          <FunctionImport Name="productProcedure" ReturnType="Collection(StokveSatisYonetimModel.productProcedure_Result)" />
+        </EntityContainer>
+        <ComplexType Name="ProcedureStaffEntryExit_Result">
+          <Property Type="Int32" Name="Giriş_Çıkış_ID" Nullable="false" />
+          <Property Type="Int32" Name="Personel_ID" Nullable="true" />
+          <Property Type="DateTime" Name="Giriş_Saati" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Çıkış_Saati" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="İzinli" Nullable="true" />
+          <Property Type="String" Name="Ad_Soyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Aylık_Maş" Nullable="true" />
+          <Property Type="String" Name="TC_Numarası" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Pozisyon" Nullable="true" />
+          <Property Type="String" Name="Telefon_NO" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="productProcedure_Result">
+          <Property Type="Int32" Name="productID" Nullable="false" />
+          <Property Type="String" Name="productName" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="productPrice" Nullable="true" />
+          <Property Type="String" Name="productBarcode" Nullable="true" MaxLength="13" />
+          <Property Type="Double" Name="productKDVRate" Nullable="true" />
+          <Property Type="Int32" Name="productStockQuantity" Nullable="true" />
+          <Property Type="String" Name="supplierName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="supplierPhoneNumber" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="supplierIBAN" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="supplierEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="supplierAddress" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="productGroupName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StokveSatisYonetimModelStoreContainer" CdmEntityContainer="ShopManagementEntities">
+          <EntitySetMapping Name="productDetailTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.productDetailTbl">
+              <MappingFragment StoreEntitySet="productDetailTbl">
+                <ScalarProperty Name="productDetailID" ColumnName="productDetailID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productPurchaseDate" ColumnName="productPurchaseDate" />
+                <ScalarProperty Name="productGroupID" ColumnName="productGroupID" />
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productGroupTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.productGroupTbl">
+              <MappingFragment StoreEntitySet="productGroupTbl">
+                <ScalarProperty Name="productGroupID" ColumnName="productGroupID" />
+                <ScalarProperty Name="productGroupName" ColumnName="productGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.productTbl">
+              <MappingFragment StoreEntitySet="productTbl">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+                <ScalarProperty Name="productBarcode" ColumnName="productBarcode" />
+                <ScalarProperty Name="productKDVRate" ColumnName="productKDVRate" />
+                <ScalarProperty Name="productStockQuantity" ColumnName="productStockQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receiptDetailTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.receiptDetailTbl">
+              <MappingFragment StoreEntitySet="receiptDetailTbl">
+                <ScalarProperty Name="receiptDetailID" ColumnName="receiptDetailID" />
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+                <ScalarProperty Name="productQuantityPrice" ColumnName="productQuantityPrice" />
+                <ScalarProperty Name="productTotalPrice" ColumnName="productTotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receiptTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.receiptTbl">
+              <MappingFragment StoreEntitySet="receiptTbl">
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="receiptFormationDate" ColumnName="receiptFormationDate" />
+                <ScalarProperty Name="receiptTotalKDV" ColumnName="receiptTotalKDV" />
+                <ScalarProperty Name="receiptTotalPrice" ColumnName="receiptTotalPrice" />
+                <ScalarProperty Name="receiptPaymentType" ColumnName="receiptPaymentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffEntryExitTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.StaffEntryExitTbl">
+              <MappingFragment StoreEntitySet="StaffEntryExitTbl">
+                <ScalarProperty Name="staffEntryExitID" ColumnName="staffEntryExitID" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="entryDateTime" ColumnName="entryDateTime" />
+                <ScalarProperty Name="exitDateTime" ColumnName="exitDateTime" />
+                <ScalarProperty Name="leaveStatus" ColumnName="leaveStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffPositionTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.staffPositionTbl">
+              <MappingFragment StoreEntitySet="staffPositionTbl">
+                <ScalarProperty Name="staffPositionID" ColumnName="staffPositionID" />
+                <ScalarProperty Name="staffPositionName" ColumnName="staffPositionName" />
+                <ScalarProperty Name="staffPermissonLevel" ColumnName="staffPermissonLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.staffTbl">
+              <MappingFragment StoreEntitySet="staffTbl">
+                <ScalarProperty Name="staffIsActive" ColumnName="staffIsActive" />
+                <ScalarProperty Name="staffFinishDate" ColumnName="staffFinishDate" />
+                <ScalarProperty Name="staffStartDate" ColumnName="staffStartDate" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="staffTCNumber" ColumnName="staffTCNumber" />
+                <ScalarProperty Name="staffNameSurname" ColumnName="staffNameSurname" />
+                <ScalarProperty Name="staffPhoneNo" ColumnName="staffPhoneNo" />
+                <ScalarProperty Name="staffEmail" ColumnName="staffEmail" />
+                <ScalarProperty Name="staffAdress" ColumnName="staffAdress" />
+                <ScalarProperty Name="staffPositionID" ColumnName="staffPositionID" />
+                <ScalarProperty Name="staffSalary" ColumnName="staffSalary" />
+                <ScalarProperty Name="staffPassword" ColumnName="staffPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplierTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.supplierTbl">
+              <MappingFragment StoreEntitySet="supplierTbl">
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+                <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+                <ScalarProperty Name="supplierPhoneNumber" ColumnName="supplierPhoneNumber" />
+                <ScalarProperty Name="supplierIBAN" ColumnName="supplierIBAN" />
+                <ScalarProperty Name="supplierEmail" ColumnName="supplierEmail" />
+                <ScalarProperty Name="supplierAddress" ColumnName="supplierAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ProcedureStaffEntryExit" FunctionName="StokveSatisYonetimModel.Store.ProcedureStaffEntryExit">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StokveSatisYonetimModel.ProcedureStaffEntryExit_Result">
+                <ScalarProperty Name="Giriş_Çıkış_ID" ColumnName="Giriş-Çıkış ID" />
+                <ScalarProperty Name="Personel_ID" ColumnName="Personel ID" />
+                <ScalarProperty Name="Giriş_Saati" ColumnName="Giriş Saati" />
+                <ScalarProperty Name="Çıkış_Saati" ColumnName="Çıkış Saati" />
+                <ScalarProperty Name="İzinli" ColumnName="İzinli" />
+                <ScalarProperty Name="Ad_Soyad" ColumnName="Ad Soyad" />
+                <ScalarProperty Name="Aylık_Maş" ColumnName="Aylık Maş" />
+                <ScalarProperty Name="TC_Numarası" ColumnName="TC Numarası" />
+                <ScalarProperty Name="Pozisyon" ColumnName="Pozisyon" />
+                <ScalarProperty Name="Telefon_NO" ColumnName="Telefon NO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="productProcedure" FunctionName="StokveSatisYonetimModel.Store.productProcedure">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StokveSatisYonetimModel.productProcedure_Result">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+                <ScalarProperty Name="productBarcode" ColumnName="productBarcode" />
+                <ScalarProperty Name="productKDVRate" ColumnName="productKDVRate" />
+                <ScalarProperty Name="productStockQuantity" ColumnName="productStockQuantity" />
+                <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+                <ScalarProperty Name="supplierPhoneNumber" ColumnName="supplierPhoneNumber" />
+                <ScalarProperty Name="supplierIBAN" ColumnName="supplierIBAN" />
+                <ScalarProperty Name="supplierEmail" ColumnName="supplierEmail" />
+                <ScalarProperty Name="supplierAddress" ColumnName="supplierAddress" />
+                <ScalarProperty Name="productGroupName" ColumnName="productGroupName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
