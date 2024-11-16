@@ -16,8 +16,6 @@ namespace Market_Management
         {
             InitializeComponent();
         }
-
-        
         private void NewFormLoad(object Form)
         {
             if (this.operationPanel.Controls.Count > 0)
@@ -29,9 +27,6 @@ namespace Market_Management
             this.operationPanel.Tag = f;
             f.Show();
         }
-
-       
-
         private void stockManagementButton_Click(object sender, EventArgs e)
         {
             NewFormLoad(new stockManagementForm());
@@ -40,10 +35,19 @@ namespace Market_Management
         {
             Close();
         }
-
         private void staffManagementButton_Click(object sender, EventArgs e)
         {
             NewFormLoad(new staffManagementForm());
+        }
+        private void salariesButton_Click(object sender, EventArgs e)
+        {
+            NewFormLoad (new receiptsForm());
+        }
+
+        private void cashRegisterButton_Click(object sender, EventArgs e)
+        {
+            cashRegisterForm cashRegisterForm = new cashRegisterForm();
+            cashRegisterForm.ShowDialog();
         }
     }
 }

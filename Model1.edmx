@@ -42,8 +42,8 @@
           <Property Name="receiptID" Type="int" />
           <Property Name="productID" Type="int" />
           <Property Name="productQuantity" Type="int" />
-          <Property Name="productQuantityPrice" Type="int" />
-          <Property Name="productTotalPrice" Type="int" />
+          <Property Name="productTotalPrice" Type="float" />
+          <Property Name="productRebate" Type="bit" />
         </EntityType>
         <EntityType Name="receiptTbl">
           <Key>
@@ -52,8 +52,10 @@
           <Property Name="receiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="receiptFormationDate" Type="datetime" />
           <Property Name="receiptTotalKDV" Type="float" />
-          <Property Name="receiptTotalPrice" Type="int" />
+          <Property Name="receiptTotalPrice" Type="float" />
           <Property Name="receiptPaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="receiptCustomerPay" Type="float" />
+          <Property Name="receiptCashChange" Type="float" />
         </EntityType>
         <EntityType Name="StaffEntryExitTbl">
           <Key>
@@ -284,8 +286,8 @@
           <Property Name="receiptID" Type="Int32" />
           <Property Name="productID" Type="Int32" />
           <Property Name="productQuantity" Type="Int32" />
-          <Property Name="productQuantityPrice" Type="Int32" />
-          <Property Name="productTotalPrice" Type="Int32" />
+          <Property Name="productTotalPrice" Type="Double" />
+          <Property Name="productRebate" Type="Boolean" />
           <NavigationProperty Name="productTbl" Relationship="Self.FK_receiptDetailTbl_productTbl" FromRole="receiptDetailTbl" ToRole="productTbl" />
           <NavigationProperty Name="receiptTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptDetailTbl" ToRole="receiptTbl" />
         </EntityType>
@@ -296,9 +298,11 @@
           <Property Name="receiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="receiptFormationDate" Type="DateTime" Precision="3" />
           <Property Name="receiptTotalKDV" Type="Double" />
-          <Property Name="receiptTotalPrice" Type="Int32" />
+          <Property Name="receiptTotalPrice" Type="Double" />
           <Property Name="receiptPaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptTbl" ToRole="receiptDetailTbl" />
+          <Property Name="receiptCustomerPay" Type="Double" />
+          <Property Name="receiptCashChange" Type="Double" />
         </EntityType>
         <EntityType Name="StaffEntryExitTbl">
           <Key>
@@ -333,11 +337,11 @@
           <Property Name="staffPositionID" Type="Int32" />
           <Property Name="staffSalary" Type="Int32" />
           <Property Name="staffPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="StaffEntryExitTbl" Relationship="Self.FK_StaffEntryExitTbl_staffTbl" FromRole="staffTbl" ToRole="StaffEntryExitTbl" />
-          <NavigationProperty Name="staffPositionTbl" Relationship="Self.FK_staffTbl_staffPositionTbl" FromRole="staffTbl" ToRole="staffPositionTbl" />
           <Property Name="staffStartDate" Type="DateTime" Precision="3" />
           <Property Name="staffFinishDate" Type="DateTime" Precision="3" />
           <Property Name="staffIsActive" Type="Boolean" />
+          <NavigationProperty Name="StaffEntryExitTbl" Relationship="Self.FK_StaffEntryExitTbl_staffTbl" FromRole="staffTbl" ToRole="StaffEntryExitTbl" />
+          <NavigationProperty Name="staffPositionTbl" Relationship="Self.FK_staffTbl_staffPositionTbl" FromRole="staffTbl" ToRole="staffPositionTbl" />
         </EntityType>
         <EntityType Name="supplierTbl">
           <Key>
@@ -558,14 +562,16 @@
                 <ScalarProperty Name="receiptID" ColumnName="receiptID" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
                 <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
-                <ScalarProperty Name="productQuantityPrice" ColumnName="productQuantityPrice" />
                 <ScalarProperty Name="productTotalPrice" ColumnName="productTotalPrice" />
+                <ScalarProperty Name="productRebate" ColumnName="productRebate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="receiptTbl">
             <EntityTypeMapping TypeName="StokveSatisYonetimModel.receiptTbl">
               <MappingFragment StoreEntitySet="receiptTbl">
+                <ScalarProperty Name="receiptCashChange" ColumnName="receiptCashChange" />
+                <ScalarProperty Name="receiptCustomerPay" ColumnName="receiptCustomerPay" />
                 <ScalarProperty Name="receiptID" ColumnName="receiptID" />
                 <ScalarProperty Name="receiptFormationDate" ColumnName="receiptFormationDate" />
                 <ScalarProperty Name="receiptTotalKDV" ColumnName="receiptTotalKDV" />
@@ -597,9 +603,6 @@
           <EntitySetMapping Name="staffTbl">
             <EntityTypeMapping TypeName="StokveSatisYonetimModel.staffTbl">
               <MappingFragment StoreEntitySet="staffTbl">
-                <ScalarProperty Name="staffIsActive" ColumnName="staffIsActive" />
-                <ScalarProperty Name="staffFinishDate" ColumnName="staffFinishDate" />
-                <ScalarProperty Name="staffStartDate" ColumnName="staffStartDate" />
                 <ScalarProperty Name="staffID" ColumnName="staffID" />
                 <ScalarProperty Name="staffTCNumber" ColumnName="staffTCNumber" />
                 <ScalarProperty Name="staffNameSurname" ColumnName="staffNameSurname" />
@@ -609,6 +612,9 @@
                 <ScalarProperty Name="staffPositionID" ColumnName="staffPositionID" />
                 <ScalarProperty Name="staffSalary" ColumnName="staffSalary" />
                 <ScalarProperty Name="staffPassword" ColumnName="staffPassword" />
+                <ScalarProperty Name="staffStartDate" ColumnName="staffStartDate" />
+                <ScalarProperty Name="staffFinishDate" ColumnName="staffFinishDate" />
+                <ScalarProperty Name="staffIsActive" ColumnName="staffIsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

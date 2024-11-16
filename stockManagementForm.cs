@@ -29,7 +29,7 @@ namespace Market_Management
 
         void CallStockTable()
         {
-            var products = dbContex.productProcedure().ToList(); // Tüm ürünleri getir
+            var products = dbContex.productProcedure().ToList(); 
 
             foreach (var product in products)
             {
@@ -120,7 +120,6 @@ namespace Market_Management
                 }
             }
         }
-
         private void addButton_Click(object sender, EventArgs e)
         {
            
@@ -179,8 +178,6 @@ namespace Market_Management
                 MessageBox.Show("Hatalı veri girişi: " + ex.Message, "Format Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         private void btnSupplierAdd_Click(object sender, EventArgs e)
         {
             supplierTbl addNewSupplier= new supplierTbl();
@@ -194,7 +191,6 @@ namespace Market_Management
             MessageBox.Show("Eklendi!");
             ClearTxtSuppliers();
         }
-
         private void ClearTxtProducts()
         {
             productNameTxt.Text = "";
@@ -203,7 +199,6 @@ namespace Market_Management
             productKdvRateTxt.Text = "";
             productStockQuantityTxt.Text = "";
         }
-
         private void ClearTxtSuppliers()
         {
             txtSupplierName.Text = "";
@@ -214,7 +209,6 @@ namespace Market_Management
 
 
         }
-
         private void CallSuppliersForCombobox()
         {
             var suppliers = dbContex.supplierTbl.ToList();
@@ -248,7 +242,6 @@ namespace Market_Management
         {
             CallProductDetailTable(sender, e);
         }
-
         private void comboBoxSupplierForInventory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxSupplierForInventory.SelectedItem != null)
@@ -257,7 +250,6 @@ namespace Market_Management
                 supplierIDTxt.Text = selectedSupplier.Value.ToString();
             }
         }
-
         private void comboBoxProductGroupForInventory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -267,6 +259,11 @@ namespace Market_Management
                 productGroupIDTxt.Text = selectedProductGroup.Value.ToString();
             }
            
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

@@ -43,6 +43,6 @@ namespace Market_Management
             staffOperationForm.ShowDialog();
         }
 
-        
+      
     }
 }

@@ -57,7 +57,7 @@ namespace Market_Management
             this.panelEntryExitTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelEntryExitTable.Location = new System.Drawing.Point(0, 0);
             this.panelEntryExitTable.Name = "panelEntryExitTable";
-            this.panelEntryExitTable.Size = new System.Drawing.Size(595, 380);
+            this.panelEntryExitTable.Size = new System.Drawing.Size(795, 392);
             this.panelEntryExitTable.TabIndex = 0;
             // 
             // dataGridView1
@@ -65,10 +65,11 @@ namespace Market_Management
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(595, 380);
+            this.dataGridView1.Size = new System.Drawing.Size(795, 392);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
@@ -89,9 +90,9 @@ namespace Market_Management
             this.panelEntryExitOperation.Controls.Add(this.label1);
             this.panelEntryExitOperation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelEntryExitOperation.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.panelEntryExitOperation.Location = new System.Drawing.Point(0, 380);
+            this.panelEntryExitOperation.Location = new System.Drawing.Point(0, 398);
             this.panelEntryExitOperation.Name = "panelEntryExitOperation";
-            this.panelEntryExitOperation.Size = new System.Drawing.Size(595, 150);
+            this.panelEntryExitOperation.Size = new System.Drawing.Size(795, 132);
             this.panelEntryExitOperation.TabIndex = 1;
             // 
             // labelKacSaat
@@ -102,6 +103,7 @@ namespace Market_Management
             this.labelKacSaat.Size = new System.Drawing.Size(58, 17);
             this.labelKacSaat.TabIndex = 5;
             this.labelKacSaat.Text = "Kaç saat";
+            this.labelKacSaat.Visible = false;
             // 
             // dateTimePicker2
             // 
@@ -132,20 +134,21 @@ namespace Market_Management
             this.buttonExitFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonExitFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExitFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonExitFilter.Location = new System.Drawing.Point(357, 63);
+            this.buttonExitFilter.Location = new System.Drawing.Point(315, 60);
             this.buttonExitFilter.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExitFilter.Name = "buttonExitFilter";
             this.buttonExitFilter.Size = new System.Drawing.Size(59, 22);
             this.buttonExitFilter.TabIndex = 2;
             this.buttonExitFilter.Text = "Çıkışlar";
             this.buttonExitFilter.UseVisualStyleBackColor = false;
+            this.buttonExitFilter.Visible = false;
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button5.Location = new System.Drawing.Point(443, 34);
+            this.button5.Location = new System.Drawing.Point(594, 20);
             this.button5.Margin = new System.Windows.Forms.Padding(0);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(128, 87);
@@ -160,26 +163,28 @@ namespace Market_Management
             this.buttonLeaveFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonLeaveFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLeaveFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonLeaveFilter.Location = new System.Drawing.Point(357, 91);
+            this.buttonLeaveFilter.Location = new System.Drawing.Point(315, 88);
             this.buttonLeaveFilter.Margin = new System.Windows.Forms.Padding(0);
             this.buttonLeaveFilter.Name = "buttonLeaveFilter";
             this.buttonLeaveFilter.Size = new System.Drawing.Size(59, 22);
             this.buttonLeaveFilter.TabIndex = 2;
             this.buttonLeaveFilter.Text = "İzinler";
             this.buttonLeaveFilter.UseVisualStyleBackColor = false;
+            this.buttonLeaveFilter.Visible = false;
             // 
             // buttonEntryFilter
             // 
             this.buttonEntryFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonEntryFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEntryFilter.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonEntryFilter.Location = new System.Drawing.Point(357, 35);
+            this.buttonEntryFilter.Location = new System.Drawing.Point(315, 32);
             this.buttonEntryFilter.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEntryFilter.Name = "buttonEntryFilter";
             this.buttonEntryFilter.Size = new System.Drawing.Size(59, 22);
             this.buttonEntryFilter.TabIndex = 2;
             this.buttonEntryFilter.Text = "Girişler";
             this.buttonEntryFilter.UseVisualStyleBackColor = false;
+            this.buttonEntryFilter.Visible = false;
             // 
             // buttonDateFilter
             // 
@@ -247,7 +252,7 @@ namespace Market_Management
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
-            this.ClientSize = new System.Drawing.Size(595, 530);
+            this.ClientSize = new System.Drawing.Size(795, 530);
             this.Controls.Add(this.panelEntryExitOperation);
             this.Controls.Add(this.panelEntryExitTable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

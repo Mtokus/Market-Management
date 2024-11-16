@@ -23,8 +23,10 @@ namespace Market_Management
         public int receiptID { get; set; }
         public Nullable<System.DateTime> receiptFormationDate { get; set; }
         public Nullable<double> receiptTotalKDV { get; set; }
-        public Nullable<int> receiptTotalPrice { get; set; }
+        public Nullable<double> receiptTotalPrice { get; set; }
         public string receiptPaymentType { get; set; }
+        public Nullable<double> receiptCustomerPay { get; set; }
+        public Nullable<double> receiptCashChange { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receiptDetailTbl> receiptDetailTbl { get; set; }

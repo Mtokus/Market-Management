@@ -22,6 +22,7 @@ namespace Market_Management
         {
             CallStaffEntry();
         }
+
         ShopManagementEntities dbContex = new ShopManagementEntities();
         void CallStaffEntry()
         {

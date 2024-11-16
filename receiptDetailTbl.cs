@@ -18,8 +18,8 @@ namespace Market_Management
         public Nullable<int> receiptID { get; set; }
         public Nullable<int> productID { get; set; }
         public Nullable<int> productQuantity { get; set; }
-        public Nullable<int> productQuantityPrice { get; set; }
-        public Nullable<int> productTotalPrice { get; set; }
+        public Nullable<double> productTotalPrice { get; set; }
+        public Nullable<bool> productRebate { get; set; }
     
         public virtual productTbl productTbl { get; set; }
         public virtual receiptTbl receiptTbl { get; set; }

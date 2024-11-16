@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cashRegisterButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAsNJREFUaEPdmb+KFEEQxlcw0FzvAQ5EUzWXC3yFC0wEH0EMBAXRyEsVDXwB7wUU
+        DAAACwwBP0AiyAAAAsNJREFUaEPdmb+KFEEQxlcw0FzvAQ5EUzWXC3yFC0wEH0EMBAXRyEsVDXwB7wUU
         AxERDAV9AU0MDMRAQUTwz32/ua2lpq3em97p2Zvxg99ubU91zVfXPXu7s7OKOiJ2xS/xtxLUouZadF5w
         0sdipxLUoia1B9eW4GQ811KvmqfFD0GBZZBDrj9Z17k5oprFssnLtoQtMbn+ZF3m5sjVLFaXyT4nF5eq
         Vp2wkMePL4tLVatOa/KmSJeaMZ8TxY/E9UKYE9XspJPivngu3oiDJtsJyPX5tS9iauPpnjghsnomvosX
@@ -446,10 +446,10 @@
         aDc7CAAA2s0OAgCAdrODAACg3ewgAABos+pj/x+JtdTz/ylKUwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="salariesButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAtNJREFUaEPtmVeLFEEURgdzxtd9EMyC/jUxrGLOAUV9Efwpvongi/ssKOaE+CaI
+        DAAACwwBP0AiyAAAAtNJREFUaEPtmVeLFEEURgdzxtd9EMyC/jUxrGLOAUV9Efwpvongi/ssKOaE+CaI
         OafvDFz4GHp6uruqehHmwGF3qqvvnbtbVd3VPZgypT9WyDPymfwt/2aWmE/lablcZoUvPyerEpfwtsxa
         BH/5qkQlPSWzwbCJwEfkEpkbYh6VkeeJzMYvGYFLfPmA2JGHnNmIoFiaIrm6BN0iWVUYCptpaEiXXBPp
         EvSwjHP4vSldck2kS9CTMs5ps6J0yTWRpkE3SYaM93cZUgytOrx/NpoG3Su9b5X7ZR3fJf2+DT9lwr9A
@@ -490,7 +490,7 @@
   <data name="stockManagementButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAQtJREFUaEPtmFEKAjEMRPfLc3k0P/Wg6jE0+SiUpVlnnbRpIQ8GRCbrzC5roFuS
+        DAAACwwBP0AiyAAAAQtJREFUaEPtmFEKAjEMRPfLc3k0P/Wg6jE0+SiUpVlnnbRpIQ8GRCbrzC5roFuS
         xHIRPUQv0eeknqK7SK8RhgZohTsjvUYY/9z5vd6iMOogZ2Fm3WBCMLNuMCGYWTeYEMysG0wIZtYNJgQz
         a8Ispt6CFp/HYuqtw8U3453f63Dx1cbZgLJBpiCgbJApCCgbZAoCygaZgoCyQaYgoGyQKQgoG2QKQhdY
         kcnMBSCyAMBVdGtIv9/T8qlMRhTQAPXvFLWCtXwqE8hEkgVEJpCJJAuITCATyfL/Ql3JAtEsX0DPXuoS
