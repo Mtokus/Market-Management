@@ -17,7 +17,7 @@ namespace Market_Management
         public int receiptDetailID { get; set; }
         public Nullable<int> receiptID { get; set; }
         public Nullable<int> productID { get; set; }
-        public Nullable<int> productQuantity { get; set; }
+        public Nullable<double> productQuantity { get; set; }
         public Nullable<double> productTotalPrice { get; set; }
         public Nullable<bool> productRebate { get; set; }
     

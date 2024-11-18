@@ -26,7 +26,6 @@ namespace Market_Management
             CallProductGroupForCombobox();
 
         }
-
         void CallStockTable()
         {
             var products = dbContex.productProcedure().ToList(); 
@@ -119,19 +118,35 @@ namespace Market_Management
                     MessageBox.Show("Tedarikçi Firma bulunmuyor");
                 }
             }
+            else
+            {
+               var updateProduct = dbContex.productProcedure().Where(w => w.productID == id).FirstOrDefault();
+
+
+
+                productIDTxt.Text = updateProduct.productID.ToString();
+                productNameTxt.Text = updateProduct.productName.ToString();
+                productPriceTxt.Text = updateProduct.productPrice.ToString();
+                productBarcodeTxt.Text = updateProduct.productBarcode.ToString();
+                productKdvRateTxt.Text = updateProduct.productKDVRate.ToString();
+                productStockQuantityTxt.Text = updateProduct.productStockQuantity.ToString();
+                comboBoxSupplierForInventory.Text = updateProduct.supplierName.ToString();
+                comboBoxProductGroupForInventory.Text = updateProduct.productGroupName.ToString();
+              //  supplierIDTxt.Text= updateProduct.supp
+
+
+
+            }
         }
         private void addButton_Click(object sender, EventArgs e)
         {
-           
             var textboxes = new List<TextBox> { productNameTxt, productPriceTxt, productBarcodeTxt, productKdvRateTxt, productStockQuantityTxt, supplierIDTxt, productGroupIDTxt };
 
-           
             if (textboxes.Any(tb => string.IsNullOrWhiteSpace(tb.Text)))
             {
                 MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             try
             {
                 string newProductBarcode = productBarcodeTxt.Text;
@@ -164,11 +179,13 @@ namespace Market_Management
                 }
                 else
                 {
-                    
-                    existingProductBarcode.productStockQuantity += Convert.ToInt32(productStockQuantityTxt.Text);
-                    dbContex.SaveChanges();
+                    DialogResult result = MessageBox.Show("Bu ürün mevcut, stoğa eklemek ister misiniz ?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        existingProductBarcode.productStockQuantity += Convert.ToInt32(productStockQuantityTxt.Text);
+                        dbContex.SaveChanges();
+                    }
                 }
-
                 dataGridView1.Rows.Clear();
                 CallStockTable();
                 ClearTxtProducts();
@@ -198,6 +215,8 @@ namespace Market_Management
             productBarcodeTxt.Text = "";
             productKdvRateTxt.Text = "";
             productStockQuantityTxt.Text = "";
+            comboBoxProductGroupForInventory.Text = "";
+            comboBoxSupplierForInventory.Text = "";
         }
         private void ClearTxtSuppliers()
         {
@@ -253,16 +272,22 @@ namespace Market_Management
         private void comboBoxProductGroupForInventory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (comboBoxSupplierForInventory.SelectedItem != null)
+            if (comboBoxProductGroupForInventory.SelectedItem != null)
             {
-                var selectedProductGroup = (dynamic)comboBoxSupplierForInventory.SelectedItem;
+                var selectedProductGroup = (dynamic)comboBoxProductGroupForInventory.SelectedItem;
                 productGroupIDTxt.Text = selectedProductGroup.Value.ToString();
             }
            
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(productIDTxt.Text);
+            var update= dbContex.productTbl.Find(id);
 
         }
     }

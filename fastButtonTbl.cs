@@ -10,20 +10,13 @@
 namespace Market_Management
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class productProcedure_Result
+    public partial class fastButtonTbl
     {
         public int productID { get; set; }
+        public string productBarcode { get; set; }
         public string productName { get; set; }
         public Nullable<double> productPrice { get; set; }
-        public string productBarcode { get; set; }
-        public Nullable<double> productKDVRate { get; set; }
-        public Nullable<double> productStockQuantity { get; set; }
-        public string supplierName { get; set; }
-        public string supplierPhoneNumber { get; set; }
-        public string supplierIBAN { get; set; }
-        public string supplierEmail { get; set; }
-        public string supplierAddress { get; set; }
-        public string productGroupName { get; set; }
     }
 }

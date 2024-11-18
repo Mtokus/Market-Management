@@ -87,7 +87,6 @@ namespace Market_Management
             }
 
         }
-
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             CalculateWorkingHours();
@@ -104,7 +103,6 @@ namespace Market_Management
             }
             
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             staffEntryExitAddForm staffEntryExitAddForm = new staffEntryExitAddForm();

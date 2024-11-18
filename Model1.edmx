@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="StokveSatisYonetimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fastButtonTbl">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productBarcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="productName" Type="nvarchar" MaxLength="50" />
+          <Property Name="productPrice" Type="float" />
+        </EntityType>
         <EntityType Name="productDetailTbl">
           <Key>
             <PropertyRef Name="productDetailID" />
@@ -32,7 +41,7 @@
           <Property Name="productPrice" Type="float" />
           <Property Name="productBarcode" Type="varchar" MaxLength="13" />
           <Property Name="productKDVRate" Type="float" />
-          <Property Name="productStockQuantity" Type="int" />
+          <Property Name="productStockQuantity" Type="float" />
         </EntityType>
         <EntityType Name="receiptDetailTbl">
           <Key>
@@ -41,7 +50,7 @@
           <Property Name="receiptDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="receiptID" Type="int" />
           <Property Name="productID" Type="int" />
-          <Property Name="productQuantity" Type="int" />
+          <Property Name="productQuantity" Type="float" />
           <Property Name="productTotalPrice" Type="float" />
           <Property Name="productRebate" Type="bit" />
         </EntityType>
@@ -200,6 +209,7 @@
         <Function Name="ProcedureStaffEntryExit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="productProcedure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="StokveSatisYonetimModelStoreContainer">
+          <EntitySet Name="fastButtonTbl" EntityType="Self.fastButtonTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="productDetailTbl" EntityType="Self.productDetailTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="productGroupTbl" EntityType="Self.productGroupTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="productTbl" EntityType="Self.productTbl" Schema="dbo" store:Type="Tables" />
@@ -243,6 +253,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StokveSatisYonetimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fastButtonTbl">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productPrice" Type="Double" />
+        </EntityType>
         <EntityType Name="productDetailTbl">
           <Key>
             <PropertyRef Name="productDetailID" />
@@ -274,7 +293,7 @@
           <Property Name="productPrice" Type="Double" />
           <Property Name="productBarcode" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Name="productKDVRate" Type="Double" />
-          <Property Name="productStockQuantity" Type="Int32" />
+          <Property Name="productStockQuantity" Type="Double" />
           <NavigationProperty Name="productDetailTbl" Relationship="Self.FK_productDetailTbl_productTbl1" FromRole="productTbl" ToRole="productDetailTbl" />
           <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_productTbl" FromRole="productTbl" ToRole="receiptDetailTbl" />
         </EntityType>
@@ -285,7 +304,7 @@
           <Property Name="receiptDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="receiptID" Type="Int32" />
           <Property Name="productID" Type="Int32" />
-          <Property Name="productQuantity" Type="Int32" />
+          <Property Name="productQuantity" Type="Double" />
           <Property Name="productTotalPrice" Type="Double" />
           <Property Name="productRebate" Type="Boolean" />
           <NavigationProperty Name="productTbl" Relationship="Self.FK_receiptDetailTbl_productTbl" FromRole="receiptDetailTbl" ToRole="productTbl" />
@@ -300,9 +319,9 @@
           <Property Name="receiptTotalKDV" Type="Double" />
           <Property Name="receiptTotalPrice" Type="Double" />
           <Property Name="receiptPaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptTbl" ToRole="receiptDetailTbl" />
           <Property Name="receiptCustomerPay" Type="Double" />
           <Property Name="receiptCashChange" Type="Double" />
+          <NavigationProperty Name="receiptDetailTbl" Relationship="Self.FK_receiptDetailTbl_receiptTbl" FromRole="receiptTbl" ToRole="receiptDetailTbl" />
         </EntityType>
         <EntityType Name="StaffEntryExitTbl">
           <Key>
@@ -450,6 +469,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ShopManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fastButtonTbl" EntityType="Self.fastButtonTbl" />
           <EntitySet Name="productDetailTbl" EntityType="Self.productDetailTbl" />
           <EntitySet Name="productGroupTbl" EntityType="Self.productGroupTbl" />
           <EntitySet Name="productTbl" EntityType="Self.productTbl" />
@@ -509,7 +529,7 @@
           <Property Type="Double" Name="productPrice" Nullable="true" />
           <Property Type="String" Name="productBarcode" Nullable="true" MaxLength="13" />
           <Property Type="Double" Name="productKDVRate" Nullable="true" />
-          <Property Type="Int32" Name="productStockQuantity" Nullable="true" />
+          <Property Type="Double" Name="productStockQuantity" Nullable="true" />
           <Property Type="String" Name="supplierName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="supplierPhoneNumber" Nullable="true" MaxLength="11" />
           <Property Type="String" Name="supplierIBAN" Nullable="true" MaxLength="16" />
@@ -523,6 +543,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="StokveSatisYonetimModelStoreContainer" CdmEntityContainer="ShopManagementEntities">
+          <EntitySetMapping Name="fastButtonTbl">
+            <EntityTypeMapping TypeName="StokveSatisYonetimModel.fastButtonTbl">
+              <MappingFragment StoreEntitySet="fastButtonTbl">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productBarcode" ColumnName="productBarcode" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="productDetailTbl">
             <EntityTypeMapping TypeName="StokveSatisYonetimModel.productDetailTbl">
               <MappingFragment StoreEntitySet="productDetailTbl">
@@ -570,13 +600,13 @@
           <EntitySetMapping Name="receiptTbl">
             <EntityTypeMapping TypeName="StokveSatisYonetimModel.receiptTbl">
               <MappingFragment StoreEntitySet="receiptTbl">
-                <ScalarProperty Name="receiptCashChange" ColumnName="receiptCashChange" />
-                <ScalarProperty Name="receiptCustomerPay" ColumnName="receiptCustomerPay" />
                 <ScalarProperty Name="receiptID" ColumnName="receiptID" />
                 <ScalarProperty Name="receiptFormationDate" ColumnName="receiptFormationDate" />
                 <ScalarProperty Name="receiptTotalKDV" ColumnName="receiptTotalKDV" />
                 <ScalarProperty Name="receiptTotalPrice" ColumnName="receiptTotalPrice" />
                 <ScalarProperty Name="receiptPaymentType" ColumnName="receiptPaymentType" />
+                <ScalarProperty Name="receiptCustomerPay" ColumnName="receiptCustomerPay" />
+                <ScalarProperty Name="receiptCashChange" ColumnName="receiptCashChange" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

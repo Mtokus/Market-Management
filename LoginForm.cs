@@ -21,7 +21,6 @@ namespace Market_Management
         {
             Close();   
         }
-
         private void BtnLogIn_Click(object sender, EventArgs e)
         {
             string userName = txtUserName.Text.Trim();
@@ -33,16 +32,12 @@ namespace Market_Management
                 Form1 form1 = new Form1();
                 form1.Show();
                 this.Hide(); 
-                
-                
             }
-            else {
+            else 
+            {
                 MessageBox.Show("giriş Başarısız");
-
-
-                    } 
+            } 
         }
-
         private void LoginForm_Load(object sender, EventArgs e)
         {
 

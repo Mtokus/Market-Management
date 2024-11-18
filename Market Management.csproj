@@ -61,6 +61,15 @@
     <Compile Include="cashRegisterForm.Designer.cs">
       <DependentUpon>cashRegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="fastButtonAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fastButtonAddForm.Designer.cs">
+      <DependentUpon>fastButtonAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fastButtonTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +173,9 @@
     </Compile>
     <EmbeddedResource Include="cashRegisterForm.resx">
       <DependentUpon>cashRegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fastButtonAddForm.resx">
+      <DependentUpon>fastButtonAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

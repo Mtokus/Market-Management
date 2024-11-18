@@ -26,7 +26,7 @@ namespace Market_Management
         public Nullable<double> productPrice { get; set; }
         public string productBarcode { get; set; }
         public Nullable<double> productKDVRate { get; set; }
-        public Nullable<int> productStockQuantity { get; set; }
+        public Nullable<double> productStockQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<productDetailTbl> productDetailTbl { get; set; }

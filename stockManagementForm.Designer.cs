@@ -56,7 +56,7 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.productInformationTxt = new System.Windows.Forms.TextBox();
             this.productStockQuantityTxt = new System.Windows.Forms.TextBox();
             this.productKdvRateTxt = new System.Windows.Forms.TextBox();
             this.productBarcodeTxt = new System.Windows.Forms.TextBox();
@@ -222,7 +222,7 @@
             this.tabPage1.Controls.Add(this.deleteButton);
             this.tabPage1.Controls.Add(this.updateButton);
             this.tabPage1.Controls.Add(this.addButton);
-            this.tabPage1.Controls.Add(this.textBox3);
+            this.tabPage1.Controls.Add(this.productInformationTxt);
             this.tabPage1.Controls.Add(this.productStockQuantityTxt);
             this.tabPage1.Controls.Add(this.productKdvRateTxt);
             this.tabPage1.Controls.Add(this.productBarcodeTxt);
@@ -348,6 +348,7 @@
             this.updateButton.TabIndex = 35;
             this.updateButton.Text = "Güncelle";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // addButton
             // 
@@ -359,13 +360,13 @@
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // textBox3
+            // productInformationTxt
             // 
-            this.textBox3.Location = new System.Drawing.Point(332, 148);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(333, 92);
-            this.textBox3.TabIndex = 27;
+            this.productInformationTxt.Location = new System.Drawing.Point(332, 148);
+            this.productInformationTxt.Multiline = true;
+            this.productInformationTxt.Name = "productInformationTxt";
+            this.productInformationTxt.Size = new System.Drawing.Size(333, 92);
+            this.productInformationTxt.TabIndex = 27;
             // 
             // productStockQuantityTxt
             // 
@@ -657,7 +658,7 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox productInformationTxt;
         private System.Windows.Forms.TextBox productStockQuantityTxt;
         private System.Windows.Forms.TextBox productKdvRateTxt;
         private System.Windows.Forms.TextBox productBarcodeTxt;

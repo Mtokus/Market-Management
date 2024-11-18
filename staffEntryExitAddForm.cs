@@ -29,13 +29,11 @@ namespace Market_Management
             dbContex.SaveChanges();
             MessageBox.Show("kaydedildi");
         }
-
         private void staffEntryExitAddForm_Load(object sender, EventArgs e)
         {
             CallStaffNameForCombobox();
                 
         }
-
         private void CallStaffNameForCombobox()
         {
             var staffNameSurname=dbContex.staffTbl.ToList();
@@ -50,7 +48,6 @@ namespace Market_Management
             comboBoxStaffName.DisplayMember = "Text";
             comboBoxStaffName.ValueMember = "Value";
         }
-
        /* private void comboBoxStaffName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxStaffName.SelectedIndex != null)

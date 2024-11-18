@@ -27,6 +27,7 @@ namespace Market_Management
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<fastButtonTbl> fastButtonTbl { get; set; }
         public virtual DbSet<productDetailTbl> productDetailTbl { get; set; }
         public virtual DbSet<productGroupTbl> productGroupTbl { get; set; }
         public virtual DbSet<productTbl> productTbl { get; set; }

@@ -4,17 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a4c71b36ecdd4f5fb443fd7c571aa9d4" Name="Diagram1">
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.productDetailTbl" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.productGroupTbl" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.productTbl" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.receiptDetailTbl" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+      <Diagram DiagramId="acf8ccbf11344fdc9b1efd38d91c4508" Name="Diagram1">
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.fastButtonTbl" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.productDetailTbl" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.productGroupTbl" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.productTbl" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.receiptDetailTbl" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.receiptTbl" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.StaffEntryExitTbl" Width="1.5" PointX="7.25" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffPositionTbl" Width="1.5" PointX="2.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffTbl" Width="1.5" PointX="5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.supplierTbl" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.StaffEntryExitTbl" Width="1.5" PointX="7.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffPositionTbl" Width="1.5" PointX="2.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffTbl" Width="1.5" PointX="5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.supplierTbl" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="StokveSatisYonetimModel.FK_productDetailTbl_productGroupTbl" ManuallyRouted="false" />
         <AssociationConnector Association="StokveSatisYonetimModel.FK_productDetailTbl_productTbl1" ManuallyRouted="false" />
         <AssociationConnector Association="StokveSatisYonetimModel.FK_productDetailTbl_supplierTbl" ManuallyRouted="false" />
