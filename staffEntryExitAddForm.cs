@@ -20,11 +20,21 @@ namespace Market_Management
 
         private void btnNewEntryStaff_Click(object sender, EventArgs e)
         {
-            StaffEntryExitTbl addNewEntryExit= new StaffEntryExitTbl();
+            var addNewEntryExit = new StaffEntryExitTbl()
+            {
+                staffID = Convert.ToInt32(txtStaffID.Text),
+                entryDateTime = pickerStaffEntryTime.Value,
+                exitDateTime = pickerStaffExitTime.Value,
+                leaveStatus = checkLeaveStatus.Checked,
+
+            };
+
+           /* StaffEntryExitTbl addNewEntryExit= new StaffEntryExitTbl();
             addNewEntryExit.staffID=Convert.ToInt32(txtStaffID.Text) ;
             addNewEntryExit.entryDateTime = pickerStaffEntryTime.Value;
             addNewEntryExit.exitDateTime=pickerStaffExitTime.Value;
             addNewEntryExit.leaveStatus = checkLeaveStatus.Checked;
+           */
             dbContex.StaffEntryExitTbl.Add(addNewEntryExit);
             dbContex.SaveChanges();
             MessageBox.Show("kaydedildi");
@@ -48,16 +58,45 @@ namespace Market_Management
             comboBoxStaffName.DisplayMember = "Text";
             comboBoxStaffName.ValueMember = "Value";
         }
-       /* private void comboBoxStaffName_SelectedIndexChanged(object sender, EventArgs e)
+     
+        private void comboBoxStaffName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxStaffName.SelectedIndex != null)
+            
+            if (comboBoxStaffName.SelectedIndex != -1)
             {
-                var selectedStaff= (dynamic)comboBoxStaffName.SelectedItem;
-                txtStaffID.Text=selectedStaff.Value.ToString();
+                var staffNameSurname = dbContex.staffTbl
+                    .FirstOrDefault(s => s.staffNameSurname == comboBoxStaffName.Text);
+                if (staffNameSurname != null)
+                {
+                    txtStaffID.Text = staffNameSurname.staffID.ToString();
+                }
             }
         }
-       */
+        private void txtStaffID_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtStaffID.Text))
+            {
+                if (int.TryParse(txtStaffID.Text, out int staffId))
+                {
+                    var staff = dbContex.staffTbl.FirstOrDefault(s => s.staffID == staffId);
+
+                    if (staff != null)
+                    {
+                        comboBoxStaffName.Text = staff.staffNameSurname;
+                    }
+                    else
+                    {
+                        comboBoxStaffName.Text = string.Empty; 
+                    }
+                }
+                else
+                {
+                    comboBoxStaffName.Text = string.Empty; 
+                }
+            }
+        }
+
     }
 
-  
+
 }

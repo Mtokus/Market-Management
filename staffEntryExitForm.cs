@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Market_Management.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,35 +57,7 @@ namespace Market_Management
             #endregion
             var staffEntryExit = dbContex.ProcedureStaffEntryExit().OrderByDescending(c=>c.Giriş_Saati). ToList();
 
-            if (dataGridView1.Columns.Count == 0)
-            {
-                dataGridView1.Columns.Add("Ad_Soyad", "Personal Adı");
-                dataGridView1.Columns.Add("Giriş_Saati", "Giriş Saati");
-                dataGridView1.Columns.Add("Çıkış_Saati", "Çıkış Saati");
-                dataGridView1.Columns.Add("İşlem_Tarihi", "İşlem Tarihi");
-                dataGridView1.Columns.Add("Çalışma_Süresi", "Çalışma Süresi");
-            }
-
-            foreach (var item in staffEntryExit)
-            {
-                int rowIndex = dataGridView1.Rows.Add();
-
-                DateTime entryDateTime = Convert.ToDateTime(item.Giriş_Saati);
-                DateTime exitDateTime = Convert.ToDateTime(item.Çıkış_Saati);
-
-                if (exitDateTime < entryDateTime)
-                {
-                    exitDateTime = exitDateTime.AddDays(1);
-                }
-
-                TimeSpan diffTime = exitDateTime - entryDateTime;
-
-                dataGridView1.Rows[rowIndex].Cells["Ad_Soyad"].Value = item.Ad_Soyad.ToString();
-                dataGridView1.Rows[rowIndex].Cells["Giriş_Saati"].Value = entryDateTime.ToString("HH:mm:ss");
-                dataGridView1.Rows[rowIndex].Cells["Çıkış_Saati"].Value = exitDateTime.ToString("HH:mm:ss");
-                dataGridView1.Rows[rowIndex].Cells["İşlem_Tarihi"].Value = entryDateTime.ToString("dd/MM/yyyy");
-                dataGridView1.Rows[rowIndex].Cells["Çalışma_Süresi"].Value = diffTime.ToString(@"hh\:mm\:ss");
-            }
+            DatagridClass.StaffEntryExitGridview(dataGridView1, staffEntryExit);
 
         }
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -97,7 +70,7 @@ namespace Market_Management
 
             for (int rowIndex=0; rowIndex < rowCount; rowIndex ++)
             {
-                DateTime entryDateTime = Convert.ToDateTime(dataGridView1.Rows[rowIndex].Cells["Giriş_Saati"].Value);
+                DateTime entryDateTime =Convert.ToDateTime(dataGridView1.Rows[rowIndex].Cells["Giriş_Saati"].Value);
                 DateTime exitDatetime =Convert.ToDateTime(dataGridView1.Rows[rowIndex].Cells["Çıkış_Saati"].Value) ;
                 TimeSpan diffTime = exitDatetime - entryDateTime;
             }
@@ -107,6 +80,18 @@ namespace Market_Management
         {
             staffEntryExitAddForm staffEntryExitAddForm = new staffEntryExitAddForm();
             staffEntryExitAddForm.ShowDialog();
+        }
+
+        private void personelSearchTxt_TextChanged(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            if (personelSearchTxt.Text.Length > 0)
+            {
+                string staffName = personelSearchTxt.Text.ToLower().ToUpper();
+                var staffNameFiltered = dbContex.ProcedureStaffEntryExit().Where(o => o.Ad_Soyad.ToLower().ToUpper().Contains(staffName)).ToList();
+
+                DatagridClass.StaffEntryExitGridview(dataGridView1, staffNameFiltered);
+            }
         }
     }
 }

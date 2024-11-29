@@ -706,6 +706,7 @@
             this.quantityTxt.Size = new System.Drawing.Size(47, 20);
             this.quantityTxt.TabIndex = 9;
             this.quantityTxt.Text = "1";
+            this.quantityTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.quantityTxt_KeyPress);
             // 
             // calculateNumberTxt
             // 
@@ -713,6 +714,7 @@
             this.calculateNumberTxt.Name = "calculateNumberTxt";
             this.calculateNumberTxt.Size = new System.Drawing.Size(102, 20);
             this.calculateNumberTxt.TabIndex = 9;
+            this.calculateNumberTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.calculateNumberTxt_KeyPress);
             // 
             // takeActionButton
             // 

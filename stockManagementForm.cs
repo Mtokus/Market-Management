@@ -26,6 +26,7 @@ namespace Market_Management
             CallProductGroupForCombobox();
 
         }
+
         void CallStockTable()
         {
             var products = dbContex.productProcedure().ToList(); 
@@ -43,6 +44,7 @@ namespace Market_Management
                 dataGridView1.Rows[rowIndex].Cells["productGroupName"].Value = product.productGroupName ?? "Grup Adı Yok";
             }
         }
+
         void CallProductDetailTable(object sender, DataGridViewCellEventArgs e)
         {
             #region Tedarikçi yok hatası
@@ -92,52 +94,169 @@ namespace Market_Management
             var id = Convert.ToInt32(selectedRow.Cells["productID"].Value);
 
             var productDetail = dbContex.productProcedure().Where(p => p.productID == id).ToList();
-
-            if (e.ColumnIndex == 8)
+            if (dataGridView1.Columns.Count ==9) 
+            
             {
-                if (productDetail.Any()) 
+                if (e.ColumnIndex == 8)
                 {
-
-                    dataGridView1.Columns.Clear();
-                    dataGridView1.Columns.Add("productName", "Ürün Adı");
-                    dataGridView1.Columns.Add("supplierName", "Tedarikçi Adı");
-                    dataGridView1.Columns.Add("supplierPhoneNumber", "Tedarikçi NO");
-                    dataGridView1.Columns.Add("productGroupName", "Ürün Grubu");
-
-                    foreach (var product in productDetail)
+                    if (productDetail.Any())
                     {
-                        int rowIndex = dataGridView1.Rows.Add();
-                        dataGridView1.Rows[rowIndex].Cells["productName"].Value = product.productName.ToString();
-                        dataGridView1.Rows[rowIndex].Cells["supplierName"].Value = product.supplierName?.ToString() ?? "Tedarikçi Yok"; 
-                        dataGridView1.Rows[rowIndex].Cells["supplierPhoneNumber"].Value = product.supplierPhoneNumber?.ToString() ?? "Telefon Numarası Yok"; 
-                        dataGridView1.Rows[rowIndex].Cells["productGroupName"].Value = product.productGroupName?.ToString() ?? "Grup Adı Yok"; 
+
+                        dataGridView1.Columns.Clear();
+                        dataGridView1.Columns.Add("productName", "Ürün Adı");
+                        dataGridView1.Columns.Add("supplierName", "Tedarikçi Adı");
+                        dataGridView1.Columns.Add("supplierPhoneNumber", "Tedarikçi NO");
+                        dataGridView1.Columns.Add("productGroupName", "Ürün Grubu");
+                        dataGridView1.Columns.Add("backProducts", "Ürünlere Dön");
+
+                        foreach (var product in productDetail)
+                        {
+                            int rowIndex = dataGridView1.Rows.Add();
+                            dataGridView1.Rows[rowIndex].Cells["productName"].Value = product.productName.ToString();
+                            dataGridView1.Rows[rowIndex].Cells["supplierName"].Value = product.supplierName?.ToString() ?? "Tedarikçi Yok";
+                            dataGridView1.Rows[rowIndex].Cells["supplierPhoneNumber"].Value = product.supplierPhoneNumber?.ToString() ?? "Telefon Numarası Yok";
+                            dataGridView1.Rows[rowIndex].Cells["productGroupName"].Value = product.productGroupName?.ToString() ?? "Grup Adı Yok";
+                            dataGridView1.Rows[rowIndex].Cells["backProducts"].Value = "Ürünlere Dön";
+
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tedarikçi Firma bulunmuyor");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Tedarikçi Firma bulunmuyor");
+                    var updateProduct = dbContex.productProcedure().Where(w => w.productID == id).FirstOrDefault();
+
+
+
+                    productIDTxt.Text = updateProduct.productID.ToString();
+                    productNameTxt.Text = updateProduct.productName.ToString();
+                    productPriceTxt.Text = updateProduct.productPrice.ToString();
+                    productBarcodeTxt.Text = updateProduct.productBarcode.ToString();
+                    productKdvRateTxt.Text = updateProduct.productKDVRate.ToString();
+                    productStockQuantityTxt.Text = updateProduct.productStockQuantity.ToString();
+                    comboBoxSupplierForInventory.Text = updateProduct.supplierName?.ToString();
+                    comboBoxProductGroupForInventory.Text = updateProduct.productGroupName?.ToString();
+                    //  supplierIDTxt.Text= updateProduct.supp
+
                 }
+
             }
-            else
+            else if (dataGridView1.Columns.Count == 6 ) 
             {
-               var updateProduct = dbContex.productProcedure().Where(w => w.productID == id).FirstOrDefault();
+                if (e.ColumnIndex == 5) 
+                {
+                    CallStockTable();
+                }
+
+            }
+            else {
+                MessageBox.Show("Kolon sayısı yanlış");
+                    
+                    }
+            
+        }
+       
+        private void btnSupplierAdd_Click(object sender, EventArgs e)
+        {
+            supplierTbl addNewSupplier= new supplierTbl();
+            addNewSupplier.supplierName=txtSupplierName.Text;   
+            addNewSupplier.supplierPhoneNumber= txtSupplierPhoneNumber.Text;
+            addNewSupplier.supplierIBAN=txtSupplierIbanNo.Text;
+            addNewSupplier.supplierEmail= txtSupplierEmail.Text;
+            addNewSupplier.supplierAddress= txtSupplierAddress.Text;
+            dbContex.supplierTbl.Add(addNewSupplier);
+            dbContex.SaveChanges();
+            MessageBox.Show("Eklendi!");
+            ClearTxtSuppliers();
+        }
+
+        private void ClearTxtProducts()
+        {
+            productNameTxt.Text = "";
+            productPriceTxt.Text = "";
+            productBarcodeTxt.Text = "";
+            productKdvRateTxt.Text = "";
+            productStockQuantityTxt.Text = "";
+            comboBoxProductGroupForInventory.Text = "";
+            comboBoxSupplierForInventory.Text = "";
+        }
+
+        private void ClearTxtSuppliers()
+        {
+            txtSupplierName.Text = "";
+            txtSupplierPhoneNumber.Text = "";
+            txtSupplierEmail.Text = "";
+            txtSupplierIbanNo.Text = "";
+            txtSupplierAddress.Text = "";
 
 
+        }
 
-                productIDTxt.Text = updateProduct.productID.ToString();
-                productNameTxt.Text = updateProduct.productName.ToString();
-                productPriceTxt.Text = updateProduct.productPrice.ToString();
-                productBarcodeTxt.Text = updateProduct.productBarcode.ToString();
-                productKdvRateTxt.Text = updateProduct.productKDVRate.ToString();
-                productStockQuantityTxt.Text = updateProduct.productStockQuantity.ToString();
-                comboBoxSupplierForInventory.Text = updateProduct.supplierName.ToString();
-                comboBoxProductGroupForInventory.Text = updateProduct.productGroupName.ToString();
-              //  supplierIDTxt.Text= updateProduct.supp
+        private void CallSuppliersForCombobox()
+        {
+            var suppliers = dbContex.supplierTbl.ToList();
+            foreach (var supplier in suppliers) 
+            {
+                comboBoxSupplierForInventory.Items.Add(new
+                {
+                    Text = supplier.supplierName,
+                    Value=supplier.supplierID
+                });
+            }
+            comboBoxSupplierForInventory.DisplayMember = "Text";
+            comboBoxSupplierForInventory.ValueMember = "Value";
+        }
 
+        private void CallProductGroupForCombobox()
+        {
+            var productGroup = dbContex.productGroupTbl.ToList();
+            foreach (var group in productGroup)
+            {
+                comboBoxProductGroupForInventory.Items.Add(new
+                {
+                    Text = group.productGroupName,
+                    Value = group.productGroupID
+                });
 
+            }
+            comboBoxProductGroupForInventory.DisplayMember = "Text";
+            comboBoxProductGroupForInventory.ValueMember = "Value";
+        }
 
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void comboBoxSupplierForInventory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxSupplierForInventory.SelectedItem != null)
+            {
+                var selectedSupplier = (dynamic)comboBoxSupplierForInventory.SelectedItem;
+                supplierIDTxt.Text = selectedSupplier.Value.ToString();
             }
         }
+
+        private void comboBoxProductGroupForInventory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (comboBoxProductGroupForInventory.SelectedItem != null)
+            {
+                var selectedProductGroup = (dynamic)comboBoxProductGroupForInventory.SelectedItem;
+                productGroupIDTxt.Text = selectedProductGroup.Value.ToString();
+            }
+           
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CallProductDetailTable(sender, e);
+        }
+
         private void addButton_Click(object sender, EventArgs e)
         {
             var textboxes = new List<TextBox> { productNameTxt, productPriceTxt, productBarcodeTxt, productKdvRateTxt, productStockQuantityTxt, supplierIDTxt, productGroupIDTxt };
@@ -158,10 +277,10 @@ namespace Market_Management
                     productTbl addProduct = new productTbl
                     {
                         productName = productNameTxt.Text,
-                        productPrice = Convert.ToDouble(productPriceTxt.Text), 
+                        productPrice = Convert.ToDouble(productPriceTxt.Text),
                         productBarcode = productBarcodeTxt.Text,
                         productKDVRate = Convert.ToDouble(productKdvRateTxt.Text),
-                        productStockQuantity = Convert.ToInt32(productStockQuantityTxt.Text) 
+                        productStockQuantity = Convert.ToInt32(productStockQuantityTxt.Text)
                     };
 
                     dbContex.productTbl.Add(addProduct);
@@ -170,8 +289,8 @@ namespace Market_Management
                     productDetailTbl addNewProductDetail = new productDetailTbl
                     {
                         productID = newProductID,
-                        supplierID = Convert.ToInt32(supplierIDTxt.Text), 
-                        productGroupID = Convert.ToInt32(productGroupIDTxt.Text) 
+                        supplierID = Convert.ToInt32(supplierIDTxt.Text),
+                        productGroupID = Convert.ToInt32(productGroupIDTxt.Text)
                     };
 
                     dbContex.productDetailTbl.Add(addNewProductDetail);
@@ -195,101 +314,109 @@ namespace Market_Management
                 MessageBox.Show("Hatalı veri girişi: " + ex.Message, "Format Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnSupplierAdd_Click(object sender, EventArgs e)
-        {
-            supplierTbl addNewSupplier= new supplierTbl();
-            addNewSupplier.supplierName=txtSupplierName.Text;   
-            addNewSupplier.supplierPhoneNumber= txtSupplierPhoneNumber.Text;
-            addNewSupplier.supplierIBAN=txtSupplierIbanNo.Text;
-            addNewSupplier.supplierEmail= txtSupplierEmail.Text;
-            addNewSupplier.supplierAddress= txtSupplierAddress.Text;
-            dbContex.supplierTbl.Add(addNewSupplier);
-            dbContex.SaveChanges();
-            MessageBox.Show("Eklendi!");
-            ClearTxtSuppliers();
-        }
-        private void ClearTxtProducts()
-        {
-            productNameTxt.Text = "";
-            productPriceTxt.Text = "";
-            productBarcodeTxt.Text = "";
-            productKdvRateTxt.Text = "";
-            productStockQuantityTxt.Text = "";
-            comboBoxProductGroupForInventory.Text = "";
-            comboBoxSupplierForInventory.Text = "";
-        }
-        private void ClearTxtSuppliers()
-        {
-            txtSupplierName.Text = "";
-            txtSupplierPhoneNumber.Text = "";
-            txtSupplierEmail.Text = "";
-            txtSupplierIbanNo.Text = "";
-            txtSupplierAddress.Text = "";
-
-
-        }
-        private void CallSuppliersForCombobox()
-        {
-            var suppliers = dbContex.supplierTbl.ToList();
-            foreach (var supplier in suppliers) 
-            {
-                comboBoxSupplierForInventory.Items.Add(new
-                {
-                    Text = supplier.supplierName,
-                    Value=supplier.supplierID
-                });
-            }
-            comboBoxSupplierForInventory.DisplayMember = "Text";
-            comboBoxSupplierForInventory.ValueMember = "Value";
-        }
-        private void CallProductGroupForCombobox()
-        {
-            var productGroup = dbContex.productGroupTbl.ToList();
-            foreach (var group in productGroup)
-            {
-                comboBoxProductGroupForInventory.Items.Add(new
-                {
-                    Text = group.productGroupName,
-                    Value = group.productGroupID
-                });
-
-            }
-            comboBoxProductGroupForInventory.DisplayMember = "Text";
-            comboBoxProductGroupForInventory.ValueMember = "Value";
-        }
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            CallProductDetailTable(sender, e);
-        }
-        private void comboBoxSupplierForInventory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxSupplierForInventory.SelectedItem != null)
-            {
-                var selectedSupplier = (dynamic)comboBoxSupplierForInventory.SelectedItem;
-                supplierIDTxt.Text = selectedSupplier.Value.ToString();
-            }
-        }
-        private void comboBoxProductGroupForInventory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            if (comboBoxProductGroupForInventory.SelectedItem != null)
-            {
-                var selectedProductGroup = (dynamic)comboBoxProductGroupForInventory.SelectedItem;
-                productGroupIDTxt.Text = selectedProductGroup.Value.ToString();
-            }
-           
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(productIDTxt.Text);
-            var update= dbContex.productTbl.Find(id);
+            try
+            {
+                int id = Convert.ToInt32(productIDTxt.Text);
+                var product = dbContex.productTbl.Find(id);
+
+                if (product == null)
+                {
+                    MessageBox.Show("Ürün bulunamadı!");
+                    return;
+                }
+                // productTbl güncelle
+                product.productName = productNameTxt.Text;
+                product.productPrice = double.TryParse(productPriceTxt.Text, out double price) ? price : 0;
+                product.productBarcode = productBarcodeTxt.Text;
+                product.productKDVRate = double.TryParse(productKdvRateTxt.Text, out double kdvRate) ? kdvRate : 0;
+                product.productStockQuantity = double.TryParse(productStockQuantityTxt.Text, out double stockQty) ? stockQty : 0;
+
+                // productDetailTbl güncelle yoksa oluştur
+                var productDetail = dbContex.productDetailTbl.FirstOrDefault(p => p.productID == id);
+
+                if (productDetail == null)
+                {
+                    // productDetail kaydı oluştur
+                    productDetail = new productDetailTbl
+                    {
+                        productID = id,
+                        supplierID = int.TryParse(supplierIDTxt.Text, out int supplierID) ? supplierID : 0,
+                        productGroupID = int.TryParse(productGroupIDTxt.Text, out int productGroupID) ? productGroupID : 0,
+                        productPurchaseDate = dateTimePicker1.Value,
+                        productDescription = productDescriptionTxt.Text
+                    };
+                    dbContex.productDetailTbl.Add(productDetail); 
+                }
+                else
+                {
+                    
+                    productDetail.supplierID = int.TryParse(supplierIDTxt.Text, out int supplierID) ? supplierID : 0;
+                    productDetail.productGroupID = int.TryParse(productGroupIDTxt.Text, out int productGroupID) ? productGroupID : 0;
+                    productDetail.productPurchaseDate = dateTimePicker1.Value;
+                    productDetail.productDescription = productDescriptionTxt.Text;
+
+                    // Entity Framework'e güncellemeyi bildir
+                    dbContex.Entry(productDetail).State = EntityState.Modified;
+                }
+
+                int changes = dbContex.SaveChanges();
+
+                if (changes > 0)
+                {
+                    MessageBox.Show("Ürün ve detayları başarıyla güncellendi.");
+                }
+                else
+                {
+                    MessageBox.Show("Değişiklikler kaydedilmedi.");
+                }
+                dataGridView1.Rows.Clear();
+                CallStockTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(productIDTxt.Text);
+                var product = dbContex.productTbl.Find(id);
+                if (product == null)
+                {
+                    MessageBox.Show("Silinecek ürün bulunamadı!");
+                    return;
+                }
+                var productDetail = dbContex.productDetailTbl.FirstOrDefault(p => p.productID == id);
+                if (productDetail != null)
+                {
+                    dbContex.productDetailTbl.Remove(productDetail);
+                }
+                dbContex.productTbl.Remove(product);
+                dbContex.SaveChanges();
+                MessageBox.Show("Ürün başarıyla silindi.");
+                dataGridView1.Rows.Clear();
+                CallStockTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        private void supplierListButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }
-
 }

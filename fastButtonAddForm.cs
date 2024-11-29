@@ -20,18 +20,38 @@ namespace Market_Management
 
         private void productSearch_TextChanged(object sender, EventArgs e)
         {
-            if (productSearchTxt.Text != "") 
+           
+            if (string.IsNullOrEmpty(productSearchTxt.Text))
             {
+                dataGridView1.Rows.Clear();
+                CallStockTable(); 
+            }
+            else
+            {
+                dataGridView1.Rows.Clear();
                 string product_Name = productSearchTxt.Text;
                 var products = dbContex.productTbl.Where(p => p.productName.Contains(product_Name)).ToList();
+
                 foreach (var item in products)
                 {
-                    int rowIndex=dataGridView1.Rows.Add();
+                    int rowIndex = dataGridView1.Rows.Add();
                     dataGridView1.Rows[rowIndex].Cells["productID"].Value = item.productID.ToString();
                     dataGridView1.Rows[rowIndex].Cells["productName"].Value = item.productName.ToString();
                     dataGridView1.Rows[rowIndex].Cells["productBarcode"].Value = item.productBarcode.ToString();
                     dataGridView1.Rows[rowIndex].Cells["productPrice"].Value = item.productPrice.ToString();
                 }
+            }
+        }
+        private void CallStockTable()
+        {
+            var products = dbContex.productTbl.ToList(); 
+            foreach (var item in products)
+            {
+                int rowIndex = dataGridView1.Rows.Add();
+                dataGridView1.Rows[rowIndex].Cells["productID"].Value = item.productID.ToString();
+                dataGridView1.Rows[rowIndex].Cells["productName"].Value = item.productName.ToString();
+                dataGridView1.Rows[rowIndex].Cells["productBarcode"].Value = item.productBarcode.ToString();
+                dataGridView1.Rows[rowIndex].Cells["productPrice"].Value = item.productPrice.ToString();
             }
         }
 
@@ -56,5 +76,9 @@ namespace Market_Management
               }
         }
 
+        private void fastButtonAddForm_Load(object sender, EventArgs e)
+        {
+            CallStockTable();
+        }
     }
 }

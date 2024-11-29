@@ -61,6 +61,7 @@
     <Compile Include="cashRegisterForm.Designer.cs">
       <DependentUpon>cashRegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class\DatagridClass.cs" />
     <Compile Include="fastButtonAddForm.cs">
       <SubType>Form</SubType>
     </Compile>

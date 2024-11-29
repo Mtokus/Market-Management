@@ -37,7 +37,11 @@ namespace Market_Management
             
         }
         private void buttonCallStaff_Click(object sender, EventArgs e)
-        {
+        {   
+            if (comboBoxStaffName.Text=="" ) 
+            {
+               
+            }
             dataGridView1.Rows.Clear(); 
             int staffIDfromTxt = Convert.ToInt32(txtStaffID.Text);
             /* // Seçilen işçinin bilgilerini alıyoruz
@@ -80,25 +84,7 @@ namespace Market_Management
         }
         private void buttonListStaff_Click(object sender, EventArgs e)
         {
-            var staffName = dbContex.staffTbl.ToList();
-            foreach (var staff in staffName)
-            {
-                int rowIndex= dataGridViewStaffTbl.Rows.Add();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffID"].Value=staff.staffID.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffTCNumber"].Value=staff.staffTCNumber.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffNameSurname"].Value=staff.staffNameSurname.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPhoneNo"].Value=staff.staffPhoneNo.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffEmail"].Value=staff.staffEmail.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffAdress"].Value=staff.staffAdress.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPositionID"].Value=staff.staffPositionID.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffSalary"].Value=staff.staffSalary.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPassword"].Value=staff.staffPassword.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffStartDate"].Value=staff.staffStartDate.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffFinishDate"].Value=staff.staffFinishDate.ToString();
-                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffIsActive"].Value=staff.staffIsActive.Value;
-            }
-
-
+            CallStaffList();
         }
         private void comboBoxStaffName_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -110,20 +96,17 @@ namespace Market_Management
         }
         private void dataGridViewStaffTbl_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.RowIndex >= 0)
             {
-                // Tıklanan satırı alın
                 DataGridViewRow row = dataGridViewStaffTbl.Rows[e.RowIndex];
 
-                // TextBox'lara verileri yazdırın
                 txtStaffIDForUptade.Text = row.Cells["staffID"].Value?.ToString();
                 txtTcNo.Text = row.Cells["staffTCNumber"].Value?.ToString();
                 txtNameSurname.Text = row.Cells["staffNameSurname"].Value?.ToString();
                 txtPhoneNo.Text = row.Cells["staffPhoneNo"].Value?.ToString();
                 txtEmail.Text = row.Cells["staffEmail"].Value?.ToString();
                 txtHomeAddress.Text = row.Cells["staffAdress"].Value?.ToString();
-                txtPositionID.Text = row.Cells["staffPositionID"].Value?.ToString();
+                cmbStaffPosition.Text = row.Cells["staffPositionID"].Value?.ToString();
                 txtSalary.Text = row.Cells["staffSalary"].Value?.ToString();
                 txtPassword.Text = row.Cells["staffPassword"].Value?.ToString();
                 pickerStart.Text = row.Cells["staffStartDate"].Value?.ToString();
@@ -233,6 +216,89 @@ namespace Market_Management
 
                 }
             }
+        }
+        private void addStaffButton_Click(object sender, EventArgs e)
+        {
+            var addNewStaff = new staffTbl
+            {
+                staffTCNumber = txtTcNo.Text.ToString(),
+                staffNameSurname = txtNameSurname.Text.ToString(),
+                staffPhoneNo = txtPhoneNo.Text.ToString(),
+                staffEmail = txtEmail.Text.ToString(),
+                staffAdress = txtHomeAddress.Text.ToString(),
+                staffPositionID = Convert.ToInt32(cmbStaffPosition.Text),
+                staffSalary = Convert.ToInt32(txtSalary.Text),
+                staffPassword = txtPassword.Text.ToString(),
+                staffStartDate = pickerStart.Value,
+                staffFinishDate =null,
+                staffIsActive = true,
+            };
+            dbContex.staffTbl.Add(addNewStaff);
+            dbContex.SaveChanges();
+            MessageBox.Show("Başarıyla Eklendi !");
+            CallStaffList();
+        }
+        private void updateStaffButton_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txtStaffIDForUptade.Text);
+
+            var update = dbContex.staffTbl.FirstOrDefault(s => s.staffID == id);
+            if (update != null)
+            {
+                update.staffTCNumber = txtTcNo.Text.ToString();
+                update.staffNameSurname = txtNameSurname.Text.ToString();
+                update.staffPhoneNo = txtPhoneNo.Text.ToString();
+                update.staffEmail = txtEmail.Text.ToString();
+                update.staffAdress = txtHomeAddress.Text.ToString();
+                update.staffPositionID = Convert.ToInt32(cmbStaffPosition.Text);
+                update.staffSalary = Convert.ToInt32(txtSalary.Text);
+                update.staffPassword = txtPassword.Text.ToString();
+                update.staffStartDate = pickerStart.Value;
+                update.staffIsActive = chkStaffState.Checked;
+
+                if (chkStaffState.Checked) 
+                {
+                    update.staffFinishDate = null;  
+                }
+                else 
+                {
+                    update.staffFinishDate = pickerFinish.Value;  
+                }
+
+                dbContex.SaveChanges();
+                MessageBox.Show("Personel bilgileri başarıyla güncellendi.");
+            }
+            else
+            {
+                MessageBox.Show("Personel bulunamadı.");
+            }
+        }
+        private void CallStaffList()
+        {
+            dataGridView1.Rows.Clear();
+            var staffName = dbContex.staffTbl.ToList();
+            foreach (var staff in staffName)
+            {
+                int rowIndex = dataGridViewStaffTbl.Rows.Add();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffID"].Value = staff.staffID.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffTCNumber"].Value = staff.staffTCNumber.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffNameSurname"].Value = staff.staffNameSurname.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPhoneNo"].Value = staff.staffPhoneNo.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffEmail"].Value = staff.staffEmail.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffAdress"].Value = staff.staffAdress.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPositionID"].Value = staff.staffPositionID.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffSalary"].Value = staff.staffSalary.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffPassword"].Value = staff.staffPassword.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffStartDate"].Value = staff.staffStartDate.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffFinishDate"].Value = staff.staffFinishDate.ToString();
+                dataGridViewStaffTbl.Rows[rowIndex].Cells["staffIsActive"].Value = staff.staffIsActive.Value;
+            }
+
+
+        }
+        private void chkStaffState_CheckStateChanged(object sender, EventArgs e)
+        {
+            pickerFinish.Enabled = chkStaffState.Checked ? false : true;
         }
     }
 }

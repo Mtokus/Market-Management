@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(stockManagementForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -43,7 +42,6 @@
             this.productDetailID = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
             this.productGroupIDTxt = new System.Windows.Forms.TextBox();
@@ -56,7 +54,7 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.productInformationTxt = new System.Windows.Forms.TextBox();
+            this.productDescriptionTxt = new System.Windows.Forms.TextBox();
             this.productStockQuantityTxt = new System.Windows.Forms.TextBox();
             this.productKdvRateTxt = new System.Windows.Forms.TextBox();
             this.productBarcodeTxt = new System.Windows.Forms.TextBox();
@@ -72,6 +70,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.supplierListButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnSupplierAdd = new System.Windows.Forms.Button();
@@ -85,7 +84,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -116,6 +114,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -133,6 +132,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(795, 286);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -209,7 +209,6 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
-            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.productGroupIDTxt);
@@ -222,7 +221,7 @@
             this.tabPage1.Controls.Add(this.deleteButton);
             this.tabPage1.Controls.Add(this.updateButton);
             this.tabPage1.Controls.Add(this.addButton);
-            this.tabPage1.Controls.Add(this.productInformationTxt);
+            this.tabPage1.Controls.Add(this.productDescriptionTxt);
             this.tabPage1.Controls.Add(this.productStockQuantityTxt);
             this.tabPage1.Controls.Add(this.productKdvRateTxt);
             this.tabPage1.Controls.Add(this.productBarcodeTxt);
@@ -243,15 +242,6 @@
             this.tabPage1.Size = new System.Drawing.Size(787, 289);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Envanter İşlemleri";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(213, 240);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(38, 20);
-            this.button3.TabIndex = 46;
-            this.button3.Text = "Ara";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
@@ -277,7 +267,6 @@
             this.productGroupIDTxt.Name = "productGroupIDTxt";
             this.productGroupIDTxt.Size = new System.Drawing.Size(67, 20);
             this.productGroupIDTxt.TabIndex = 43;
-            this.productGroupIDTxt.Visible = false;
             // 
             // supplierIDTxt
             // 
@@ -286,7 +275,6 @@
             this.supplierIDTxt.Name = "supplierIDTxt";
             this.supplierIDTxt.Size = new System.Drawing.Size(67, 20);
             this.supplierIDTxt.TabIndex = 42;
-            this.supplierIDTxt.Visible = false;
             // 
             // productIDTxt
             // 
@@ -300,11 +288,11 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(57, 243);
+            this.label15.Location = new System.Drawing.Point(31, 243);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 40;
-            this.label15.Text = "Filtre :";
+            this.label15.Text = "Ürün Filtre :";
             // 
             // txtFilter
             // 
@@ -339,6 +327,7 @@
             this.deleteButton.TabIndex = 34;
             this.deleteButton.Text = "Sil";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // updateButton
             // 
@@ -360,13 +349,13 @@
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // productInformationTxt
+            // productDescriptionTxt
             // 
-            this.productInformationTxt.Location = new System.Drawing.Point(332, 148);
-            this.productInformationTxt.Multiline = true;
-            this.productInformationTxt.Name = "productInformationTxt";
-            this.productInformationTxt.Size = new System.Drawing.Size(333, 92);
-            this.productInformationTxt.TabIndex = 27;
+            this.productDescriptionTxt.Location = new System.Drawing.Point(332, 148);
+            this.productDescriptionTxt.Multiline = true;
+            this.productDescriptionTxt.Name = "productDescriptionTxt";
+            this.productDescriptionTxt.Size = new System.Drawing.Size(333, 92);
+            this.productDescriptionTxt.TabIndex = 27;
             // 
             // productStockQuantityTxt
             // 
@@ -487,6 +476,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.tabPage2.Controls.Add(this.supplierListButton);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.btnSupplierAdd);
@@ -508,6 +498,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tedarikçi İşlemleri";
             // 
+            // supplierListButton
+            // 
+            this.supplierListButton.Location = new System.Drawing.Point(311, 233);
+            this.supplierListButton.Name = "supplierListButton";
+            this.supplierListButton.Size = new System.Drawing.Size(75, 23);
+            this.supplierListButton.TabIndex = 49;
+            this.supplierListButton.Text = "Listele";
+            this.supplierListButton.UseVisualStyleBackColor = true;
+            this.supplierListButton.Click += new System.EventHandler(this.supplierListButton_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(547, 103);
@@ -525,6 +525,7 @@
             this.button2.TabIndex = 47;
             this.button2.Text = "Güncelle";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnSupplierAdd
             // 
@@ -617,11 +618,6 @@
             this.label14.TabIndex = 38;
             this.label14.Text = "Tedarikçi Firma : ";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // stockManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -658,7 +654,7 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.TextBox productInformationTxt;
+        private System.Windows.Forms.TextBox productDescriptionTxt;
         private System.Windows.Forms.TextBox productStockQuantityTxt;
         private System.Windows.Forms.TextBox productKdvRateTxt;
         private System.Windows.Forms.TextBox productBarcodeTxt;
@@ -674,7 +670,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox txtSupplierEmail;
         private System.Windows.Forms.TextBox txtSupplierIbanNo;
         private System.Windows.Forms.TextBox txtSupplierPhoneNumber;
@@ -702,8 +697,8 @@
         private System.Windows.Forms.TextBox productIDTxt;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtFilter;
+        private System.Windows.Forms.Button supplierListButton;
     }
 }

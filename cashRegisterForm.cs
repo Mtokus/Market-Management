@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Market_Management
         private void SetOperationLabel(string labelText, bool showQuantityControls = false, string quantityLabelText = "")
         {
             calculateOperationLabel.Text = labelText;
+            calculateNumberTxt.Text = string.Empty;
 
             quantityLabel.Visible = showQuantityControls;
             quantityTxt.Visible = showQuantityControls;
@@ -278,37 +280,77 @@ namespace Market_Management
         }
         private void cashButton_Click(object sender, EventArgs e)
         {
-            confirmSale("Cash");
+            
+            if (customerPayLabel.Text == "0" || string.IsNullOrWhiteSpace(customerPayLabel.Text))
+            {
+                MessageBox.Show("Lütfen Ödeme Giriniz");
+            }
+            else
+            {
+                confirmSale("Cash");
+            }
         }
+
         private void cardButton_Click(object sender, EventArgs e)
         {
             confirmSale("Card");
+           
         }
         private void confirmSale(string paymentType)
         {
-            using (var dbContex = new ShopManagementEntities())
-            {
-                DialogResult result = MessageBox.Show("Bu kaydı eklemek istediğinizden emin misiniz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dataGridView1.Rows.Count > 0)
 
-                if (result == DialogResult.Yes)
+            {
+                using (var dbContex = new ShopManagementEntities())
                 {
-                    var receipt = new receiptTbl
+                    DialogResult result = MessageBox.Show("Bu kaydı eklemek istediğinizden emin misiniz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
                     {
-                        receiptFormationDate = DateTime.Now,
-                        receiptTotalKDV = Convert.ToDouble(totalKDVLabel.Text),
-                        receiptTotalPrice = Convert.ToDouble(totalPriceLabel.Text),
-                        receiptPaymentType = paymentType
-                    };
-                    dbContex.receiptTbl.Add(receipt);
-                    dbContex.SaveChanges();
-                    MessageBox.Show("Eklendi");
-                }
-                else
-                {
-                    MessageBox.Show("Ekleme işlemi iptal edildi.");
+                        var receipt = new receiptTbl
+                        {
+                            receiptFormationDate = DateTime.Now,
+                            receiptTotalKDV = Convert.ToDouble(totalKDVLabel.Text),
+                            receiptTotalPrice = Convert.ToDouble(totalPriceLabel.Text),
+                            receiptCustomerPay = Convert.ToDouble(customerPayLabel.Text),
+                            receiptCashChange = Convert.ToDouble(cashChangeLabel.Text),
+                            receiptPaymentType = paymentType
+                        };
+                        dbContex.receiptTbl.Add(receipt);
+                        dbContex.SaveChanges();
+                        
+                        int newReceiptID = receipt.receiptID;
+                        foreach (DataGridViewRow row in dataGridView1.Rows) 
+                        {
+                            int addProductID = Convert.ToInt32(row.Cells["productID"].Value);
+                            if (addProductID != null || addProductID.ToString() !="" ) 
+                            {
+                                var receiptDetail = new receiptDetailTbl
+                                {
+                                    receiptID = newReceiptID, 
+                                    productID = Convert.ToInt32(row.Cells["ProductID"].Value),
+                                    productQuantity = Convert.ToDouble(row.Cells["productQuantity"].Value),
+                                    productTotalPrice = Convert.ToDouble(row.Cells["productTotalPrice"].Value),
+                                    productRebate= false
+                                };
+                                dbContex.receiptDetailTbl.Add(receiptDetail);
+                            }
+                        }
+
+                        dbContex.SaveChanges();
+                        ClearAll();
+                        MessageBox.Show("Fiş ve detaylar başarıyla eklendi.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ekleme işlemi iptal edildi.");
+                    }
                 }
             }
-
+            else 
+            {
+                MessageBox.Show("Lütfen Ürün Giriniz! ");
+            }
         }
         private void TotalKDV()
         {
@@ -359,14 +401,7 @@ namespace Market_Management
         }
         private void saleCancelButton_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
-            totalPriceLabel.Text = "0";
-            totalKDVLabel.Text = "0";
-            customerPayLabel.Text = "0";
-            cashChangeLabel.Text = "0";
-            calculateNumberTxt.Text=string.Empty;
-            SetOperationLabel("Barkod :", true,"Miktar :");
-            quantityTxt.Text = "1";
+            ClearAll();
 
         }
         private void fastButton_Click(object sender, EventArgs e)
@@ -400,6 +435,33 @@ namespace Market_Management
                 {
                     fast.Text= product.productName;
                 }
+            }
+        }
+        private void ClearAll()
+        {
+            dataGridView1.Rows.Clear();
+            totalPriceLabel.Text = "0";
+            totalKDVLabel.Text = "0";
+            customerPayLabel.Text = "0";
+            cashChangeLabel.Text = "0";
+            calculateNumberTxt.Text = string.Empty;
+            SetOperationLabel("Barkod :", true, "Miktar :");
+            quantityTxt.Text = "1";
+        }
+        private void calculateNumberTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+          //  if (calculateOperationLabel.Text== "Barkod :" && calculateOperationLabel.Text == "Ödeme :") {
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+          //  }
+        }
+        private void quantityTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) == false && e.KeyChar != (char)08 && e.KeyChar != (char)44 && e.KeyChar != (char)45)
+            {
+                e.Handled = true;
             }
         }
     }

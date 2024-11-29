@@ -86,6 +86,7 @@
             this.txtStaffID.Name = "txtStaffID";
             this.txtStaffID.Size = new System.Drawing.Size(34, 20);
             this.txtStaffID.TabIndex = 1;
+            this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
             // 
             // pickerStaffEntryTime
             // 
@@ -132,7 +133,7 @@
             this.comboBoxStaffName.Name = "comboBoxStaffName";
             this.comboBoxStaffName.Size = new System.Drawing.Size(100, 21);
             this.comboBoxStaffName.TabIndex = 6;
-          
+            this.comboBoxStaffName.SelectedIndexChanged += new System.EventHandler(this.comboBoxStaffName_SelectedIndexChanged);
             // 
             // staffEntryExitAddForm
             // 

@@ -46,20 +46,18 @@
             this.txtStaffIDForUptade = new System.Windows.Forms.TextBox();
             this.buttonListStaff = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.updateStaffButton = new System.Windows.Forms.Button();
+            this.addStaffButton = new System.Windows.Forms.Button();
             this.pickerFinish = new System.Windows.Forms.DateTimePicker();
             this.pickerStart = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkStaffState = new System.Windows.Forms.CheckBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtSalary = new System.Windows.Forms.TextBox();
-            this.txtPositionID = new System.Windows.Forms.TextBox();
             this.txtHomeAddress = new System.Windows.Forms.TextBox();
             this.txtNameSurname = new System.Windows.Forms.TextBox();
             this.txtPhoneNo = new System.Windows.Forms.TextBox();
             this.txtTcNo = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -83,6 +81,11 @@
             this.staffStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffFinishDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffIsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cmbStaffPosition = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -139,7 +142,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Size = new System.Drawing.Size(1034, 481);
-            this.splitContainer1.SplitterDistance = 319;
+            this.splitContainer1.SplitterDistance = 327;
             this.splitContainer1.TabIndex = 0;
             // 
             // dataGridView1
@@ -149,7 +152,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1034, 319);
+            this.dataGridView1.Size = new System.Drawing.Size(1034, 327);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
@@ -161,21 +164,27 @@
             this.panel1.Controls.Add(this.txtStaffID);
             this.panel1.Controls.Add(this.buttonCallStaff);
             this.panel1.Controls.Add(this.comboBoxStaffName);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1034, 158);
+            this.panel1.Size = new System.Drawing.Size(1034, 150);
             this.panel1.TabIndex = 0;
             // 
             // buttonFilter
             // 
-            this.buttonFilter.Location = new System.Drawing.Point(295, 17);
+            this.buttonFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
+            this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFilter.Location = new System.Drawing.Point(379, 16);
             this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Size = new System.Drawing.Size(75, 23);
+            this.buttonFilter.Size = new System.Drawing.Size(79, 20);
             this.buttonFilter.TabIndex = 10;
             this.buttonFilter.Text = "Filtrele";
-            this.buttonFilter.UseVisualStyleBackColor = true;
+            this.buttonFilter.UseVisualStyleBackColor = false;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
             // comboBoxMonths
@@ -194,19 +203,21 @@
             "Ekim",
             "Kasım",
             "Aralık"});
-            this.comboBoxMonths.Location = new System.Drawing.Point(199, 16);
+            this.comboBoxMonths.Location = new System.Drawing.Point(283, 15);
             this.comboBoxMonths.Name = "comboBoxMonths";
             this.comboBoxMonths.Size = new System.Drawing.Size(90, 21);
             this.comboBoxMonths.TabIndex = 9;
             // 
             // salary_transactions
             // 
-            this.salary_transactions.Location = new System.Drawing.Point(295, 86);
+            this.salary_transactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
+            this.salary_transactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.salary_transactions.Location = new System.Drawing.Point(379, 82);
             this.salary_transactions.Name = "salary_transactions";
-            this.salary_transactions.Size = new System.Drawing.Size(75, 35);
+            this.salary_transactions.Size = new System.Drawing.Size(92, 34);
             this.salary_transactions.TabIndex = 8;
             this.salary_transactions.Text = "Maaş Hesapla";
-            this.salary_transactions.UseVisualStyleBackColor = true;
+            this.salary_transactions.UseVisualStyleBackColor = false;
             this.salary_transactions.Click += new System.EventHandler(this.salary_transactions_Click);
             // 
             // txtStaffID
@@ -219,12 +230,14 @@
             // 
             // buttonCallStaff
             // 
-            this.buttonCallStaff.Location = new System.Drawing.Point(118, 86);
+            this.buttonCallStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
+            this.buttonCallStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCallStaff.Location = new System.Drawing.Point(105, 86);
             this.buttonCallStaff.Name = "buttonCallStaff";
-            this.buttonCallStaff.Size = new System.Drawing.Size(75, 21);
+            this.buttonCallStaff.Size = new System.Drawing.Size(92, 30);
             this.buttonCallStaff.TabIndex = 6;
-            this.buttonCallStaff.Text = "Getir";
-            this.buttonCallStaff.UseVisualStyleBackColor = true;
+            this.buttonCallStaff.Text = "Getir / Listele";
+            this.buttonCallStaff.UseVisualStyleBackColor = false;
             this.buttonCallStaff.Click += new System.EventHandler(this.buttonCallStaff_Click);
             // 
             // comboBoxStaffName
@@ -270,29 +283,28 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridViewStaffTbl);
             this.splitContainer2.Size = new System.Drawing.Size(1034, 481);
-            this.splitContainer2.SplitterDistance = 229;
+            this.splitContainer2.SplitterDistance = 228;
             this.splitContainer2.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.panel2.Controls.Add(this.cmbStaffPosition);
             this.panel2.Controls.Add(this.txtStaffIDForUptade);
             this.panel2.Controls.Add(this.buttonListStaff);
             this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.updateStaffButton);
+            this.panel2.Controls.Add(this.addStaffButton);
             this.panel2.Controls.Add(this.pickerFinish);
             this.panel2.Controls.Add(this.pickerStart);
-            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.chkStaffState);
             this.panel2.Controls.Add(this.txtEmail);
             this.panel2.Controls.Add(this.txtPassword);
             this.panel2.Controls.Add(this.txtSalary);
-            this.panel2.Controls.Add(this.txtPositionID);
             this.panel2.Controls.Add(this.txtHomeAddress);
             this.panel2.Controls.Add(this.txtNameSurname);
             this.panel2.Controls.Add(this.txtPhoneNo);
             this.panel2.Controls.Add(this.txtTcNo);
-            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.label9);
@@ -306,7 +318,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(229, 481);
+            this.panel2.Size = new System.Drawing.Size(228, 481);
             this.panel2.TabIndex = 0;
             // 
             // txtStaffIDForUptade
@@ -342,33 +354,34 @@
             this.button3.Text = "Sil";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // updateStaffButton
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(134, 385);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(73, 32);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Güncelle";
-            this.button2.UseVisualStyleBackColor = false;
+            this.updateStaffButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
+            this.updateStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.updateStaffButton.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.updateStaffButton.Location = new System.Drawing.Point(134, 385);
+            this.updateStaffButton.Name = "updateStaffButton";
+            this.updateStaffButton.Size = new System.Drawing.Size(73, 32);
+            this.updateStaffButton.TabIndex = 4;
+            this.updateStaffButton.Text = "Güncelle";
+            this.updateStaffButton.UseVisualStyleBackColor = false;
+            this.updateStaffButton.Click += new System.EventHandler(this.updateStaffButton_Click);
             // 
-            // button1
+            // addStaffButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(15, 385);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(73, 32);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Ekle";
-            this.button1.UseVisualStyleBackColor = false;
+            this.addStaffButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
+            this.addStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addStaffButton.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.addStaffButton.Location = new System.Drawing.Point(15, 385);
+            this.addStaffButton.Name = "addStaffButton";
+            this.addStaffButton.Size = new System.Drawing.Size(73, 32);
+            this.addStaffButton.TabIndex = 4;
+            this.addStaffButton.Text = "Ekle";
+            this.addStaffButton.UseVisualStyleBackColor = false;
+            this.addStaffButton.Click += new System.EventHandler(this.addStaffButton_Click);
             // 
             // pickerFinish
             // 
-            this.pickerFinish.Enabled = false;
             this.pickerFinish.Location = new System.Drawing.Point(105, 280);
             this.pickerFinish.Name = "pickerFinish";
             this.pickerFinish.Size = new System.Drawing.Size(100, 20);
@@ -381,15 +394,16 @@
             this.pickerStart.Size = new System.Drawing.Size(100, 20);
             this.pickerStart.TabIndex = 3;
             // 
-            // checkBox1
+            // chkStaffState
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(107, 309);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkStaffState.AutoSize = true;
+            this.chkStaffState.Location = new System.Drawing.Point(105, 315);
+            this.chkStaffState.Name = "chkStaffState";
+            this.chkStaffState.Size = new System.Drawing.Size(94, 17);
+            this.chkStaffState.TabIndex = 2;
+            this.chkStaffState.Text = "Çalışıyor Mu ? ";
+            this.chkStaffState.UseVisualStyleBackColor = true;
+            this.chkStaffState.CheckStateChanged += new System.EventHandler(this.chkStaffState_CheckStateChanged);
             // 
             // txtEmail
             // 
@@ -414,14 +428,6 @@
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(100, 25);
             this.txtSalary.TabIndex = 1;
-            // 
-            // txtPositionID
-            // 
-            this.txtPositionID.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtPositionID.Location = new System.Drawing.Point(105, 155);
-            this.txtPositionID.Name = "txtPositionID";
-            this.txtPositionID.Size = new System.Drawing.Size(100, 25);
-            this.txtPositionID.TabIndex = 1;
             // 
             // txtHomeAddress
             // 
@@ -455,21 +461,9 @@
             this.txtTcNo.Size = new System.Drawing.Size(100, 25);
             this.txtTcNo.TabIndex = 1;
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(52, 307);
-            this.label12.Margin = new System.Windows.Forms.Padding(5);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(47, 17);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Aktif  :";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Enabled = false;
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label11.Location = new System.Drawing.Point(12, 280);
             this.label11.Margin = new System.Windows.Forms.Padding(5);
@@ -600,7 +594,7 @@
             this.dataGridViewStaffTbl.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewStaffTbl.Name = "dataGridViewStaffTbl";
             this.dataGridViewStaffTbl.RowHeadersVisible = false;
-            this.dataGridViewStaffTbl.Size = new System.Drawing.Size(801, 481);
+            this.dataGridViewStaffTbl.Size = new System.Drawing.Size(802, 481);
             this.dataGridViewStaffTbl.TabIndex = 0;
             this.dataGridViewStaffTbl.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStaffTbl_CellContentDoubleClick);
             // 
@@ -688,6 +682,62 @@
             this.staffIsActive.Name = "staffIsActive";
             this.staffIsActive.ReadOnly = true;
             // 
+            // cmbStaffPosition
+            // 
+            this.cmbStaffPosition.FormattingEnabled = true;
+            this.cmbStaffPosition.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
+            this.cmbStaffPosition.Location = new System.Drawing.Point(105, 155);
+            this.cmbStaffPosition.Name = "cmbStaffPosition";
+            this.cmbStaffPosition.Size = new System.Drawing.Size(100, 21);
+            this.cmbStaffPosition.TabIndex = 6;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label12.Location = new System.Drawing.Point(32, 91);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 17);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Personel :";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label13.Location = new System.Drawing.Point(246, 19);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 17);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Ay :";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Location = new System.Drawing.Point(280, 82);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(83, 34);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Seçilen Ay\'a \r\nGöre";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Location = new System.Drawing.Point(358, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(15, 17);
+            this.label15.TabIndex = 4;
+            this.label15.Text = " :";
+            // 
             // staffOperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -697,7 +747,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "staffOperationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "asdfghj";
+            this.Text = "Personel İşlemleri";
             this.Load += new System.EventHandler(this.staffOperationForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -725,13 +775,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtStaffID;
-        private System.Windows.Forms.Button buttonCallStaff;
-        private System.Windows.Forms.ComboBox comboBoxStaffName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView dataGridViewStaffTbl;
         private System.Windows.Forms.Panel panel2;
@@ -742,7 +786,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -750,16 +793,15 @@
         private System.Windows.Forms.TextBox txtHomeAddress;
         private System.Windows.Forms.TextBox txtPhoneNo;
         private System.Windows.Forms.TextBox txtTcNo;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkStaffState;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtSalary;
         private System.Windows.Forms.TextBox txtNameSurname;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button updateStaffButton;
+        private System.Windows.Forms.Button addStaffButton;
         private System.Windows.Forms.DateTimePicker pickerFinish;
         private System.Windows.Forms.DateTimePicker pickerStart;
-        private System.Windows.Forms.TextBox txtPositionID;
         private System.Windows.Forms.Button buttonListStaff;
         private System.Windows.Forms.DataGridViewTextBoxColumn staffID;
         private System.Windows.Forms.DataGridViewTextBoxColumn staffTCNumber;
@@ -774,8 +816,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn staffFinishDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn staffIsActive;
         private System.Windows.Forms.TextBox txtStaffIDForUptade;
-        private System.Windows.Forms.Button salary_transactions;
-        private System.Windows.Forms.ComboBox comboBoxMonths;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonFilter;
+        private System.Windows.Forms.ComboBox comboBoxMonths;
+        private System.Windows.Forms.Button salary_transactions;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.Button buttonCallStaff;
+        private System.Windows.Forms.ComboBox comboBoxStaffName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbStaffPosition;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }

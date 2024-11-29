@@ -33,7 +33,7 @@ namespace Market_Management
         }
         private void picClose_Click_1(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
         private void staffManagementButton_Click(object sender, EventArgs e)
         {

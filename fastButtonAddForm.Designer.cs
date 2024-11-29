@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +37,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.buttonNoLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.allProductsBox = new System.Windows.Forms.CheckBox();
             this.productSearchTxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -64,8 +63,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Silver;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 32;
             this.dataGridView1.Size = new System.Drawing.Size(800, 332);
             this.dataGridView1.TabIndex = 2;
@@ -105,9 +104,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
             this.splitContainer1.Panel1.Controls.Add(this.buttonNoLabel);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.allProductsBox);
             this.splitContainer1.Panel1.Controls.Add(this.productSearchTxt);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             // 
@@ -138,16 +137,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Buton Numarası:";
             // 
-            // allProductsBox
-            // 
-            this.allProductsBox.AutoSize = true;
-            this.allProductsBox.Location = new System.Drawing.Point(249, 65);
-            this.allProductsBox.Name = "allProductsBox";
-            this.allProductsBox.Size = new System.Drawing.Size(84, 17);
-            this.allProductsBox.TabIndex = 6;
-            this.allProductsBox.Text = "Tüm Ürünler";
-            this.allProductsBox.UseVisualStyleBackColor = true;
-            // 
             // productSearchTxt
             // 
             this.productSearchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -175,6 +164,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "fastButtonAddForm";
             this.Text = "fastButtonAddForm";
+            this.Load += new System.EventHandler(this.fastButtonAddForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -191,7 +181,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         public System.Windows.Forms.Label buttonNoLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox allProductsBox;
         private System.Windows.Forms.TextBox productSearchTxt;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn productID;
