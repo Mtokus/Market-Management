@@ -62,6 +62,7 @@
       <DependentUpon>cashRegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class\DatagridClass.cs" />
+    <Compile Include="Class\UserClass.cs" />
     <Compile Include="fastButtonAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +110,12 @@
     </Compile>
     <Compile Include="productProcedure_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="productReturnForm.Designer.cs">
+      <DependentUpon>productReturnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="productTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -183,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="productReturnForm.resx">
+      <DependentUpon>productReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
