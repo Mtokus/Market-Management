@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+<<<<<<< HEAD
 using System.Data.Entity;
+=======
+>>>>>>> a03d5833430ba4cf70d17d1fe6dc7addb230c5da
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +20,7 @@ namespace Market_Management
         {
             InitializeComponent();
         }
+<<<<<<< HEAD
         ShopManagementEntities dbContex = new ShopManagementEntities();
         private void productReturnForm_Load(object sender, EventArgs e)
         {
@@ -267,3 +271,7 @@ namespace Market_Management
 
 }
 
+=======
+    }
+}
+>>>>>>> a03d5833430ba4cf70d17d1fe6dc7addb230c5da

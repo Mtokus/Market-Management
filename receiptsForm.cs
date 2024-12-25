@@ -56,6 +56,8 @@ namespace Market_Management
 
         private void buttonSearchReceipt_Click(object sender, EventArgs e)
         {
+            private void buttonSearchReceipt_Click(object sender, EventArgs e)
+        {
             if (!string.IsNullOrWhiteSpace(txtReceiptID.Text))
             {
                 int id = Convert.ToInt32(txtReceiptID.Text);
@@ -125,6 +127,7 @@ namespace Market_Management
             }
         }
 
+<<<<<<< HEAD
         private void receiptsForm_Load(object sender, EventArgs e)
         {
             receiptListCall();
@@ -134,6 +137,16 @@ namespace Market_Management
             var receiptList = dbContex.receiptTbl
                 .OrderByDescending(r => r.receiptFormationDate)
                 .Take(10)
+=======
+        }
+
+        private void allReceiptListButton_Click(object sender, EventArgs e)
+        {
+            // Veritabanından fişleri al
+            var receiptList = dbContex.receiptTbl
+                .OrderByDescending(r => r.receiptFormationDate)
+                .Take(10) // Son 10 fişi al
+>>>>>>> a03d5833430ba4cf70d17d1fe6dc7addb230c5da
                 .Select(r => new
                 {
                     r.receiptID,
@@ -143,6 +156,7 @@ namespace Market_Management
                     r.receiptPaymentType
                 })
                 .ToList();
+<<<<<<< HEAD
             DatagridClass.ReceiptGridList(dataGridView2, receiptList);
         }
 
@@ -170,5 +184,36 @@ namespace Market_Management
      MessageBox.Show("Lütfen geçerli bir Fiş ID giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
  }
 }*/
+=======
+
+            // DataGridView'i doldur
+            DatagridClass.ReceiptGridList(dataGridView2, receiptList);
+        }
+
+        private void returnProductFormButton_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button; // Butona tıklanıldığını al
+            int receiptID;
+
+            if (b != null && int.TryParse(txtReceiptID.Text, out receiptID)) // Fiş ID geçerli mi kontrol et
+            {
+                if (UserClass.UserLevel == 1 || UserClass.UserLevel == 2)
+                {
+                    // Yeni formu oluştur ve ID'yi Label'e yazdır
+                    productReturnForm returnForm = new productReturnForm();
+                    returnForm.urunIDLabel.Text = receiptID.ToString(); // Fiş ID'yi yeni formdaki label'e yaz
+                    returnForm.ShowDialog(); // Formu aç
+                }
+                else
+                {
+                    MessageBox.Show("Bu işlemi yapmaya yetkiniz yok!", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen geçerli bir Fiş ID giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+>>>>>>> a03d5833430ba4cf70d17d1fe6dc7addb230c5da
     }
 }

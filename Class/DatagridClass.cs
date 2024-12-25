@@ -50,6 +50,35 @@ namespace Market_Management.Class
         public static void ReceiptGridList(DataGridView dgv, IEnumerable<dynamic> items)
         {
             dgv.Columns.Clear();
+<<<<<<< HEAD
+=======
+
+            // Eğer items boşsa, "Fiş bulunamadı" mesajını göster
+            if (items == null || !items.Any())
+            {
+                MessageBox.Show("Fiş bulunamadı.");
+                return;
+            }
+
+            // DataGridView kolonlarını oluştur
+            dgv.Columns.Add("receiptID", "Fiş ID");
+            dgv.Columns.Add("receiptFormationDate", "Fiş Tarihi");
+            dgv.Columns.Add("receiptTotalKDV", "Toplam KDV");
+            dgv.Columns.Add("receiptTotalPrice", "Toplam Fiyat");
+            dgv.Columns.Add("receiptPaymentType", "Ödeme Şekli");
+
+            // Gelen item'ları DataGridView'e ekle
+            foreach (var item in items)
+            {
+                int rowCount = dgv.Rows.Add();
+                dgv.Rows[rowCount].Cells["receiptID"].Value = item.receiptID.ToString();
+                dgv.Rows[rowCount].Cells["receiptFormationDate"].Value = item.receiptFormationDate?.ToString("dd/MM/yyyy");
+                dgv.Rows[rowCount].Cells["receiptTotalKDV"].Value = item.receiptTotalKDV.ToString();
+                dgv.Rows[rowCount].Cells["receiptTotalPrice"].Value = item.receiptTotalPrice?.ToString("C2");
+                dgv.Rows[rowCount].Cells["receiptPaymentType"].Value = item.receiptPaymentType.ToString();
+            }
+        }
+>>>>>>> a03d5833430ba4cf70d17d1fe6dc7addb230c5da
 
             
             if (items == null || !items.Any())
