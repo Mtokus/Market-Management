@@ -271,7 +271,7 @@
             this.ClientSize = new System.Drawing.Size(800, 451);
             this.Controls.Add(this.splitContainer1);
             this.Name = "productReturnForm";
-            this.Text = "productReturnForm";
+            this.Text = "Ürün İade Formu";
             this.Load += new System.EventHandler(this.productReturnForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

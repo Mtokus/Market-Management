@@ -152,7 +152,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "staffEntryExitAddForm";
-            this.Text = "staffEntryExitAddForm";
+            this.Text = "Personel Giriş-Çıkış";
             this.Load += new System.EventHandler(this.staffEntryExitAddForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
