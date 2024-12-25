@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Market_Management.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,24 +20,38 @@ namespace Market_Management
         ShopManagementEntities db = new ShopManagementEntities();
         private void picClose_Click(object sender, EventArgs e)
         {
-            Close();   
+            Application.Exit();  
         }
         private void BtnLogIn_Click(object sender, EventArgs e)
         {
-            string userName = txtUserName.Text.Trim();
-            string password = txtPassword.Text.Trim();
-            var userFromDB = db.staffTbl.FirstOrDefault(a => a.staffTCNumber == userName && a.staffPassword == password);
+            string userName = this.txtUserName.Text.Trim();
+            string password = this.txtPassword.Text.Trim();
+            staffTbl userFromDB = this.db.staffTbl.FirstOrDefault((staffTbl a) => a.staffTCNumber == userName && a.staffPassword == password);
+            
             if (userFromDB != null)
             {
+                UserClass.UserLevel = Convert.ToInt32(userFromDB.staffPositionID);
+                UserClass.FullName = userFromDB.staffNameSurname.ToString();
                 MessageBox.Show("Giriş Başarılı");
-                Form1 form1 = new Form1();
-                form1.Show();
-                this.Hide(); 
+                if (UserClass.UserLevel == 6)
+                {
+                    cashRegisterForm f = new cashRegisterForm();
+                    f.Show();
+                    Hide();
+                }
+
+                else
+                {
+                    Form1 form = new Form1();
+                    form.Show();
+                    form.labelUserNameOperationPanel.Text = UserClass.FullName;
+                    Hide();
+                }
             }
-            else 
+            else
             {
                 MessageBox.Show("giriş Başarısız");
-            } 
+            }
         }
         private void LoginForm_Load(object sender, EventArgs e)
         {

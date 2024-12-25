@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotMemory.Unit, Version=111.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.dotMemoryUnit.3.2.20220510\lib\net35\dotMemory.Unit.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -62,6 +65,7 @@
       <DependentUpon>cashRegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Class\DatagridClass.cs" />
+    <Compile Include="Class\UserClass.cs" />
     <Compile Include="fastButtonAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +113,12 @@
     </Compile>
     <Compile Include="productProcedure_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="productReturnForm.Designer.cs">
+      <DependentUpon>productReturnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="productTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -183,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="productReturnForm.resx">
+      <DependentUpon>productReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

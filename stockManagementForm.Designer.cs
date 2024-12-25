@@ -28,18 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(stockManagementForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productKDVRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productGroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDetailID = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -70,9 +60,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.clearSupplierTextboxButton = new System.Windows.Forms.Button();
+            this.supplierIDLabel = new System.Windows.Forms.Label();
             this.supplierListButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.deleteSupplierButton = new System.Windows.Forms.Button();
+            this.updateSupplierButton = new System.Windows.Forms.Button();
             this.btnSupplierAdd = new System.Windows.Forms.Button();
             this.txtSupplierAddress = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -84,6 +76,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.clearProductTextboxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -118,16 +111,6 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.productID,
-            this.productName,
-            this.productPrice,
-            this.productBarcode,
-            this.productKDVRate,
-            this.productStockQuantity,
-            this.supplierName,
-            this.productGroupName,
-            this.productDetailID});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -135,65 +118,9 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(795, 286);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
-            // 
-            // productID
-            // 
-            this.productID.HeaderText = "ID";
-            this.productID.Name = "productID";
-            this.productID.ReadOnly = true;
-            this.productID.Visible = false;
-            // 
-            // productName
-            // 
-            this.productName.HeaderText = "Ürün Adı";
-            this.productName.Name = "productName";
-            this.productName.ReadOnly = true;
-            // 
-            // productPrice
-            // 
-            this.productPrice.HeaderText = "Birim Fiyatı";
-            this.productPrice.Name = "productPrice";
-            this.productPrice.ReadOnly = true;
-            // 
-            // productBarcode
-            // 
-            this.productBarcode.HeaderText = "BARKOD";
-            this.productBarcode.Name = "productBarcode";
-            this.productBarcode.ReadOnly = true;
-            // 
-            // productKDVRate
-            // 
-            this.productKDVRate.HeaderText = "KDV Oranı";
-            this.productKDVRate.Name = "productKDVRate";
-            this.productKDVRate.ReadOnly = true;
-            // 
-            // productStockQuantity
-            // 
-            this.productStockQuantity.HeaderText = "Stok Miktarı";
-            this.productStockQuantity.Name = "productStockQuantity";
-            this.productStockQuantity.ReadOnly = true;
-            // 
-            // supplierName
-            // 
-            this.supplierName.HeaderText = "Tedarikçi Firma";
-            this.supplierName.Name = "supplierName";
-            this.supplierName.ReadOnly = true;
-            // 
-            // productGroupName
-            // 
-            this.productGroupName.HeaderText = "Ürün Grup";
-            this.productGroupName.Name = "productGroupName";
-            this.productGroupName.ReadOnly = true;
-            // 
-            // productDetailID
-            // 
-            this.productDetailID.HeaderText = "Ürün Detayı";
-            this.productDetailID.Image = ((System.Drawing.Image)(resources.GetObject("productDetailID.Image")));
-            this.productDetailID.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.productDetailID.Name = "productDetailID";
-            this.productDetailID.ReadOnly = true;
             // 
             // tabControl1
             // 
@@ -205,10 +132,12 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(795, 315);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.tabPage1.Controls.Add(this.clearProductTextboxButton);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.productGroupIDTxt);
@@ -267,6 +196,7 @@
             this.productGroupIDTxt.Name = "productGroupIDTxt";
             this.productGroupIDTxt.Size = new System.Drawing.Size(67, 20);
             this.productGroupIDTxt.TabIndex = 43;
+            this.productGroupIDTxt.Visible = false;
             // 
             // supplierIDTxt
             // 
@@ -275,6 +205,7 @@
             this.supplierIDTxt.Name = "supplierIDTxt";
             this.supplierIDTxt.Size = new System.Drawing.Size(67, 20);
             this.supplierIDTxt.TabIndex = 42;
+            this.supplierIDTxt.Visible = false;
             // 
             // productIDTxt
             // 
@@ -288,7 +219,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(31, 243);
+            this.label15.Location = new System.Drawing.Point(31, 260);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(61, 13);
             this.label15.TabIndex = 40;
@@ -296,10 +227,11 @@
             // 
             // txtFilter
             // 
-            this.txtFilter.Location = new System.Drawing.Point(101, 240);
+            this.txtFilter.Location = new System.Drawing.Point(101, 257);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(106, 20);
             this.txtFilter.TabIndex = 39;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
             // comboBoxSupplierForInventory
             // 
@@ -422,7 +354,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(237, 45);
+            this.label6.Location = new System.Drawing.Point(238, 45);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 19;
@@ -476,9 +408,11 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.tabPage2.Controls.Add(this.clearSupplierTextboxButton);
+            this.tabPage2.Controls.Add(this.supplierIDLabel);
             this.tabPage2.Controls.Add(this.supplierListButton);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.deleteSupplierButton);
+            this.tabPage2.Controls.Add(this.updateSupplierButton);
             this.tabPage2.Controls.Add(this.btnSupplierAdd);
             this.tabPage2.Controls.Add(this.txtSupplierAddress);
             this.tabPage2.Controls.Add(this.label13);
@@ -498,34 +432,55 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tedarikçi İşlemleri";
             // 
+            // clearSupplierTextboxButton
+            // 
+            this.clearSupplierTextboxButton.Location = new System.Drawing.Point(311, 233);
+            this.clearSupplierTextboxButton.Name = "clearSupplierTextboxButton";
+            this.clearSupplierTextboxButton.Size = new System.Drawing.Size(75, 23);
+            this.clearSupplierTextboxButton.TabIndex = 51;
+            this.clearSupplierTextboxButton.Text = "Temizle";
+            this.clearSupplierTextboxButton.UseVisualStyleBackColor = true;
+            this.clearSupplierTextboxButton.Click += new System.EventHandler(this.clearSupplierTextboxButton_Click);
+            // 
+            // supplierIDLabel
+            // 
+            this.supplierIDLabel.AutoSize = true;
+            this.supplierIDLabel.Location = new System.Drawing.Point(326, 43);
+            this.supplierIDLabel.Name = "supplierIDLabel";
+            this.supplierIDLabel.Size = new System.Drawing.Size(41, 13);
+            this.supplierIDLabel.TabIndex = 50;
+            this.supplierIDLabel.Text = "label17";
+            this.supplierIDLabel.Visible = false;
+            // 
             // supplierListButton
             // 
-            this.supplierListButton.Location = new System.Drawing.Point(311, 233);
+            this.supplierListButton.Location = new System.Drawing.Point(547, 156);
             this.supplierListButton.Name = "supplierListButton";
-            this.supplierListButton.Size = new System.Drawing.Size(75, 23);
+            this.supplierListButton.Size = new System.Drawing.Size(88, 26);
             this.supplierListButton.TabIndex = 49;
-            this.supplierListButton.Text = "Listele";
+            this.supplierListButton.Text = "Tümünü Listele";
             this.supplierListButton.UseVisualStyleBackColor = true;
             this.supplierListButton.Click += new System.EventHandler(this.supplierListButton_Click);
             // 
-            // button1
+            // deleteSupplierButton
             // 
-            this.button1.Location = new System.Drawing.Point(547, 103);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 26);
-            this.button1.TabIndex = 46;
-            this.button1.Text = "Sil";
-            this.button1.UseVisualStyleBackColor = true;
+            this.deleteSupplierButton.Location = new System.Drawing.Point(547, 103);
+            this.deleteSupplierButton.Name = "deleteSupplierButton";
+            this.deleteSupplierButton.Size = new System.Drawing.Size(88, 26);
+            this.deleteSupplierButton.TabIndex = 46;
+            this.deleteSupplierButton.Text = "Sil";
+            this.deleteSupplierButton.UseVisualStyleBackColor = true;
+            this.deleteSupplierButton.Click += new System.EventHandler(this.deleteSupplierButton_Click);
             // 
-            // button2
+            // updateSupplierButton
             // 
-            this.button2.Location = new System.Drawing.Point(547, 67);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 26);
-            this.button2.TabIndex = 47;
-            this.button2.Text = "Güncelle";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.updateSupplierButton.Location = new System.Drawing.Point(547, 67);
+            this.updateSupplierButton.Name = "updateSupplierButton";
+            this.updateSupplierButton.Size = new System.Drawing.Size(88, 26);
+            this.updateSupplierButton.TabIndex = 47;
+            this.updateSupplierButton.Text = "Güncelle";
+            this.updateSupplierButton.UseVisualStyleBackColor = true;
+            this.updateSupplierButton.Click += new System.EventHandler(this.updateSupplierButton_Click);
             // 
             // btnSupplierAdd
             // 
@@ -618,6 +573,16 @@
             this.label14.TabIndex = 38;
             this.label14.Text = "Tedarikçi Firma : ";
             // 
+            // clearProductTextboxButton
+            // 
+            this.clearProductTextboxButton.Location = new System.Drawing.Point(569, 246);
+            this.clearProductTextboxButton.Name = "clearProductTextboxButton";
+            this.clearProductTextboxButton.Size = new System.Drawing.Size(96, 27);
+            this.clearProductTextboxButton.TabIndex = 46;
+            this.clearProductTextboxButton.Text = "Tümünü Temizle";
+            this.clearProductTextboxButton.UseVisualStyleBackColor = true;
+            this.clearProductTextboxButton.Click += new System.EventHandler(this.clearProductTextboxButton_Click);
+            // 
             // stockManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,7 +613,29 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox txtSupplierEmail;
+        private System.Windows.Forms.TextBox txtSupplierIbanNo;
+        private System.Windows.Forms.TextBox txtSupplierPhoneNumber;
+        private System.Windows.Forms.TextBox txtSupplierName;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtSupplierAddress;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button deleteSupplierButton;
+        private System.Windows.Forms.Button updateSupplierButton;
+        private System.Windows.Forms.Button btnSupplierAdd;
+        private System.Windows.Forms.Button supplierListButton;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox productGroupIDTxt;
+        private System.Windows.Forms.TextBox supplierIDTxt;
+        private System.Windows.Forms.TextBox productIDTxt;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.ComboBox comboBoxSupplierForInventory;
         private System.Windows.Forms.ComboBox comboBoxProductGroupForInventory;
         private System.Windows.Forms.Button deleteButton;
@@ -669,36 +656,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox txtSupplierEmail;
-        private System.Windows.Forms.TextBox txtSupplierIbanNo;
-        private System.Windows.Forms.TextBox txtSupplierPhoneNumber;
-        private System.Windows.Forms.TextBox txtSupplierName;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtSupplierAddress;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnSupplierAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productKDVRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productStockQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn supplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productGroupName;
-        private System.Windows.Forms.DataGridViewImageColumn productDetailID;
-        private System.Windows.Forms.TextBox productGroupIDTxt;
-        private System.Windows.Forms.TextBox supplierIDTxt;
-        private System.Windows.Forms.TextBox productIDTxt;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtFilter;
-        private System.Windows.Forms.Button supplierListButton;
+        private System.Windows.Forms.Label supplierIDLabel;
+        private System.Windows.Forms.Button clearSupplierTextboxButton;
+        private System.Windows.Forms.Button clearProductTextboxButton;
     }
 }

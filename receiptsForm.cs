@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Market_Management.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,11 +20,46 @@ namespace Market_Management
             InitializeComponent();
         }
         ShopManagementEntities dbContex= new ShopManagementEntities();
+
+
+
+        private void confirmReturnButton_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button; 
+            int receiptID;
+
+            if (b != null && int.TryParse(txtReceiptID.Text, out receiptID)) 
+            {
+                if (UserClass.UserLevel == 1 || UserClass.UserLevel == 2)
+                {
+                    
+                    productReturnForm returnForm = new productReturnForm();
+                    returnForm.productIDLabel.Text = receiptID.ToString(); 
+                    returnForm.ShowDialog(); 
+                }
+                else
+                {
+                    MessageBox.Show("Bu işlemi yapmaya yetkiniz yok!", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen geçerli bir Fiş ID giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void allReceiptListButton_Click(object sender, EventArgs e)
+        {
+            receiptListCall();
+        }
+
         private void buttonSearchReceipt_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtReceiptID.Text))
             {
                 int id = Convert.ToInt32(txtReceiptID.Text);
+
                 var receipt = dbContex.receiptDetailTbl
                     .Where(p => p.receiptID == id)
                     .Include(p => p.receiptTbl)
@@ -40,10 +76,20 @@ namespace Market_Management
 
                 if (receipt.Any())
                 {
+                    // DataGridView1 için kolon ekleme
                     dataGridView1.Columns.Clear();
                     dataGridView1.Columns.Add("productName", "Ürün Adı");
                     dataGridView1.Columns.Add("productPrice", "Ürün Fiyatı");
-                    dataGridView1.Columns.Add("productQuantity", "Ürün miktarı");
+                    dataGridView1.Columns.Add("productQuantity", "Ürün Miktarı");
+
+                    // İade için Checkbox kolonu ekleme
+                    DataGridViewCheckBoxColumn returnColumn = new DataGridViewCheckBoxColumn
+                    {
+                        Name = "productReturn",
+                        HeaderText = "İade",
+                        Width = 50
+                    };
+                    dataGridView1.Columns.Add(returnColumn);
 
                     foreach (var item in receipt)
                     {
@@ -53,26 +99,20 @@ namespace Market_Management
                         dataGridView1.Rows[rowIndex].Cells["productQuantity"].Value = item.Quantity.ToString();
                     }
 
-                    var receiptInformation = dbContex.receiptTbl.FirstOrDefault(p => p.receiptID == id);
-                    if (receiptInformation != null)
-                    {
-                        dataGridView2.Columns.Clear();
-                        dataGridView2.Columns.Add("receiptID", "Fiş ID");
-                        dataGridView2.Columns.Add("receiptFormationDate", "Fiş Tarihi");
-                        dataGridView2.Columns.Add("receiptTotalKDV", "Toplam KDV");
-                        dataGridView2.Columns.Add("receiptTotalPrice", "Toplam Fiyat");
-                        dataGridView2.Columns.Add("receiptPaymentType", "Ödeme Şekli");
+                    // Fiş bilgilerini al ve DataGridView2'yi doldur
+                    var receiptInformation = dbContex.receiptTbl
+                        .Where(p => p.receiptID == id)
+                        .Select(r => new
+                        {
+                            r.receiptID,
+                            r.receiptFormationDate,
+                            r.receiptTotalKDV,
+                            r.receiptTotalPrice,
+                            r.receiptPaymentType
+                        })
+                        .ToList();
 
-                        // Yeni bir satır ekleyin
-                        int rowCount = dataGridView2.Rows.Add();
-
-                        // Hücrelere değer atayın
-                        dataGridView2.Rows[rowCount].Cells["receiptID"].Value = receiptInformation.receiptID.ToString();
-                        dataGridView2.Rows[rowCount].Cells["receiptFormationDate"].Value = receiptInformation.receiptFormationDate?.ToString("dd/MM/yyyy");
-                        dataGridView2.Rows[rowCount].Cells["receiptTotalKDV"].Value = receiptInformation.receiptTotalKDV.ToString();
-                        dataGridView2.Rows[rowCount].Cells["receiptTotalPrice"].Value = receiptInformation.receiptTotalPrice?.ToString("C2");
-                        dataGridView2.Rows[rowCount].Cells["receiptPaymentType"].Value = receiptInformation.receiptPaymentType.ToString();
-                    }
+                    DatagridClass.ReceiptGridList(dataGridView2, receiptInformation);
                 }
                 else
                 {
@@ -85,5 +125,50 @@ namespace Market_Management
             }
         }
 
+        private void receiptsForm_Load(object sender, EventArgs e)
+        {
+            receiptListCall();
+        }
+        private void receiptListCall() 
+        {
+            var receiptList = dbContex.receiptTbl
+                .OrderByDescending(r => r.receiptFormationDate)
+                .Take(10)
+                .Select(r => new
+                {
+                    r.receiptID,
+                    r.receiptFormationDate,
+                    r.receiptTotalKDV,
+                    r.receiptTotalPrice,
+                    r.receiptPaymentType
+                })
+                .ToList();
+            DatagridClass.ReceiptGridList(dataGridView2, receiptList);
+        }
+
+        /*  private void returnProductFormButton_Click(object sender, EventArgs e)
+{
+ Button b = sender as Button; // Butona tıklanıldığını al
+ int receiptID;
+
+ if (b != null && int.TryParse(txtReceiptID.Text, out receiptID)) // Fiş ID geçerli mi kontrol et
+ {
+     if (UserClass.UserLevel == 1 || UserClass.UserLevel == 2)
+     {
+         // Yeni formu oluştur ve ID'yi Label'e yazdır
+         productReturnForm returnForm = new productReturnForm();
+         returnForm.productIDLabel.Text = receiptID.ToString(); // Fiş ID'yi yeni formdaki label'e yaz
+         returnForm.ShowDialog(); // Formu aç
+     }
+     else
+     {
+         MessageBox.Show("Bu işlemi yapmaya yetkiniz yok!", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+     }
+ }
+ else
+ {
+     MessageBox.Show("Lütfen geçerli bir Fiş ID giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+ }
+}*/
     }
 }

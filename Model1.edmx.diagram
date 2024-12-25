@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="StokveSatisYonetimModel.receiptDetailTbl" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.receiptTbl" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.StaffEntryExitTbl" Width="1.5" PointX="7.25" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffPositionTbl" Width="1.5" PointX="2.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokveSatisYonetimModel.staffPositionTbl" Width="1.875" PointX="2.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.staffTbl" Width="1.5" PointX="5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.supplierTbl" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="StokveSatisYonetimModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="5.625" IsExpanded="true" />
