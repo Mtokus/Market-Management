@@ -109,7 +109,7 @@
             this.txtUserName.Location = new System.Drawing.Point(137, 289);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(291, 20);
-            this.txtUserName.TabIndex = 2;
+            this.txtUserName.TabIndex = 0;
             // 
             // txtPassword
             // 
@@ -117,7 +117,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(291, 20);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 1;
             // 
             // BtnLogIn
             // 
@@ -129,7 +129,7 @@
             this.BtnLogIn.Location = new System.Drawing.Point(137, 406);
             this.BtnLogIn.Name = "BtnLogIn";
             this.BtnLogIn.Size = new System.Drawing.Size(291, 40);
-            this.BtnLogIn.TabIndex = 4;
+            this.BtnLogIn.TabIndex = 2;
             this.BtnLogIn.Text = "Giriş Yap";
             this.BtnLogIn.UseVisualStyleBackColor = false;
             this.BtnLogIn.Click += new System.EventHandler(this.BtnLogIn_Click);

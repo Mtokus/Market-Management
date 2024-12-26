@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.buttonRefreshButton = new System.Windows.Forms.Button();
+            this.buttonRefreshList = new System.Windows.Forms.Button();
             this.buttonNoLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.productSearchTxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,8 +66,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Silver;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.Height = 32;
             this.dataGridView1.Size = new System.Drawing.Size(800, 332);
             this.dataGridView1.TabIndex = 2;
@@ -105,7 +108,10 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.splitContainer1.Panel1.Controls.Add(this.buttonRefreshButton);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonRefreshList);
             this.splitContainer1.Panel1.Controls.Add(this.buttonNoLabel);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.productSearchTxt);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -117,21 +123,53 @@
             this.splitContainer1.SplitterDistance = 114;
             this.splitContainer1.TabIndex = 1;
             // 
+            // buttonRefreshButton
+            // 
+            this.buttonRefreshButton.Location = new System.Drawing.Point(204, 58);
+            this.buttonRefreshButton.Name = "buttonRefreshButton";
+            this.buttonRefreshButton.Size = new System.Drawing.Size(90, 23);
+            this.buttonRefreshButton.TabIndex = 1;
+            this.buttonRefreshButton.Text = "Butonu Temizle";
+            this.buttonRefreshButton.UseVisualStyleBackColor = true;
+            this.buttonRefreshButton.Visible = false;
+            this.buttonRefreshButton.Click += new System.EventHandler(this.buttonRefreshButton_Click);
+            // 
+            // buttonRefreshList
+            // 
+            this.buttonRefreshList.Location = new System.Drawing.Point(300, 58);
+            this.buttonRefreshList.Name = "buttonRefreshList";
+            this.buttonRefreshList.Size = new System.Drawing.Size(90, 23);
+            this.buttonRefreshList.TabIndex = 2;
+            this.buttonRefreshList.Text = "Listeyi Sıfırla";
+            this.buttonRefreshList.UseVisualStyleBackColor = true;
+            this.buttonRefreshList.Visible = false;
+            this.buttonRefreshList.Click += new System.EventHandler(this.buttonRefreshList_Click);
+            // 
             // buttonNoLabel
             // 
             this.buttonNoLabel.AutoSize = true;
             this.buttonNoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonNoLabel.Location = new System.Drawing.Point(374, 22);
+            this.buttonNoLabel.Location = new System.Drawing.Point(333, 22);
             this.buttonNoLabel.Name = "buttonNoLabel";
             this.buttonNoLabel.Size = new System.Drawing.Size(76, 20);
             this.buttonNoLabel.TabIndex = 8;
             this.buttonNoLabel.Text = "Buton No";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(13, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(183, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Atamak istediğiniz ürüne çift tıklayınız.";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(241, 22);
+            this.label1.Location = new System.Drawing.Point(200, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 20);
             this.label1.TabIndex = 7;
@@ -140,10 +178,10 @@
             // productSearchTxt
             // 
             this.productSearchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.productSearchTxt.Location = new System.Drawing.Point(12, 58);
+            this.productSearchTxt.Location = new System.Drawing.Point(16, 45);
             this.productSearchTxt.Name = "productSearchTxt";
-            this.productSearchTxt.Size = new System.Drawing.Size(231, 26);
-            this.productSearchTxt.TabIndex = 5;
+            this.productSearchTxt.Size = new System.Drawing.Size(162, 26);
+            this.productSearchTxt.TabIndex = 0;
             this.productSearchTxt.TextChanged += new System.EventHandler(this.productSearch_TextChanged);
             // 
             // label2
@@ -163,7 +201,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
             this.Name = "fastButtonAddForm";
-            this.Text = "fastButtonAddForm";
+            this.Text = "Hızlı Ürün Ekle";
             this.Load += new System.EventHandler(this.fastButtonAddForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -187,5 +225,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn productBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productPrice;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonRefreshButton;
+        private System.Windows.Forms.Button buttonRefreshList;
     }
 }

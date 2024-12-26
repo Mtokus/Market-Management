@@ -107,7 +107,7 @@ namespace Market_Management.Class
                 dgv.Rows[index].Cells["Çalışma_Süresi"].Value = çalışmaSüresi.ToString("hh\\:mm");
 
                 bool izinliMi = Convert.ToBoolean(GetPropertyValue(staff, "İzinli_Mi"));
-                dgv.Rows[index].Cells["İzinli_Mi"].Value = izinliMi ? "Evet" : "Hayır";
+               dgv.Rows[index].Cells["İzinli_Mi"].Value = izinliMi ? "Evet" : "Hayır";
             }
         }
        

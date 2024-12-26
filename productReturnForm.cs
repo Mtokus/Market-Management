@@ -262,7 +262,14 @@ namespace Market_Management
             }
 
         }
-      
+
+        private void productQuantityTxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) == false && e.KeyChar != (char)08 && e.KeyChar != (char)44 && e.KeyChar != (char)45)
+            {
+                e.Handled = true;
+            }
+        }
     }
 
 }

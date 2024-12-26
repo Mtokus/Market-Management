@@ -34,8 +34,8 @@ namespace Market_Management
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelEntryExitOperation = new System.Windows.Forms.Panel();
             this.labelKacSaat = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.pickerFinish = new System.Windows.Forms.DateTimePicker();
+            this.pickerStart = new System.Windows.Forms.DateTimePicker();
             this.buttonExitFilter = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.buttonLeaveFilter = new System.Windows.Forms.Button();
@@ -76,8 +76,8 @@ namespace Market_Management
             // panelEntryExitOperation
             // 
             this.panelEntryExitOperation.Controls.Add(this.labelKacSaat);
-            this.panelEntryExitOperation.Controls.Add(this.dateTimePicker2);
-            this.panelEntryExitOperation.Controls.Add(this.dateTimePicker1);
+            this.panelEntryExitOperation.Controls.Add(this.pickerFinish);
+            this.panelEntryExitOperation.Controls.Add(this.pickerStart);
             this.panelEntryExitOperation.Controls.Add(this.buttonExitFilter);
             this.panelEntryExitOperation.Controls.Add(this.button5);
             this.panelEntryExitOperation.Controls.Add(this.buttonLeaveFilter);
@@ -105,29 +105,29 @@ namespace Market_Management
             this.labelKacSaat.Text = "Kaç saat";
             this.labelKacSaat.Visible = false;
             // 
-            // dateTimePicker2
+            // pickerFinish
             // 
-            this.dateTimePicker2.CustomFormat = " dd/MM/yyyy";
-            this.dateTimePicker2.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(125, 85);
-            this.dateTimePicker2.MaxDate = new System.DateTime(2050, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(104, 22);
-            this.dateTimePicker2.TabIndex = 4;
-            this.dateTimePicker2.Value = new System.DateTime(2024, 10, 23, 0, 0, 0, 0);
+            this.pickerFinish.CustomFormat = " dd/MM/yyyy";
+            this.pickerFinish.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.pickerFinish.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.pickerFinish.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.pickerFinish.Location = new System.Drawing.Point(125, 85);
+            this.pickerFinish.MaxDate = new System.DateTime(2050, 1, 1, 0, 0, 0, 0);
+            this.pickerFinish.Name = "pickerFinish";
+            this.pickerFinish.Size = new System.Drawing.Size(104, 22);
+            this.pickerFinish.TabIndex = 4;
+            this.pickerFinish.Value = new System.DateTime(2024, 12, 25, 0, 0, 0, 0);
             // 
-            // dateTimePicker1
+            // pickerStart
             // 
-            this.dateTimePicker1.Checked = false;
-            this.dateTimePicker1.CustomFormat = " dd/MM/yyyy";
-            this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(15, 85);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(104, 22);
-            this.dateTimePicker1.TabIndex = 3;
+            this.pickerStart.Checked = false;
+            this.pickerStart.CustomFormat = " dd/MM/yyyy";
+            this.pickerStart.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.pickerStart.Location = new System.Drawing.Point(15, 85);
+            this.pickerStart.Name = "pickerStart";
+            this.pickerStart.Size = new System.Drawing.Size(104, 22);
+            this.pickerStart.TabIndex = 3;
             // 
             // buttonExitFilter
             // 
@@ -194,10 +194,11 @@ namespace Market_Management
             this.buttonDateFilter.Location = new System.Drawing.Point(232, 85);
             this.buttonDateFilter.Margin = new System.Windows.Forms.Padding(0);
             this.buttonDateFilter.Name = "buttonDateFilter";
-            this.buttonDateFilter.Size = new System.Drawing.Size(59, 17);
+            this.buttonDateFilter.Size = new System.Drawing.Size(59, 22);
             this.buttonDateFilter.TabIndex = 2;
             this.buttonDateFilter.Text = "Filtrele";
             this.buttonDateFilter.UseVisualStyleBackColor = false;
+            this.buttonDateFilter.Click += new System.EventHandler(this.buttonDateFilter_Click);
             // 
             // buttonStaffNameFilter
             // 
@@ -273,8 +274,8 @@ namespace Market_Management
         private System.Windows.Forms.Panel panelEntryExitTable;
         private System.Windows.Forms.Panel panelEntryExitOperation;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker pickerFinish;
+        private DateTimePicker pickerStart;
         private Button buttonExitFilter;
         private Button button5;
         private Button buttonLeaveFilter;

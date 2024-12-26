@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.deleteProduct = new System.Windows.Forms.DataGridViewImageColumn();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(productReturnForm));
             this.confirmReturnButton = new System.Windows.Forms.Button();
             this.productIDLabel = new System.Windows.Forms.Label();
             this.addSelectedButton = new System.Windows.Forms.Button();
@@ -38,7 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.productQuantityTxt = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteProduct = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.productNameTxt = new System.Windows.Forms.TextBox();
@@ -61,25 +62,12 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // deleteProduct
-            // 
-            this.deleteProduct.HeaderText = "İptal";
-            this.deleteProduct.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.deleteProduct.Name = "deleteProduct";
-            this.deleteProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.deleteProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // productName
-            // 
-            this.productName.HeaderText = "Ürün Adı";
-            this.productName.Name = "productName";
-            // 
             // confirmReturnButton
             // 
             this.confirmReturnButton.Location = new System.Drawing.Point(145, 385);
             this.confirmReturnButton.Name = "confirmReturnButton";
             this.confirmReturnButton.Size = new System.Drawing.Size(88, 23);
-            this.confirmReturnButton.TabIndex = 7;
+            this.confirmReturnButton.TabIndex = 6;
             this.confirmReturnButton.Text = "İadeyi Onayla";
             this.confirmReturnButton.UseVisualStyleBackColor = true;
             this.confirmReturnButton.Click += new System.EventHandler(this.confirmReturnButton_Click);
@@ -99,7 +87,7 @@
             this.addSelectedButton.Location = new System.Drawing.Point(49, 144);
             this.addSelectedButton.Name = "addSelectedButton";
             this.addSelectedButton.Size = new System.Drawing.Size(87, 23);
-            this.addSelectedButton.TabIndex = 5;
+            this.addSelectedButton.TabIndex = 4;
             this.addSelectedButton.Text = "Seçilenleri Ekle";
             this.addSelectedButton.UseVisualStyleBackColor = true;
             this.addSelectedButton.Click += new System.EventHandler(this.addSelectedButton_Click);
@@ -119,7 +107,7 @@
             this.addSingleButton.Location = new System.Drawing.Point(158, 95);
             this.addSingleButton.Name = "addSingleButton";
             this.addSingleButton.Size = new System.Drawing.Size(75, 23);
-            this.addSingleButton.TabIndex = 4;
+            this.addSingleButton.TabIndex = 3;
             this.addSingleButton.Text = "İade Ekle";
             this.addSingleButton.UseVisualStyleBackColor = true;
             this.addSingleButton.Click += new System.EventHandler(this.addSingleButton_Click);
@@ -139,6 +127,7 @@
             this.productQuantityTxt.Name = "productQuantityTxt";
             this.productQuantityTxt.Size = new System.Drawing.Size(100, 20);
             this.productQuantityTxt.TabIndex = 2;
+            this.productQuantityTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productQuantityTxt_KeyPress);
             // 
             // dataGridView2
             // 
@@ -157,10 +146,24 @@
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
+            // productName
+            // 
+            this.productName.HeaderText = "Ürün Adı";
+            this.productName.Name = "productName";
+            // 
             // productQuantity
             // 
             this.productQuantity.HeaderText = "İade Adeti";
             this.productQuantity.Name = "productQuantity";
+            // 
+            // deleteProduct
+            // 
+            this.deleteProduct.HeaderText = "İptal";
+            this.deleteProduct.Image = ((System.Drawing.Image)(resources.GetObject("deleteProduct.Image")));
+            this.deleteProduct.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.deleteProduct.Name = "deleteProduct";
+            this.deleteProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.deleteProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridView1
             // 
@@ -271,7 +274,7 @@
             this.ClientSize = new System.Drawing.Size(800, 451);
             this.Controls.Add(this.splitContainer1);
             this.Name = "productReturnForm";
-            this.Text = "productReturnForm";
+            this.Text = "Ürün İade Formu";
             this.Load += new System.EventHandler(this.productReturnForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -291,9 +294,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewImageColumn deleteProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.Button confirmReturnButton;
         public System.Windows.Forms.Label productIDLabel;
         private System.Windows.Forms.Button addSelectedButton;
@@ -302,7 +302,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox productQuantityTxt;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productQuantity;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TextBox productNameTxt;
@@ -311,5 +310,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productQuantity;
+        private System.Windows.Forms.DataGridViewImageColumn deleteProduct;
     }
 }

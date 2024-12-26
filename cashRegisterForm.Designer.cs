@@ -157,6 +157,7 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1150, 30);
             this.panelHeader.TabIndex = 4;
+            this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelHeader_MouseDown);
             // 
             // labelUserNameOperationPanel
             // 
@@ -704,7 +705,7 @@
             this.quantityTxt.Location = new System.Drawing.Point(279, 7);
             this.quantityTxt.Name = "quantityTxt";
             this.quantityTxt.Size = new System.Drawing.Size(47, 20);
-            this.quantityTxt.TabIndex = 9;
+            this.quantityTxt.TabIndex = 2;
             this.quantityTxt.Text = "1";
             this.quantityTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.quantityTxt_KeyPress);
             // 
@@ -713,7 +714,7 @@
             this.calculateNumberTxt.Location = new System.Drawing.Point(101, 7);
             this.calculateNumberTxt.Name = "calculateNumberTxt";
             this.calculateNumberTxt.Size = new System.Drawing.Size(102, 20);
-            this.calculateNumberTxt.TabIndex = 9;
+            this.calculateNumberTxt.TabIndex = 1;
             this.calculateNumberTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.calculateNumberTxt_KeyPress);
             // 
             // takeActionButton
@@ -724,7 +725,7 @@
             this.takeActionButton.Location = new System.Drawing.Point(330, 0);
             this.takeActionButton.Name = "takeActionButton";
             this.takeActionButton.Size = new System.Drawing.Size(113, 31);
-            this.takeActionButton.TabIndex = 8;
+            this.takeActionButton.TabIndex = 3;
             this.takeActionButton.Text = "Seç";
             this.takeActionButton.UseVisualStyleBackColor = false;
             this.takeActionButton.Click += new System.EventHandler(this.takeActionButton_Click);
@@ -783,7 +784,7 @@
             this.saleCancelButton.Location = new System.Drawing.Point(26, 97);
             this.saleCancelButton.Name = "saleCancelButton";
             this.saleCancelButton.Size = new System.Drawing.Size(230, 47);
-            this.saleCancelButton.TabIndex = 0;
+            this.saleCancelButton.TabIndex = 6;
             this.saleCancelButton.Text = "Satış İptal";
             this.saleCancelButton.UseVisualStyleBackColor = false;
             this.saleCancelButton.Click += new System.EventHandler(this.saleCancelButton_Click);
@@ -796,7 +797,7 @@
             this.customerPayButton.Location = new System.Drawing.Point(145, 198);
             this.customerPayButton.Name = "customerPayButton";
             this.customerPayButton.Size = new System.Drawing.Size(120, 46);
-            this.customerPayButton.TabIndex = 0;
+            this.customerPayButton.TabIndex = 8;
             this.customerPayButton.Text = "Alınan Ücret";
             this.customerPayButton.UseVisualStyleBackColor = false;
             this.customerPayButton.Click += new System.EventHandler(this.customerPayButton_Click);
@@ -819,7 +820,7 @@
             this.barcodeChoiceButton.Location = new System.Drawing.Point(19, 198);
             this.barcodeChoiceButton.Name = "barcodeChoiceButton";
             this.barcodeChoiceButton.Size = new System.Drawing.Size(120, 47);
-            this.barcodeChoiceButton.TabIndex = 0;
+            this.barcodeChoiceButton.TabIndex = 7;
             this.barcodeChoiceButton.Text = "Barkod Gir";
             this.barcodeChoiceButton.UseVisualStyleBackColor = false;
             this.barcodeChoiceButton.Click += new System.EventHandler(this.barcodeChoiceButton_Click);
@@ -859,7 +860,7 @@
             this.cashButton.Location = new System.Drawing.Point(19, 41);
             this.cashButton.Name = "cashButton";
             this.cashButton.Size = new System.Drawing.Size(120, 47);
-            this.cashButton.TabIndex = 0;
+            this.cashButton.TabIndex = 4;
             this.cashButton.Text = "NAKİT";
             this.cashButton.UseVisualStyleBackColor = false;
             this.cashButton.Click += new System.EventHandler(this.cashButton_Click);
@@ -872,7 +873,7 @@
             this.cardButton.Location = new System.Drawing.Point(145, 41);
             this.cardButton.Name = "cardButton";
             this.cardButton.Size = new System.Drawing.Size(120, 47);
-            this.cardButton.TabIndex = 0;
+            this.cardButton.TabIndex = 5;
             this.cardButton.Text = "KART";
             this.cardButton.UseVisualStyleBackColor = false;
             this.cardButton.Click += new System.EventHandler(this.cardButton_Click);
@@ -1101,6 +1102,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "cashRegisterForm";
             this.Text = "cashRegisterForm";
+            this.Load += new System.EventHandler(this.cashRegisterForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

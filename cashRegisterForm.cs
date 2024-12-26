@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,45 +17,27 @@ namespace Market_Management
 {
     public partial class cashRegisterForm : Form
     {
+        [DllImport("user32.dll")]
+        public static extern void ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HTCAPTION = 0x2;
         public cashRegisterForm()
         {
             InitializeComponent();
+            panelHeader.MouseDown += panelHeader_MouseDown;
             labelUserNameOperationPanel.Text = UserClass.FullName;
         }
         ShopManagementEntities dbContex = new ShopManagementEntities();
-
-        private void picClose_Click(object sender, EventArgs e)
+        private void cashRegisterForm_Load(object sender, EventArgs e)
         {
-            
-            if (UserClass.UserLevel == 6)
-            {
-                Application.ExitThread();  
-            }
-            else
-            {
-                Close();
-            }
-           
-          
+            fastButtonLoad();
         }
-        private void SetOperationLabel(string labelText, bool showQuantityControls = false, string quantityLabelText = "")
-        {
-            calculateOperationLabel.Text = labelText;
-            calculateNumberTxt.Text = string.Empty;
 
-            quantityLabel.Visible = showQuantityControls;
-            quantityTxt.Visible = showQuantityControls;
-
-            if (showQuantityControls)
-            {
-                quantityLabel.Text = quantityLabelText;
-            }
-        }
-        private void QuantityCalcToFalse()
-        {
-            quantityLabel.Visible = false;
-            quantityTxt.Visible = false;
-        }
+        //Button Click
         private void quantityChoiceButton_Click(object sender, EventArgs e)
         {
             SetOperationLabel("İade :");
@@ -63,44 +46,10 @@ namespace Market_Management
         {
             SetOperationLabel("Barkod :", true, "Miktar :");
         }
-        //oto barkod oluşturma
-        /* private void weighingOptionButton_Click(object sender, EventArgs e)
-         {
-             SetOperationLabel("Ürün Kodu :", true,"Kg :");
-
-
-         }
-        */
         private void customerPayButton_Click(object sender, EventArgs e)
         {
             SetOperationLabel("Ödeme :");
         }
-        /*#region Clicks
-        private void quantityChoiceButton_Click(object sender, EventArgs e)
-        {
-            calculateOperationLabel.Text = "İade :".ToString();
-            QuantityCalcToFalse();
-        }
-        private void barcodeChoiceButton_Click(object sender, EventArgs e)
-        {
-            calculateOperationLabel.Text = "Barkod :".ToString();
-            quantityLabel.Visible = true;
-            quantityTxt.Visible = true;
-
-        }
-        private void weighingOptionButton_Click(object sender, EventArgs e)
-        {
-            calculateOperationLabel.Text = "Ürün Giriniz :".ToString();
-            QuantityCalcToFalse();
-        }
-        private void customerPayButton_Click(object sender, EventArgs e)
-        {
-            calculateOperationLabel.Text = "Ödeme :".ToString();
-            QuantityCalcToFalse();
-        }
-        #endregion
-        */
-        //İşlem butonu 
         private void takeActionButton_Click(object sender, EventArgs e)
         {
             if (calculateOperationLabel.Text == "İade :")
@@ -145,6 +94,8 @@ namespace Market_Management
                                     break;
                                 }
                             }
+                            calculateNumberTxt.Text = string.Empty;
+                            quantityTxt.Text = "1";
                         }
 
                         if (!haveProduct)
@@ -204,6 +155,186 @@ namespace Market_Management
              }
             */
         }
+        private void cashButton_Click(object sender, EventArgs e)
+        {
+            double totalprice = Convert.ToDouble(totalPriceLabel.Text);
+            double customerpay = Convert.ToDouble(customerPayLabel.Text);
+
+            if (customerPayLabel.Text == "0" || string.IsNullOrWhiteSpace(customerPayLabel.Text))
+            {
+                MessageBox.Show("Lütfen Ödeme Giriniz");
+            }
+            else if (totalprice < customerpay)
+            {
+                confirmSale("Cash");
+            }
+            else
+            {
+                double cashchange = Convert.ToDouble(cashChangeLabel.Text);
+                cashchange = Math.Abs(cashchange);
+                MessageBox.Show($"Lütfen {(cashchange.ToString("C2"))} ekleyiniz"); ;
+            }
+        }
+        private void cardButton_Click(object sender, EventArgs e)
+        {
+            confirmSale("Card");
+
+        }
+        private void CalculatorNumbersButton_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            if (b.Text == ",")
+            {
+                if (string.IsNullOrEmpty(calculateNumberTxt.Text))
+                {
+                    return;
+                }
+                int point = calculateNumberTxt.Text.Count(p => p == ',');
+                if (point < 1)
+                {
+                    calculateNumberTxt.Text += b.Text;
+                }
+            }
+            else if (b.Text == "C")
+            {
+                if (calculateNumberTxt.Text.Length > 0)
+                {
+                    calculateNumberTxt.Text = calculateNumberTxt.Text.Substring(0, calculateNumberTxt.Text.Length - 1);
+                }
+            }
+            else
+            {
+                calculateNumberTxt.Text += b.Text;
+            }
+        }
+        private void saleCancelButton_Click(object sender, EventArgs e)
+        {
+            ClearAll();
+        }
+        private void fastButton_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+
+            if (b != null)
+            {
+                int buttonID = Convert.ToInt16(b.Name.ToString().Substring(10, 1));
+
+                if (UserClass.UserLevel == 1 || UserClass.UserLevel == 2)
+                {
+                    fastButtonAddForm f = new fastButtonAddForm();
+                    f.buttonNoLabel.Text = buttonID.ToString();
+                    f.ShowDialog();
+                }
+                else
+                {
+                    if (b.Text.StartsWith("-"))
+                    {
+                        fastButtonAddForm f = new fastButtonAddForm();
+                        f.buttonNoLabel.Text = buttonID.ToString();
+                        f.ShowDialog();
+                    }
+                    else
+                    {
+                        // Düğmede "-" yoksa ürün barkodu alınır ve textbox'a yazılır
+                        var product_Barcode = dbContex.fastButtonTbl
+                            .Where(f => f.productID == buttonID)
+                            .Select(f => f.productBarcode)
+                            .FirstOrDefault();
+
+                        var product = dbContex.productTbl
+                            .Where(p => p.productBarcode == product_Barcode)
+                            .FirstOrDefault();
+
+                        if (product != null)
+                        {
+                            calculateNumberTxt.Text = product.productBarcode.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ürün bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        //Calculations
+        public bool stockDecrease()
+        {
+            bool isStockSufficient = true;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                string barcode = row.Cells["productBarcode"].Value.ToString();
+                int quantity = Convert.ToInt32(row.Cells["productQuantity"].Value);
+                var productUpdate = dbContex.productTbl.FirstOrDefault(p => p.productBarcode == barcode);
+
+                if (productUpdate != null && productUpdate.productStockQuantity >= quantity)
+                {
+                    productUpdate.productStockQuantity -= quantity;
+                    dbContex.Entry(productUpdate).State = EntityState.Modified;
+                }
+                else
+                {
+                    MessageBox.Show($"Ürün stokta yetersiz: {barcode}");
+                    isStockSufficient = false;
+                }
+            }
+
+            if (isStockSufficient)
+            {
+                dbContex.SaveChanges();
+            }
+
+            return isStockSufficient;
+        }
+        private void TotalKDV()
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                double sumKDV = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    double priceCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productQuantityPrice"].Value);
+                    double quantityCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productQuantity"].Value);
+                    double totalPriceCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productTotalPrice"].Value);
+                    double totalKDV = totalPriceCell - (priceCell * quantityCell);
+                    sumKDV += totalKDV;
+                }
+
+
+                totalKDVLabel.Text = Math.Round(sumKDV, 2).ToString();
+                // totalKDVLabel.Text = Math.Round(sumKDV, 2).ToString("C2");
+            }
+            else
+            {
+                totalKDVLabel.Text = 0.ToString();
+            }
+        }
+        private void TotalPrice()
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                double sum = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    var totalPriceCell = dataGridView1.Rows[i].Cells["productTotalPrice"].Value;
+
+
+                    if (totalPriceCell != null && double.TryParse(totalPriceCell.ToString(), out double totalPrice))
+                    {
+                        sum += totalPrice;
+                    }
+                }
+                totalPriceLabel.Text = sum.ToString();
+                // totalPriceLabel.Text = sum.ToString("C2");
+            }
+            else
+            {
+                totalPriceLabel.Text = 0.ToString();
+                // totalPriceLabel.Text = 0.ToString("C2"); 
+            }
+        }
         private void ChangeMoneyCalculate()
         {
             try
@@ -239,6 +370,31 @@ namespace Market_Management
              else { MessageBox.Show("Ödeme girmediniz"); }
             */
         }
+        private void picClose_Click(object sender, EventArgs e)
+        {
+            
+            if (UserClass.UserLevel == 6)
+            {
+                Application.ExitThread();  
+            }
+            else
+            {
+                Close();
+            }
+        }
+        private void SetOperationLabel(string labelText, bool showQuantityControls = false, string quantityLabelText = "")
+        {
+            calculateOperationLabel.Text = labelText;
+            calculateNumberTxt.Text = string.Empty;
+
+            quantityLabel.Visible = showQuantityControls;
+            quantityTxt.Visible = showQuantityControls;
+
+            if (showQuantityControls)
+            {
+                quantityLabel.Text = quantityLabelText;
+            }
+        }
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -264,58 +420,7 @@ namespace Market_Management
                 }
             }
         }
-        private void CalculatorNumbersButton_Click(object sender, EventArgs e)
-        {
-            Button b = (Button)sender;
-            if (b.Text == ",")
-            {
-                if (string.IsNullOrEmpty(calculateNumberTxt.Text))
-                {
-                    return;
-                }
-                int point = calculateNumberTxt.Text.Count(p => p == ',');
-                if (point < 1)
-                {
-                    calculateNumberTxt.Text += b.Text;
-                }
-            }
-            else if (b.Text == "C")
-            {
-                if (calculateNumberTxt.Text.Length > 0)
-                {
-                    calculateNumberTxt.Text = calculateNumberTxt.Text.Substring(0, calculateNumberTxt.Text.Length - 1);
-                }
-            }
-            else
-            {
-                calculateNumberTxt.Text += b.Text;
-            }
-        }
-        private void cashButton_Click(object sender, EventArgs e)
-        {
-            double totalprice = Convert.ToDouble(totalPriceLabel.Text);
-            double customerpay = Convert.ToDouble(customerPayLabel.Text);
-
-            if (customerPayLabel.Text == "0" || string.IsNullOrWhiteSpace(customerPayLabel.Text))
-            {
-                MessageBox.Show("Lütfen Ödeme Giriniz");
-            }
-            else if (totalprice < customerpay)
-            {
-                confirmSale("Cash");
-            }
-            else
-            {
-                double cashchange = Convert.ToDouble(cashChangeLabel.Text);
-                cashchange = Math.Abs(cashchange);
-                MessageBox.Show($"Lütfen {(cashchange.ToString("C2"))} ekleyiniz"); ;
-            }
-        }
-        private void cardButton_Click(object sender, EventArgs e)
-        {
-            confirmSale("Card");
-
-        }
+        
         private void confirmSale(string paymentType)
         {
             if (dataGridView1.Rows.Count > 0)
@@ -378,104 +483,7 @@ namespace Market_Management
                 MessageBox.Show("Lütfen Ürün Giriniz! ");
             }
         }
-        private void TotalKDV()
-        {
-            if (dataGridView1.Rows.Count > 0)
-            {
-                double sumKDV = 0;
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    double priceCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productQuantityPrice"].Value);
-                    double quantityCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productQuantity"].Value);
-                    double totalPriceCell = Convert.ToDouble(dataGridView1.Rows[i].Cells["productTotalPrice"].Value);
-                    double totalKDV = totalPriceCell - (priceCell * quantityCell);
-                    sumKDV += totalKDV;
-                }
-
-
-                totalKDVLabel.Text = Math.Round(sumKDV, 2).ToString();
-                // totalKDVLabel.Text = Math.Round(sumKDV, 2).ToString("C2");
-            }
-            else
-            {
-                totalKDVLabel.Text = 0.ToString();
-            }
-        }
-        private void TotalPrice()
-        {
-            if (dataGridView1.Rows.Count > 0)
-            {
-                double sum = 0;
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {
-                    var totalPriceCell = dataGridView1.Rows[i].Cells["productTotalPrice"].Value;
-
-
-                    if (totalPriceCell != null && double.TryParse(totalPriceCell.ToString(), out double totalPrice))
-                    {
-                        sum += totalPrice;
-                    }
-                }
-                totalPriceLabel.Text = sum.ToString();
-                // totalPriceLabel.Text = sum.ToString("C2");
-            }
-            else
-            {
-                totalPriceLabel.Text = 0.ToString();
-                // totalPriceLabel.Text = 0.ToString("C2"); 
-            }
-        }
-        private void saleCancelButton_Click(object sender, EventArgs e)
-        {
-            ClearAll();
-
-        }
-        private void fastButton_Click(object sender, EventArgs e)
-        {
-            Button b = (Button)sender;
-
-            if (b != null)
-            {
-                int buttonID = Convert.ToInt16(b.Name.ToString().Substring(10, 1));
-
-                if (UserClass.UserLevel == 1 || UserClass.UserLevel == 2)
-                {
-                    fastButtonAddForm f = new fastButtonAddForm();
-                    f.buttonNoLabel.Text = buttonID.ToString();
-                    f.ShowDialog();
-                }
-                else
-                {
-                    if (b.Text.StartsWith("-"))
-                    {
-                        fastButtonAddForm f = new fastButtonAddForm();
-                        f.buttonNoLabel.Text = buttonID.ToString();
-                        f.ShowDialog();
-                    }
-                    else
-                    {
-                        // Düğmede "-" yoksa ürün barkodu alınır ve textbox'a yazılır
-                        var product_Barcode = dbContex.fastButtonTbl
-                            .Where(f => f.productID == buttonID)
-                            .Select(f => f.productBarcode)
-                            .FirstOrDefault();
-
-                        var product = dbContex.productTbl
-                            .Where(p => p.productBarcode == product_Barcode)
-                            .FirstOrDefault();
-
-                        if (product != null)
-                        {
-                            calculateNumberTxt.Text = product.productBarcode.ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ürün bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-        }
+    
         public void fastButtonLoad()
         {
             var fastProducts = dbContex.fastButtonTbl.ToList();
@@ -515,39 +523,48 @@ namespace Market_Management
                 e.Handled = true;
             }
         }
-        private void cashRegisterForm_Load(object sender, EventArgs e)
+        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            fastButtonLoad();
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
         }
-        public bool stockDecrease()
+        //oto barkod oluşturma
+        /* private void weighingOptionButton_Click(object sender, EventArgs e)
+         {
+             SetOperationLabel("Ürün Kodu :", true,"Kg :");
+
+
+         }
+        */
+
+        /*#region Clicks
+        private void quantityChoiceButton_Click(object sender, EventArgs e)
         {
-            bool isStockSufficient = true;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                string barcode = row.Cells["productBarcode"].Value.ToString();
-                int quantity = Convert.ToInt32(row.Cells["productQuantity"].Value);
-                var productUpdate = dbContex.productTbl.FirstOrDefault(p => p.productBarcode == barcode);
-
-                if (productUpdate != null && productUpdate.productStockQuantity >= quantity)
-                {
-                    productUpdate.productStockQuantity -= quantity;
-                    dbContex.Entry(productUpdate).State = EntityState.Modified;
-                }
-                else
-                {
-                    MessageBox.Show($"Ürün stokta yetersiz: {barcode}");
-                    isStockSufficient = false;
-                }
-            }
-
-            if (isStockSufficient)
-            {
-                dbContex.SaveChanges();
-            }
-
-            return isStockSufficient;
+            calculateOperationLabel.Text = "İade :".ToString();
+            QuantityCalcToFalse();
         }
+        private void barcodeChoiceButton_Click(object sender, EventArgs e)
+        {
+            calculateOperationLabel.Text = "Barkod :".ToString();
+            quantityLabel.Visible = true;
+            quantityTxt.Visible = true;
 
+        }
+        private void weighingOptionButton_Click(object sender, EventArgs e)
+        {
+            calculateOperationLabel.Text = "Ürün Giriniz :".ToString();
+            QuantityCalcToFalse();
+        }
+        private void customerPayButton_Click(object sender, EventArgs e)
+        {
+            calculateOperationLabel.Text = "Ödeme :".ToString();
+            QuantityCalcToFalse();
+        }
+        #endregion
+        */
+        //İşlem butonu 
     }
 }

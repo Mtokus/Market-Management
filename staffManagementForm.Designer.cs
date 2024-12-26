@@ -30,7 +30,6 @@
         {
             this.panelStaffEntryExitOperation = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.maas_islemleri = new System.Windows.Forms.Button();
             this.buttonStaffOperation = new System.Windows.Forms.Button();
             this.buttonStaffEntryExit = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
@@ -49,7 +48,6 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(191)))), ((int)(((byte)(53)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.maas_islemleri);
             this.panel2.Controls.Add(this.buttonStaffOperation);
             this.panel2.Controls.Add(this.buttonStaffEntryExit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -58,22 +56,11 @@
             this.panel2.Size = new System.Drawing.Size(960, 82);
             this.panel2.TabIndex = 1;
             // 
-            // maas_islemleri
-            // 
-            this.maas_islemleri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
-            this.maas_islemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.maas_islemleri.Location = new System.Drawing.Point(591, 12);
-            this.maas_islemleri.Name = "maas_islemleri";
-            this.maas_islemleri.Size = new System.Drawing.Size(167, 57);
-            this.maas_islemleri.TabIndex = 0;
-            this.maas_islemleri.Text = "Maaş İşlemleri";
-            this.maas_islemleri.UseVisualStyleBackColor = false;
-            // 
             // buttonStaffOperation
             // 
             this.buttonStaffOperation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonStaffOperation.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonStaffOperation.Location = new System.Drawing.Point(396, 12);
+            this.buttonStaffOperation.Location = new System.Drawing.Point(495, 12);
             this.buttonStaffOperation.Name = "buttonStaffOperation";
             this.buttonStaffOperation.Size = new System.Drawing.Size(167, 57);
             this.buttonStaffOperation.TabIndex = 0;
@@ -85,7 +72,7 @@
             // 
             this.buttonStaffEntryExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonStaffEntryExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonStaffEntryExit.Location = new System.Drawing.Point(197, 12);
+            this.buttonStaffEntryExit.Location = new System.Drawing.Point(296, 12);
             this.buttonStaffEntryExit.Name = "buttonStaffEntryExit";
             this.buttonStaffEntryExit.Size = new System.Drawing.Size(167, 57);
             this.buttonStaffEntryExit.TabIndex = 0;
@@ -115,7 +102,6 @@
 
         private System.Windows.Forms.Panel panelStaffEntryExitOperation;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button maas_islemleri;
         private System.Windows.Forms.Button buttonStaffOperation;
         private System.Windows.Forms.Button buttonStaffEntryExit;
     }

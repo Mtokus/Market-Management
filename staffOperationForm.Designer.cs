@@ -33,16 +33,27 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtExtraWorkingHours = new System.Windows.Forms.Label();
+            this.txtStaffSalary = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.totalSalaryLabel = new System.Windows.Forms.Label();
+            this.overTimeLabel = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.buttonFilter = new System.Windows.Forms.Button();
             this.comboBoxMonths = new System.Windows.Forms.ComboBox();
             this.salary_transactions = new System.Windows.Forms.Button();
             this.txtStaffID = new System.Windows.Forms.TextBox();
             this.buttonCallStaff = new System.Windows.Forms.Button();
             this.comboBoxStaffName = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbStaffPosition = new System.Windows.Forms.ComboBox();
             this.txtStaffIDForUptade = new System.Windows.Forms.TextBox();
             this.buttonListStaff = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -81,11 +92,6 @@
             this.staffStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffFinishDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffIsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cmbStaffPosition = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -158,6 +164,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(227)))), ((int)(((byte)(169)))));
+            this.panel1.Controls.Add(this.txtExtraWorkingHours);
+            this.panel1.Controls.Add(this.txtStaffSalary);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Controls.Add(this.totalSalaryLabel);
+            this.panel1.Controls.Add(this.overTimeLabel);
+            this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.buttonFilter);
             this.panel1.Controls.Add(this.comboBoxMonths);
             this.panel1.Controls.Add(this.salary_transactions);
@@ -175,14 +187,70 @@
             this.panel1.Size = new System.Drawing.Size(1034, 150);
             this.panel1.TabIndex = 0;
             // 
+            // txtExtraWorkingHours
+            // 
+            this.txtExtraWorkingHours.AutoSize = true;
+            this.txtExtraWorkingHours.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtExtraWorkingHours.Location = new System.Drawing.Point(681, 17);
+            this.txtExtraWorkingHours.Name = "txtExtraWorkingHours";
+            this.txtExtraWorkingHours.Size = new System.Drawing.Size(0, 17);
+            this.txtExtraWorkingHours.TabIndex = 11;
+            // 
+            // txtStaffSalary
+            // 
+            this.txtStaffSalary.AutoSize = true;
+            this.txtStaffSalary.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtStaffSalary.Location = new System.Drawing.Point(681, 88);
+            this.txtStaffSalary.Name = "txtStaffSalary";
+            this.txtStaffSalary.Size = new System.Drawing.Size(0, 17);
+            this.txtStaffSalary.TabIndex = 12;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label17.Location = new System.Drawing.Point(580, 88);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(95, 17);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "Toplam Maaş :";
+            // 
+            // totalSalaryLabel
+            // 
+            this.totalSalaryLabel.AutoSize = true;
+            this.totalSalaryLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.totalSalaryLabel.Location = new System.Drawing.Point(681, 88);
+            this.totalSalaryLabel.Name = "totalSalaryLabel";
+            this.totalSalaryLabel.Size = new System.Drawing.Size(0, 17);
+            this.totalSalaryLabel.TabIndex = 14;
+            // 
+            // overTimeLabel
+            // 
+            this.overTimeLabel.AutoSize = true;
+            this.overTimeLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.overTimeLabel.Location = new System.Drawing.Point(681, 17);
+            this.overTimeLabel.Name = "overTimeLabel";
+            this.overTimeLabel.Size = new System.Drawing.Size(0, 17);
+            this.overTimeLabel.TabIndex = 14;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.Location = new System.Drawing.Point(544, 17);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(131, 17);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Toplam Mesai Saati :";
+            // 
             // buttonFilter
             // 
             this.buttonFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(85)))), ((int)(((byte)(0)))));
             this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFilter.Location = new System.Drawing.Point(379, 16);
+            this.buttonFilter.Location = new System.Drawing.Point(379, 15);
             this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Size = new System.Drawing.Size(79, 20);
-            this.buttonFilter.TabIndex = 10;
+            this.buttonFilter.Size = new System.Drawing.Size(79, 22);
+            this.buttonFilter.TabIndex = 2;
             this.buttonFilter.Text = "Filtrele";
             this.buttonFilter.UseVisualStyleBackColor = false;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
@@ -206,7 +274,8 @@
             this.comboBoxMonths.Location = new System.Drawing.Point(283, 15);
             this.comboBoxMonths.Name = "comboBoxMonths";
             this.comboBoxMonths.Size = new System.Drawing.Size(90, 21);
-            this.comboBoxMonths.TabIndex = 9;
+            this.comboBoxMonths.TabIndex = 1;
+            this.comboBoxMonths.SelectedValueChanged += new System.EventHandler(this.comboBoxMonths_SelectedValueChanged);
             // 
             // salary_transactions
             // 
@@ -215,7 +284,7 @@
             this.salary_transactions.Location = new System.Drawing.Point(379, 82);
             this.salary_transactions.Name = "salary_transactions";
             this.salary_transactions.Size = new System.Drawing.Size(92, 34);
-            this.salary_transactions.TabIndex = 8;
+            this.salary_transactions.TabIndex = 4;
             this.salary_transactions.Text = "Maaş Hesapla";
             this.salary_transactions.UseVisualStyleBackColor = false;
             this.salary_transactions.Click += new System.EventHandler(this.salary_transactions_Click);
@@ -235,7 +304,7 @@
             this.buttonCallStaff.Location = new System.Drawing.Point(105, 86);
             this.buttonCallStaff.Name = "buttonCallStaff";
             this.buttonCallStaff.Size = new System.Drawing.Size(92, 30);
-            this.buttonCallStaff.TabIndex = 6;
+            this.buttonCallStaff.TabIndex = 3;
             this.buttonCallStaff.Text = "Getir / Listele";
             this.buttonCallStaff.UseVisualStyleBackColor = false;
             this.buttonCallStaff.Click += new System.EventHandler(this.buttonCallStaff_Click);
@@ -246,14 +315,55 @@
             this.comboBoxStaffName.Location = new System.Drawing.Point(105, 16);
             this.comboBoxStaffName.Name = "comboBoxStaffName";
             this.comboBoxStaffName.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxStaffName.TabIndex = 5;
+            this.comboBoxStaffName.TabIndex = 0;
             this.comboBoxStaffName.SelectedValueChanged += new System.EventHandler(this.comboBoxStaffName_SelectedValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label13.Location = new System.Drawing.Point(246, 15);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 17);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Ay :";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.Location = new System.Drawing.Point(280, 82);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(83, 34);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Seçilen Ay\'a \r\nGöre";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Location = new System.Drawing.Point(358, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(15, 17);
+            this.label15.TabIndex = 4;
+            this.label15.Text = " :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label12.Location = new System.Drawing.Point(32, 91);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 17);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Personel :";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(8, 19);
+            this.label1.Location = new System.Drawing.Point(8, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 17);
             this.label1.TabIndex = 4;
@@ -321,6 +431,21 @@
             this.panel2.Size = new System.Drawing.Size(228, 481);
             this.panel2.TabIndex = 0;
             // 
+            // cmbStaffPosition
+            // 
+            this.cmbStaffPosition.FormattingEnabled = true;
+            this.cmbStaffPosition.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
+            this.cmbStaffPosition.Location = new System.Drawing.Point(105, 155);
+            this.cmbStaffPosition.Name = "cmbStaffPosition";
+            this.cmbStaffPosition.Size = new System.Drawing.Size(100, 21);
+            this.cmbStaffPosition.TabIndex = 6;
+            // 
             // txtStaffIDForUptade
             // 
             this.txtStaffIDForUptade.Location = new System.Drawing.Point(75, 0);
@@ -337,7 +462,7 @@
             this.buttonListStaff.Location = new System.Drawing.Point(15, 348);
             this.buttonListStaff.Name = "buttonListStaff";
             this.buttonListStaff.Size = new System.Drawing.Size(192, 31);
-            this.buttonListStaff.TabIndex = 4;
+            this.buttonListStaff.TabIndex = 12;
             this.buttonListStaff.Text = "Listele";
             this.buttonListStaff.UseVisualStyleBackColor = false;
             this.buttonListStaff.Click += new System.EventHandler(this.buttonListStaff_Click);
@@ -350,7 +475,7 @@
             this.button3.Location = new System.Drawing.Point(15, 442);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(192, 31);
-            this.button3.TabIndex = 4;
+            this.button3.TabIndex = 15;
             this.button3.Text = "Sil";
             this.button3.UseVisualStyleBackColor = false;
             // 
@@ -362,7 +487,7 @@
             this.updateStaffButton.Location = new System.Drawing.Point(134, 385);
             this.updateStaffButton.Name = "updateStaffButton";
             this.updateStaffButton.Size = new System.Drawing.Size(73, 32);
-            this.updateStaffButton.TabIndex = 4;
+            this.updateStaffButton.TabIndex = 14;
             this.updateStaffButton.Text = "Güncelle";
             this.updateStaffButton.UseVisualStyleBackColor = false;
             this.updateStaffButton.Click += new System.EventHandler(this.updateStaffButton_Click);
@@ -375,7 +500,7 @@
             this.addStaffButton.Location = new System.Drawing.Point(15, 385);
             this.addStaffButton.Name = "addStaffButton";
             this.addStaffButton.Size = new System.Drawing.Size(73, 32);
-            this.addStaffButton.TabIndex = 4;
+            this.addStaffButton.TabIndex = 13;
             this.addStaffButton.Text = "Ekle";
             this.addStaffButton.UseVisualStyleBackColor = false;
             this.addStaffButton.Click += new System.EventHandler(this.addStaffButton_Click);
@@ -385,14 +510,14 @@
             this.pickerFinish.Location = new System.Drawing.Point(105, 280);
             this.pickerFinish.Name = "pickerFinish";
             this.pickerFinish.Size = new System.Drawing.Size(100, 20);
-            this.pickerFinish.TabIndex = 3;
+            this.pickerFinish.TabIndex = 10;
             // 
             // pickerStart
             // 
             this.pickerStart.Location = new System.Drawing.Point(105, 236);
             this.pickerStart.Name = "pickerStart";
             this.pickerStart.Size = new System.Drawing.Size(100, 20);
-            this.pickerStart.TabIndex = 3;
+            this.pickerStart.TabIndex = 9;
             // 
             // chkStaffState
             // 
@@ -400,7 +525,7 @@
             this.chkStaffState.Location = new System.Drawing.Point(105, 315);
             this.chkStaffState.Name = "chkStaffState";
             this.chkStaffState.Size = new System.Drawing.Size(94, 17);
-            this.chkStaffState.TabIndex = 2;
+            this.chkStaffState.TabIndex = 11;
             this.chkStaffState.Text = "Çalışıyor Mu ? ";
             this.chkStaffState.UseVisualStyleBackColor = true;
             this.chkStaffState.CheckStateChanged += new System.EventHandler(this.chkStaffState_CheckStateChanged);
@@ -411,7 +536,7 @@
             this.txtEmail.Location = new System.Drawing.Point(105, 101);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(100, 25);
-            this.txtEmail.TabIndex = 1;
+            this.txtEmail.TabIndex = 4;
             // 
             // txtPassword
             // 
@@ -419,7 +544,7 @@
             this.txtPassword.Location = new System.Drawing.Point(105, 209);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(100, 25);
-            this.txtPassword.TabIndex = 1;
+            this.txtPassword.TabIndex = 8;
             // 
             // txtSalary
             // 
@@ -427,7 +552,8 @@
             this.txtSalary.Location = new System.Drawing.Point(105, 182);
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(100, 25);
-            this.txtSalary.TabIndex = 1;
+            this.txtSalary.TabIndex = 7;
+            this.txtSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTcNo_KeyPress);
             // 
             // txtHomeAddress
             // 
@@ -435,7 +561,7 @@
             this.txtHomeAddress.Location = new System.Drawing.Point(105, 128);
             this.txtHomeAddress.Name = "txtHomeAddress";
             this.txtHomeAddress.Size = new System.Drawing.Size(100, 25);
-            this.txtHomeAddress.TabIndex = 1;
+            this.txtHomeAddress.TabIndex = 5;
             // 
             // txtNameSurname
             // 
@@ -443,7 +569,7 @@
             this.txtNameSurname.Location = new System.Drawing.Point(105, 47);
             this.txtNameSurname.Name = "txtNameSurname";
             this.txtNameSurname.Size = new System.Drawing.Size(100, 25);
-            this.txtNameSurname.TabIndex = 1;
+            this.txtNameSurname.TabIndex = 2;
             // 
             // txtPhoneNo
             // 
@@ -451,7 +577,8 @@
             this.txtPhoneNo.Location = new System.Drawing.Point(105, 74);
             this.txtPhoneNo.Name = "txtPhoneNo";
             this.txtPhoneNo.Size = new System.Drawing.Size(100, 25);
-            this.txtPhoneNo.TabIndex = 1;
+            this.txtPhoneNo.TabIndex = 3;
+            this.txtPhoneNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTcNo_KeyPress);
             // 
             // txtTcNo
             // 
@@ -460,6 +587,7 @@
             this.txtTcNo.Name = "txtTcNo";
             this.txtTcNo.Size = new System.Drawing.Size(100, 25);
             this.txtTcNo.TabIndex = 1;
+            this.txtTcNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTcNo_KeyPress);
             // 
             // label11
             // 
@@ -682,62 +810,6 @@
             this.staffIsActive.Name = "staffIsActive";
             this.staffIsActive.ReadOnly = true;
             // 
-            // cmbStaffPosition
-            // 
-            this.cmbStaffPosition.FormattingEnabled = true;
-            this.cmbStaffPosition.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"});
-            this.cmbStaffPosition.Location = new System.Drawing.Point(105, 155);
-            this.cmbStaffPosition.Name = "cmbStaffPosition";
-            this.cmbStaffPosition.Size = new System.Drawing.Size(100, 21);
-            this.cmbStaffPosition.TabIndex = 6;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(32, 91);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(67, 17);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Personel :";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label13.Location = new System.Drawing.Point(246, 19);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 17);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "Ay :";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(280, 82);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(83, 34);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Seçilen Ay\'a \r\nGöre";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label15.Location = new System.Drawing.Point(358, 90);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(15, 17);
-            this.label15.TabIndex = 4;
-            this.label15.Text = " :";
-            // 
             // staffOperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -817,18 +889,24 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn staffIsActive;
         private System.Windows.Forms.TextBox txtStaffIDForUptade;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox cmbStaffPosition;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label txtExtraWorkingHours;
+        private System.Windows.Forms.Label txtStaffSalary;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label totalSalaryLabel;
+        private System.Windows.Forms.Label overTimeLabel;
+        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button buttonFilter;
         private System.Windows.Forms.ComboBox comboBoxMonths;
         private System.Windows.Forms.Button salary_transactions;
         private System.Windows.Forms.TextBox txtStaffID;
         private System.Windows.Forms.Button buttonCallStaff;
         private System.Windows.Forms.ComboBox comboBoxStaffName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbStaffPosition;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label1;
     }
 }

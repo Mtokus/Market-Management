@@ -127,7 +127,7 @@
             this.confirmReturnButton.Location = new System.Drawing.Point(97, 157);
             this.confirmReturnButton.Name = "confirmReturnButton";
             this.confirmReturnButton.Size = new System.Drawing.Size(100, 23);
-            this.confirmReturnButton.TabIndex = 3;
+            this.confirmReturnButton.TabIndex = 2;
             this.confirmReturnButton.Text = "İade Sayfası";
             this.confirmReturnButton.UseVisualStyleBackColor = true;
             this.confirmReturnButton.Click += new System.EventHandler(this.confirmReturnButton_Click);
@@ -138,7 +138,7 @@
             this.buttonSearchReceipt.Location = new System.Drawing.Point(144, 62);
             this.buttonSearchReceipt.Name = "buttonSearchReceipt";
             this.buttonSearchReceipt.Size = new System.Drawing.Size(53, 23);
-            this.buttonSearchReceipt.TabIndex = 2;
+            this.buttonSearchReceipt.TabIndex = 1;
             this.buttonSearchReceipt.Text = "Ara";
             this.buttonSearchReceipt.UseVisualStyleBackColor = true;
             this.buttonSearchReceipt.Click += new System.EventHandler(this.buttonSearchReceipt_Click);
@@ -207,6 +207,7 @@
             this.txtReceiptID.Name = "txtReceiptID";
             this.txtReceiptID.Size = new System.Drawing.Size(100, 22);
             this.txtReceiptID.TabIndex = 0;
+            this.txtReceiptID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceiptID_KeyPress);
             // 
             // splitContainer2
             // 

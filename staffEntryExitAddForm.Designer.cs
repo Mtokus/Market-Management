@@ -87,6 +87,7 @@
             this.txtStaffID.Size = new System.Drawing.Size(34, 20);
             this.txtStaffID.TabIndex = 1;
             this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
+            this.txtStaffID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStaffID_KeyPress);
             // 
             // pickerStaffEntryTime
             // 

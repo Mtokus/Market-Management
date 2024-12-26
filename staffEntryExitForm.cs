@@ -93,6 +93,20 @@ namespace Market_Management
                 DatagridClass.StaffEntryExitGridview(dataGridView1, staffNameFiltered);
             }
         }
+
+        private void buttonDateFilter_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = this.pickerStart.Value.Date;
+            DateTime endDate = this.pickerFinish.Value.Date.AddDays(1.0).AddTicks(-1L);
+            using (ShopManagementEntities context = new ShopManagementEntities())
+            {
+                List<ProcedureStaffEntryExit_Result> filteredRecords = (from r in context.ProcedureStaffEntryExit()
+                                                                        where r.Giriş_Saati >= startDate && r.Çıkış_Saati <= endDate
+                                                                        select r).ToList<ProcedureStaffEntryExit_Result>();
+                DatagridClass.StaffEntryExitGridview(this.dataGridView1, filteredRecords);
+            }
+        }
+        
     }
 }
 //public Nullable<System.DateTime> Giriş_Saati { get; set; }

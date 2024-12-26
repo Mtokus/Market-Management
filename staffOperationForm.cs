@@ -93,6 +93,7 @@ namespace Market_Management
                 var selectedStaffName = (dynamic)comboBoxStaffName.SelectedItem;
                 txtStaffID.Text = selectedStaffName.Value.ToString();
             }
+            clearLabels();
         }
         private void dataGridViewStaffTbl_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -144,12 +145,14 @@ namespace Market_Management
                             }
                         }
                     }
-                    MessageBox.Show("Toplam fazla çalışma süresi: " + totalExtraWorkingHours.ToString(@"hh\:mm"));
+                    overTimeLabel.Text = totalExtraWorkingHours.ToString(@"hh\:mm");
+                    // MessageBox.Show("Toplam fazla çalışma süresi: " + totalExtraWorkingHours.ToString(@"hh\:mm"));
                     double totalExtraHoursDecimal = totalExtraWorkingHours.TotalHours;
                     double totalExtraPay = totalExtraHoursDecimal * staffHourlyPay * 1.5;
                     int totalStandardPay = (dataGridView1.Rows.Count * 8) * staffHourlyPay;
                     double totalStaffSalary = totalStandardPay + totalExtraPay;
-                    MessageBox.Show("Toplam maaş: " + totalStaffSalary.ToString("C"));
+                    totalSalaryLabel.Text = totalStaffSalary.ToString("C2");
+                    //MessageBox.Show("Toplam maaş: " + totalStaffSalary.ToString("C2"));
                 }
                 else
                 {
@@ -159,6 +162,72 @@ namespace Market_Management
         }
         private void buttonFilter_Click(object sender, EventArgs e)
         {
+            
+            dataGridView1.Rows.Clear();
+
+            if (string.IsNullOrEmpty(txtStaffID.Text))
+            {
+                MessageBox.Show("Lütfen Personel Seçiniz");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(comboBoxMonths.Text))
+            {
+                MessageBox.Show("Lütfen Ay Seçiniz");
+                return;
+            }
+
+            int selectedMonth = comboBoxMonths.SelectedIndex + 1;
+            int selectedYear = DateTime.Today.Year;
+
+            if (selectedMonth > DateTime.Today.Month)
+            {
+                selectedYear -= 1;
+            }
+
+            DateTime startDatetime = new DateTime(selectedYear, selectedMonth, 1);
+            DateTime endDatetime = startDatetime.AddMonths(1).AddDays(-1);
+
+            using (var dbContext = new ShopManagementEntities())
+            {
+                int staffID = Convert.ToInt32(txtStaffID.Text);
+
+                var girisCikislar = dbContext.StaffEntryExitTbl
+                    .Where(c => c.staffID == staffID
+                                && c.entryDateTime >= startDatetime
+                                && c.entryDateTime <= endDatetime)
+                    .ToList();
+
+                if (dataGridView1.Columns.Count == 0)
+                {
+                    dataGridView1.Columns.Add("Giriş_Saati", "Giriş Saati");
+                    dataGridView1.Columns.Add("Çıkış_Saati", "Çıkış Saati");
+                    dataGridView1.Columns.Add("İşlem_Tarihi", "İşlem Tarihi");
+                    dataGridView1.Columns.Add("Çalışma_Süresi", "Çalışma Süresi");
+                }
+                foreach (var entryExit in girisCikislar)
+                {
+                    int rowIndex = dataGridView1.Rows.Add();
+
+                    DateTime entryDateTime = entryExit.entryDateTime ?? DateTime.MinValue;
+                    DateTime exitDateTime = entryExit.exitDateTime ?? DateTime.MinValue;
+
+                    if (exitDateTime < entryDateTime)
+                    {
+                        exitDateTime = exitDateTime.AddDays(1);
+                    }
+
+                    TimeSpan diffTime = exitDateTime - entryDateTime;
+
+                    dataGridView1.Rows[rowIndex].Cells["Giriş_Saati"].Value = entryDateTime.ToString("HH:mm:ss");
+                    dataGridView1.Rows[rowIndex].Cells["Çıkış_Saati"].Value = exitDateTime.ToString("HH:mm:ss");
+                    dataGridView1.Rows[rowIndex].Cells["İşlem_Tarihi"].Value = entryDateTime.ToString("dd/MM/yyyy");
+                    dataGridView1.Rows[rowIndex].Cells["Çalışma_Süresi"].Value = diffTime.ToString(@"hh\:mm");
+                }
+            }
+        
+
+            /*
             dataGridView1.Rows.Clear();
             DateTime stardDatetime = DateTime.MinValue;
             DateTime endDatetime = DateTime.MinValue;
@@ -216,6 +285,7 @@ namespace Market_Management
 
                 }
             }
+            */
         }
         private void addStaffButton_Click(object sender, EventArgs e)
         {
@@ -299,6 +369,24 @@ namespace Market_Management
         private void chkStaffState_CheckStateChanged(object sender, EventArgs e)
         {
             pickerFinish.Enabled = chkStaffState.Checked ? false : true;
+        }
+
+        private void comboBoxMonths_SelectedValueChanged(object sender, EventArgs e)
+        {
+            clearLabels();
+        }
+        private void clearLabels() 
+        {
+            overTimeLabel.Text = string.Empty;
+            totalSalaryLabel.Text = string.Empty;
+        }
+
+        private void txtTcNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

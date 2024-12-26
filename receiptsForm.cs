@@ -146,6 +146,14 @@ namespace Market_Management
             DatagridClass.ReceiptGridList(dataGridView2, receiptList);
         }
 
+        private void txtReceiptID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         /*  private void returnProductFormButton_Click(object sender, EventArgs e)
 {
  Button b = sender as Button; // Butona tıklanıldığını al

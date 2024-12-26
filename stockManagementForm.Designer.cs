@@ -32,6 +32,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.clearProductTextboxButton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
             this.productGroupIDTxt = new System.Windows.Forms.TextBox();
@@ -76,7 +77,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.clearProductTextboxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -120,7 +120,6 @@
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // tabControl1
             // 
@@ -172,12 +171,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Envanter İşlemleri";
             // 
+            // clearProductTextboxButton
+            // 
+            this.clearProductTextboxButton.Location = new System.Drawing.Point(569, 246);
+            this.clearProductTextboxButton.Name = "clearProductTextboxButton";
+            this.clearProductTextboxButton.Size = new System.Drawing.Size(96, 27);
+            this.clearProductTextboxButton.TabIndex = 12;
+            this.clearProductTextboxButton.Text = "Tümünü Temizle";
+            this.clearProductTextboxButton.UseVisualStyleBackColor = true;
+            this.clearProductTextboxButton.Click += new System.EventHandler(this.clearProductTextboxButton_Click);
+            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(332, 113);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(121, 20);
-            this.dateTimePicker1.TabIndex = 45;
+            this.dateTimePicker1.TabIndex = 7;
             // 
             // label16
             // 
@@ -213,7 +222,7 @@
             this.productIDTxt.Location = new System.Drawing.Point(101, 16);
             this.productIDTxt.Name = "productIDTxt";
             this.productIDTxt.Size = new System.Drawing.Size(78, 20);
-            this.productIDTxt.TabIndex = 41;
+            this.productIDTxt.TabIndex = 0;
             this.productIDTxt.Visible = false;
             // 
             // label15
@@ -239,7 +248,7 @@
             this.comboBoxSupplierForInventory.Location = new System.Drawing.Point(332, 42);
             this.comboBoxSupplierForInventory.Name = "comboBoxSupplierForInventory";
             this.comboBoxSupplierForInventory.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSupplierForInventory.TabIndex = 38;
+            this.comboBoxSupplierForInventory.TabIndex = 5;
             this.comboBoxSupplierForInventory.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupplierForInventory_SelectedIndexChanged);
             // 
             // comboBoxProductGroupForInventory
@@ -248,7 +257,7 @@
             this.comboBoxProductGroupForInventory.Location = new System.Drawing.Point(332, 76);
             this.comboBoxProductGroupForInventory.Name = "comboBoxProductGroupForInventory";
             this.comboBoxProductGroupForInventory.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxProductGroupForInventory.TabIndex = 37;
+            this.comboBoxProductGroupForInventory.TabIndex = 6;
             this.comboBoxProductGroupForInventory.SelectedIndexChanged += new System.EventHandler(this.comboBoxProductGroupForInventory_SelectedIndexChanged);
             // 
             // deleteButton
@@ -256,7 +265,7 @@
             this.deleteButton.Location = new System.Drawing.Point(577, 117);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(88, 26);
-            this.deleteButton.TabIndex = 34;
+            this.deleteButton.TabIndex = 11;
             this.deleteButton.Text = "Sil";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -266,7 +275,7 @@
             this.updateButton.Location = new System.Drawing.Point(577, 81);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(88, 26);
-            this.updateButton.TabIndex = 35;
+            this.updateButton.TabIndex = 10;
             this.updateButton.Text = "Güncelle";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
@@ -276,7 +285,7 @@
             this.addButton.Location = new System.Drawing.Point(577, 42);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(88, 26);
-            this.addButton.TabIndex = 36;
+            this.addButton.TabIndex = 9;
             this.addButton.Text = "Ekle";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -287,42 +296,46 @@
             this.productDescriptionTxt.Multiline = true;
             this.productDescriptionTxt.Name = "productDescriptionTxt";
             this.productDescriptionTxt.Size = new System.Drawing.Size(333, 92);
-            this.productDescriptionTxt.TabIndex = 27;
+            this.productDescriptionTxt.TabIndex = 8;
             // 
             // productStockQuantityTxt
             // 
             this.productStockQuantityTxt.Location = new System.Drawing.Point(101, 181);
             this.productStockQuantityTxt.Name = "productStockQuantityTxt";
             this.productStockQuantityTxt.Size = new System.Drawing.Size(78, 20);
-            this.productStockQuantityTxt.TabIndex = 29;
+            this.productStockQuantityTxt.TabIndex = 4;
+            this.productStockQuantityTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTxt_KeyPress);
             // 
             // productKdvRateTxt
             // 
             this.productKdvRateTxt.Location = new System.Drawing.Point(101, 148);
             this.productKdvRateTxt.Name = "productKdvRateTxt";
             this.productKdvRateTxt.Size = new System.Drawing.Size(78, 20);
-            this.productKdvRateTxt.TabIndex = 30;
+            this.productKdvRateTxt.TabIndex = 3;
+            this.productKdvRateTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productKdvRateTxt_KeyPress);
             // 
             // productBarcodeTxt
             // 
             this.productBarcodeTxt.Location = new System.Drawing.Point(101, 115);
             this.productBarcodeTxt.Name = "productBarcodeTxt";
             this.productBarcodeTxt.Size = new System.Drawing.Size(78, 20);
-            this.productBarcodeTxt.TabIndex = 31;
+            this.productBarcodeTxt.TabIndex = 2;
+            this.productBarcodeTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTxt_KeyPress);
             // 
             // productPriceTxt
             // 
             this.productPriceTxt.Location = new System.Drawing.Point(101, 82);
             this.productPriceTxt.Name = "productPriceTxt";
             this.productPriceTxt.Size = new System.Drawing.Size(78, 20);
-            this.productPriceTxt.TabIndex = 32;
+            this.productPriceTxt.TabIndex = 1;
+            this.productPriceTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(productKdvRateTxt_KeyPress);
             // 
             // productNameTxt
             // 
             this.productNameTxt.Location = new System.Drawing.Point(101, 49);
             this.productNameTxt.Name = "productNameTxt";
             this.productNameTxt.Size = new System.Drawing.Size(78, 20);
-            this.productNameTxt.TabIndex = 33;
+            this.productNameTxt.TabIndex = 0;
             // 
             // label8
             // 
@@ -437,7 +450,7 @@
             this.clearSupplierTextboxButton.Location = new System.Drawing.Point(311, 233);
             this.clearSupplierTextboxButton.Name = "clearSupplierTextboxButton";
             this.clearSupplierTextboxButton.Size = new System.Drawing.Size(75, 23);
-            this.clearSupplierTextboxButton.TabIndex = 51;
+            this.clearSupplierTextboxButton.TabIndex = 9;
             this.clearSupplierTextboxButton.Text = "Temizle";
             this.clearSupplierTextboxButton.UseVisualStyleBackColor = true;
             this.clearSupplierTextboxButton.Click += new System.EventHandler(this.clearSupplierTextboxButton_Click);
@@ -457,7 +470,7 @@
             this.supplierListButton.Location = new System.Drawing.Point(547, 156);
             this.supplierListButton.Name = "supplierListButton";
             this.supplierListButton.Size = new System.Drawing.Size(88, 26);
-            this.supplierListButton.TabIndex = 49;
+            this.supplierListButton.TabIndex = 8;
             this.supplierListButton.Text = "Tümünü Listele";
             this.supplierListButton.UseVisualStyleBackColor = true;
             this.supplierListButton.Click += new System.EventHandler(this.supplierListButton_Click);
@@ -467,7 +480,7 @@
             this.deleteSupplierButton.Location = new System.Drawing.Point(547, 103);
             this.deleteSupplierButton.Name = "deleteSupplierButton";
             this.deleteSupplierButton.Size = new System.Drawing.Size(88, 26);
-            this.deleteSupplierButton.TabIndex = 46;
+            this.deleteSupplierButton.TabIndex = 7;
             this.deleteSupplierButton.Text = "Sil";
             this.deleteSupplierButton.UseVisualStyleBackColor = true;
             this.deleteSupplierButton.Click += new System.EventHandler(this.deleteSupplierButton_Click);
@@ -477,7 +490,7 @@
             this.updateSupplierButton.Location = new System.Drawing.Point(547, 67);
             this.updateSupplierButton.Name = "updateSupplierButton";
             this.updateSupplierButton.Size = new System.Drawing.Size(88, 26);
-            this.updateSupplierButton.TabIndex = 47;
+            this.updateSupplierButton.TabIndex = 6;
             this.updateSupplierButton.Text = "Güncelle";
             this.updateSupplierButton.UseVisualStyleBackColor = true;
             this.updateSupplierButton.Click += new System.EventHandler(this.updateSupplierButton_Click);
@@ -487,7 +500,7 @@
             this.btnSupplierAdd.Location = new System.Drawing.Point(547, 32);
             this.btnSupplierAdd.Name = "btnSupplierAdd";
             this.btnSupplierAdd.Size = new System.Drawing.Size(88, 26);
-            this.btnSupplierAdd.TabIndex = 48;
+            this.btnSupplierAdd.TabIndex = 5;
             this.btnSupplierAdd.Text = "Ekle";
             this.btnSupplierAdd.UseVisualStyleBackColor = true;
             this.btnSupplierAdd.Click += new System.EventHandler(this.btnSupplierAdd_Click);
@@ -498,7 +511,7 @@
             this.txtSupplierAddress.Multiline = true;
             this.txtSupplierAddress.Name = "txtSupplierAddress";
             this.txtSupplierAddress.Size = new System.Drawing.Size(253, 87);
-            this.txtSupplierAddress.TabIndex = 45;
+            this.txtSupplierAddress.TabIndex = 4;
             // 
             // label13
             // 
@@ -514,28 +527,30 @@
             this.txtSupplierEmail.Location = new System.Drawing.Point(133, 114);
             this.txtSupplierEmail.Name = "txtSupplierEmail";
             this.txtSupplierEmail.Size = new System.Drawing.Size(173, 20);
-            this.txtSupplierEmail.TabIndex = 39;
+            this.txtSupplierEmail.TabIndex = 3;
             // 
             // txtSupplierIbanNo
             // 
             this.txtSupplierIbanNo.Location = new System.Drawing.Point(133, 88);
             this.txtSupplierIbanNo.Name = "txtSupplierIbanNo";
             this.txtSupplierIbanNo.Size = new System.Drawing.Size(173, 20);
-            this.txtSupplierIbanNo.TabIndex = 40;
+            this.txtSupplierIbanNo.TabIndex = 2;
+            this.txtSupplierIbanNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTxt_KeyPress);
             // 
             // txtSupplierPhoneNumber
             // 
             this.txtSupplierPhoneNumber.Location = new System.Drawing.Point(133, 62);
             this.txtSupplierPhoneNumber.Name = "txtSupplierPhoneNumber";
             this.txtSupplierPhoneNumber.Size = new System.Drawing.Size(173, 20);
-            this.txtSupplierPhoneNumber.TabIndex = 41;
+            this.txtSupplierPhoneNumber.TabIndex = 1;
+            this.txtSupplierPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTxt_KeyPress);
             // 
             // txtSupplierName
             // 
             this.txtSupplierName.Location = new System.Drawing.Point(133, 36);
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(173, 20);
-            this.txtSupplierName.TabIndex = 43;
+            this.txtSupplierName.TabIndex = 0;
             // 
             // label10
             // 
@@ -572,16 +587,6 @@
             this.label14.Size = new System.Drawing.Size(88, 13);
             this.label14.TabIndex = 38;
             this.label14.Text = "Tedarikçi Firma : ";
-            // 
-            // clearProductTextboxButton
-            // 
-            this.clearProductTextboxButton.Location = new System.Drawing.Point(569, 246);
-            this.clearProductTextboxButton.Name = "clearProductTextboxButton";
-            this.clearProductTextboxButton.Size = new System.Drawing.Size(96, 27);
-            this.clearProductTextboxButton.TabIndex = 46;
-            this.clearProductTextboxButton.Text = "Tümünü Temizle";
-            this.clearProductTextboxButton.UseVisualStyleBackColor = true;
-            this.clearProductTextboxButton.Click += new System.EventHandler(this.clearProductTextboxButton_Click);
             // 
             // stockManagementForm
             // 
